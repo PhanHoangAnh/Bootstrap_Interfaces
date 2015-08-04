@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+    <div class="container-outside">
+        <nav class="navbar navbar-default" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Title</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Link</a>
+                    </li>
+                    <li><a href="#">Link</a>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Link</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a>
+                            </li>
+                            <li><a href="#">Another action</a>
+                            </li>
+                            <li><a href="#">Something else here</a>
+                            </li>
+                            <li><a href="#">Separated link</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+        <!-- left-->
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <my-sidebar>
+                <div class="bs-docs-sidebar">
+                    <ul id="sidebar" class="nav nav-stacked fixed">
+                        <li>
+                            <a href="#GroupA">Group A</a>
+                            <ul class="nav nav-stacked">
+                                <li><a href="#GroupASub1">Sub-Group 1</a>
+                                </li>
+                                <li><a href="#GroupASub2">Sub-Group 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Same for Group B & C -->
+                        <li>
+                            <a href="#GroupB">Group B</a>
+                            <ul class="nav nav-stacked">
+                                <li><a href="#GroupBSub1">Sub-Group 1</a>
+                                </li>
+                                <li><a href="#GroupBSub2">Sub-Group 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#GroupB">Group C</a>
+                            <ul class="nav nav-stacked">
+                                <li><a href="#GroupCSub1">Sub-Group 1</a>
+                                </li>
+                                <li><a href="#GroupCSub2">Sub-Group 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </my-sidebar>
+        </div>
+        <!--center-->
+        <main-content>
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                <side-bar>
+                    <section id="GroupA" class="group">
+                        <h3>Group A</h3>
+                        <div id="GroupASub1" class="subgroup">
+                            <h4>Group A Sub 1</h4>
+                        </div>
+                        <div id="GroupASub2" class="subgroup">
+                            <h4>Group A Sub 2</h4>
+                        </div>
+                    </section>
+                    <section id="GroupB" class="group">
+                        <h3>Group B</h3>
+                        <div id="GroupBSub1" class="subgroup">
+                            <h4>Group B Sub 1</h4>
+                        </div>
+                        <div id="GroupBSub2" class="subgroup">
+                            <h4>Group B Sub 2</h4>
+                        </div>
+                    </section>
+                    <section id="GroupC" class="group">
+                        <h3>Group C</h3>
+                        <div id="GroupCSub1" class="subgroup">
+                            <h4>Group C Sub 1</h4>
+                        </div>
+                        <div id="GroupCSub2" class="subgroup">
+                            <h4>Group C Sub 2</h4>
+                        </div>
+                    </section>
+                </side-bar>
+            </div>
+        </main-content>
+    </div>
+
+
+
+
+</body>
+<script type="text/javascript">
+$('body').scrollspy({
+    target: '.bs-docs-sidebar',
+    offset: 40
+});
+$("#sidebar").affix({
+    offset: {
+        top: 60
+    }
+});
+</script>
+
+</html>

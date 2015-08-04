@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/sidebar.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src='js/main.js'></script>
+</head>
+<style type="text/css">
+.equal,
+.equal > div[class*='col-'] {
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+}
+</style>
+
+<body>
+    <header class="navbar navbar-bright navbar-fixed-top" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">Bootply</a>
+            </div>
+            <nav class="collapse navbar-collapse" role="navigation">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#sec">Get Started</a>
+                    </li>
+                    <li>
+                        <a href="#sec">Edit</a>
+                    </li>
+                    <li>
+                        <a href="#sec">Visualize</a>
+                    </li>
+                    <li>
+                        <a href="#sec">Prototype</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="masthead">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1>Bootply
+                        <p class="lead">The easiest way to apply Bootstrap</p>
+                    </h1>
+                </div>
+                <div class="col-md-5">
+                    <div class="well well-lg">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <img src="http://lorempixel.com/160/160/sports/" class="img-responsive " id='avatar'>
+                            </div>
+                            <div class="col-sm-6">
+                                <strong>Important</strong>
+                                <p>Blah blah blah blah bla!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /cont -->
+    </div>
+
+
+    <div class="container-fluid">
+
+        <!--left-->
+        <div class="col-md-2" id="leftCol">
+            <my-sidebar>
+                <div class="bs-docs-sidebar">
+                    <ul id="sidebar" class="nav nav-stacked fixed">
+                        <li>
+                            <a href="#GroupA">Group A</a>
+                            <ul class="nav nav-stacked">
+                                <li><a href="#GroupASub1">Sub-Group 1</a>
+                                </li>
+                                <li><a href="#GroupASub2">Sub-Group 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Same for Group B & C -->
+                        <li>
+                            <a href="#GroupB">Group B</a>
+                            <ul class="nav nav-stacked">
+                                <li><a href="#GroupBSub1">Sub-Group 1</a>
+                                </li>
+                                <li><a href="#GroupBSub2">Sub-Group 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#GroupB">Group C</a>
+                            <ul class="nav nav-stacked">
+                                <li><a href="#GroupCSub1">Sub-Group 1</a>
+                                </li>
+                                <li><a href="#GroupCSub2">Sub-Group 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </my-sidebar>
+        </div>
+        <!--/left-->
+
+        <!--center-->
+        <div class="col-sm-7">
+            <div class="row">
+
+                <content-area>
+                    <div class="container-fluid">
+                        <h2>Test..</h2>
+                        <div class="row equal">
+                            <!--begin panel 1 -->
+                            <div class="col-md-4">
+                                <div style="text-align:center" class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h1 class="panel-title text-center">Web y Metrícas</h1>
+                                    </div>
+                                    <!-- end panel-heading -->
+                                    <div class="panel-body">
+                                        <p>
+                                            <img src="http://lorempixel.com/400/200/sports/" class="img-responsive center-block">
+                                        </p>
+                                        <p class="text-left lead2">Apoyamos estratégicamente la presencia de tu empresa en el mundo digital, a través de la construcción de recursos web atractivos para tus clientes.</p>
+                                        <ul class="text-left">
+                                            <li>Web Corporativas</li>
+                                            <li>Tiendas Virtuales</li>
+                                            <li>Plataformas e-Learning</li>
+                                            <li>Arquitectura de Información</li>
+                                            <li>Google Analytics, SEO–SEM</li>
+                                            <li>Análisis de Competencia Digital</li>
+                                            <li>Data Mining</li>
+                                        </ul> <a class="btn btn-primary" href="#">Ver más »</a>
+                                    </div>
+                                    <!-- end panel-body -->
+                                </div>
+                                <!-- end panel-primary -->
+                            </div>
+                            <!--end col-md-4 -->
+                            <!-- begin panel 2 -->
+                            <div class="col-md-4">
+                                <div style="text-align:center" class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h1 class="panel-title">Gestíon de Redes Socials</h1>
+                                    </div>
+                                    <!-- end panel-heading -->
+                                    <div class="panel-body">
+                                        <p>
+                                            <img src="http://lorempixel.com/400/200/sports/" class="img-responsive center-block">
+                                        </p>
+                                        <p class="text-left lead2">Crear una experiencia de marca excepcional a través de redes es más inteligente, rápida y las comunicaciones sociales serán más eficientes.</p>
+                                        <ul class="text-left">
+                                            <li>Compromiso</li>
+                                            <li>Publicación</li>
+                                            <li>Monitoreo</li>
+                                            <li>Analítica</li>
+                                            <li>Colaboración</li>
+                                            <li>CRM</li>
+                                            <li>Movil</li>
+                                        </ul> <a class="btn btn-primary" href="#">Ver más »</a>
+                                    </div>
+                                    <!-- end panel-body -->
+                                </div>
+                                <!-- end panel-primary -->
+                            </div>
+                            <!-- end col-md-4 -->
+                            <!--begin panel 3 -->
+                            <div class="col-md-4">
+                                <div style="text-align:center" class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h1 class="panel-title">Plan de Medios</h1>
+                                    </div>
+                                    <!-- end panel-heading -->
+                                    <div class="panel-body">
+                                        <p>
+                                            <img src="http://lorempixel.com/400/200/sports/" class="img-responsive center-block">
+                                        </p>
+                                        <p class="text-left lead2">Trabajamos en conjunto con la empresa para reforzar las fortalezas de su organización y las comunicamos de forma integral y con un mensaje claro.</p>
+                                        <ul class="text-left">
+                                            <li>Asesoría Comunicacional</li>
+                                            <li>RR.PP</li>
+                                            <li>Presencia de Marca</li>
+                                            <li>Clipping Digital</li>
+                                            <li>Manejo de Crisis</li>
+                                            <li>Lobby</li>
+                                            <li>Media Training</li>
+                                        </ul> <a class="btn btn-primary" href="#">Ver más »</a>
+                                    </div>
+                                    <!-- end panel-body -->
+                                </div>
+                                <!-- end  panel-primary -->
+                            </div>
+                            <!-- end col-md-4 -->
+                        </div>
+                        <!-- end row -->
+                    </div>
+                </content-area>
+
+                <content-area>
+                    <div class="container-fluid">
+                        <h2>Test..</h2>
+                        <div class="row equal">
+                            <!--begin panel 1 -->
+                            <div class="col-md-4">
+                                <div style="text-align:center" class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h1 class="panel-title text-center">Web y Metrícas</h1>
+                                    </div>
+                                    <!-- end panel-heading -->
+                                    <div class="panel-body">
+                                        <p>
+                                            <img src="http://lorempixel.com/400/200/sports/" class="img-responsive center-block">
+                                        </p>
+                                        <p class="text-left lead2">Apoyamos estratégicamente la presencia de tu empresa en el mundo digital, a través de la construcción de recursos web atractivos para tus clientes.</p>
+                                        <ul class="text-left">
+                                            <li>Web Corporativas</li>
+                                            <li>Tiendas Virtuales</li>
+                                            <li>Plataformas e-Learning</li>
+                                            <li>Arquitectura de Información</li>
+                                            <li>Google Analytics, SEO–SEM</li>
+                                            <li>Análisis de Competencia Digital</li>
+                                            <li>Data Mining</li>
+                                        </ul> <a class="btn btn-primary" href="#">Ver más »</a>
+                                    </div>
+                                    <!-- end panel-body -->
+                                </div>
+                                <!-- end panel-primary -->
+                            </div>
+                            <!--end col-md-4 -->
+                            <!-- begin panel 2 -->
+                            <div class="col-md-4">
+                                <div style="text-align:center" class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h1 class="panel-title">Gestíon de Redes Socials</h1>
+                                    </div>
+                                    <!-- end panel-heading -->
+                                    <div class="panel-body">
+                                        <p>
+                                            <img src="http://lorempixel.com/400/200/sports/" class="img-responsive center-block">
+                                        </p>
+                                        <p class="text-left lead2">Crear una experiencia de marca excepcional a través de redes es más inteligente, rápida y las comunicaciones sociales serán más eficientes.</p>
+                                        <ul class="text-left">
+                                            <li>Compromiso</li>
+                                            <li>Publicación</li>
+                                            <li>Monitoreo</li>
+                                            <li>Analítica</li>
+                                            <li>Colaboración</li>
+                                            <li>CRM</li>
+                                            <li>Movil</li>
+                                        </ul> <a class="btn btn-primary" href="#">Ver más »</a>
+                                    </div>
+                                    <!-- end panel-body -->
+                                </div>
+                                <!-- end panel-primary -->
+                            </div>
+                            <!-- end col-md-4 -->
+                            <!--begin panel 3 -->
+                            <div class="col-md-4">
+                                <div style="text-align:center" class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h1 class="panel-title">Plan de Medios</h1>
+                                    </div>
+                                    <!-- end panel-heading -->
+                                    <div class="panel-body">
+                                        <p>
+                                            <img src="http://lorempixel.com/400/200/sports/" class="img-responsive center-block">
+                                        </p>
+                                        <p class="text-left lead2">Trabajamos en conjunto con la empresa para reforzar las fortalezas de su organización y las comunicamos de forma integral y con un mensaje claro.</p>
+                                        <ul class="text-left">
+                                            <li>Asesoría Comunicacional</li>
+                                            <li>RR.PP</li>
+                                            <li>Presencia de Marca</li>
+                                            <li>Clipping Digital</li>
+                                            <li>Manejo de Crisis</li>
+                                            <li>Lobby</li>
+                                            <li>Media Training</li>
+                                        </ul> <a class="btn btn-primary" href="#">Ver más »</a>
+                                    </div>
+                                    <!-- end panel-body -->
+                                </div>
+                                <!-- end  panel-primary -->
+                            </div>
+                            <!-- end col-md-4 -->
+                            <!--begin panel 4 -->
+                            <!--begin panel 3 -->
+                            <div class="col-md-4">
+                                <div style="text-align:center" class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h1 class="panel-title">Plan de Medios</h1>
+                                    </div>
+                                    <!-- end panel-heading -->
+                                    <div class="panel-body">
+                                        <p>
+                                            <img src="http://lorempixel.com/400/200/sports/" class="img-responsive center-block">
+                                        </p>
+                                        <p class="text-left lead2">Trabajamos en conjunto con la empresa para reforzar las fortalezas de su organización y las comunicamos de forma integral y con un mensaje claro.</p>
+                                        <ul class="text-left">
+                                            <li>Asesoría Comunicacional</li>
+                                            <li>RR.PP</li>
+                                            <li>Presencia de Marca</li>
+                                            <li>Clipping Digital</li>
+                                            <li>Manejo de Crisis</li>
+                                            <li>Lobby</li>
+                                            <li>Media Training</li>
+                                        </ul> <a class="btn btn-primary" href="#">Ver más »</a>
+                                    </div>
+                                    <!-- end panel-body -->
+                                </div>
+                                <!-- end  panel-primary -->
+                            </div>
+                            <!-- end col-md-4 -->
+                        </div>
+                        <!-- end row -->
+                    </div>
+                </content-area>
+
+            </div>
+
+        </div>
+        <!--/center-->
+
+        <!--right-->
+        <div class="col-sm-3">
+            <h2>Side</h2>
+            <div class="panel panel-default">
+                <div class="panel-heading">Title</div>
+                <div class="panel-body">Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
+            </div>
+            <hr>
+            <div class="panel panel-default">
+                <div class="panel-heading">Title</div>
+                <div class="panel-body">Content here..</div>
+            </div>
+            <hr>
+            <div class="panel panel-default">
+                <div class="panel-heading">Title</div>
+                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
+            </div>
+            <hr>
+            <div class="panel panel-default">
+                <div class="panel-heading">Title</div>
+                <div class="panel-body">Content here..</div>
+            </div>
+            <hr>
+        </div>
+        <!--/right-->
+        <hr>
+    </div>
+    <!--/container-fluid-->
+    http://www.bootply.com/127828
+</body>
+<script type="text/javascript">
+$('body').scrollspy({
+    target: '.bs-docs-sidebar',
+    offset: 140
+});
+$("#sidebar").affix({
+    offset: {
+        top: 260
+    }
+});
+</script>
+
+</html>

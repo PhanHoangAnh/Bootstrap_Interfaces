@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"> 
+    <title>The Gadget Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+</head>
+<body>
+    <div class="navbar navbar-fixed-top navbar-inverse">
+        <div class="navbar-inner">
+            <div class="container">
+                <a href="#" class="brand">Gadget Store</a>
+                <div class="nav-collapse collapse navbar-responsive-collapse">
+                    <ul class="nav">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Products <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Gadgets</a></li>
+                                <li><a href="#">Accessories</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">More &raquo;</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form action="#" class="navbar-search pull-left">
+                        <input type="text" placeholder="Search &hellip;" class="search-query">
+                    </form>
+                    <ul class="nav pull-right">                        
+                        <li><a href="#myModal" data-toggle="modal">Login</a></li>
+                        <li class="divider-vertical"></li>
+                        <li><a href="sign-up.html">Register</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div id="myCarousel" class="carousel slide">
+                    <!-- Carousel indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>   
+                    <!-- Carousel items -->
+                    <div class="carousel-inner">
+                        <div class="active item"><img src="img/slide-01.jpg" alt="" /></div>
+                        <div class="item"><img src="img/slide-02.jpg" alt="" /></div>
+                        <div class="item"><img src="img/slide-03.jpg" alt="" /></div>
+                    </div>
+                    <!-- Carousel nav -->
+                    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span3">
+                <div class="well">
+	        		<ul class="nav nav-list">
+					  <li class="nav-header">Gadgets</li>
+					  <li class="active"><a href="#">Mobile</a></li>
+					  <li><a href="#">Laptop</a></li>
+					  <li><a href="#">Camera</a></li>
+					  <li><a href="#">Tablet</a></li>
+                      <li><a href="#">Music System</a></li>
+					  <li><a href="#">Television</a></li>
+                      <li><a href="#">Desktop</a></li>
+					  <li class="nav-header">Accessories</li>
+					  <li><a href="#">Mobile Cover</a></li>
+					  <li><a href="#">Earphone</a></li>
+					  <li><a href="#">Charger</a></li>
+					  <li><a href="#">Batteries</a></li>
+					</ul>
+	        	</div>
+            </div>
+            <div class="span9">
+                <ul class="thumbnails">
+                    <li class="span3">
+                        <div class="thumbnail">
+                            <img src="img/desktop.jpg" alt="Sample Image">
+                            <div class="caption">
+                                <h3>Desktop</h3>
+                                <P>Starting at <span class="price">$499</span></P>
+                                <p><a href="product-details.html" class="btn btn-success">View details &raquo;</a></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="span3">
+                        <div class="thumbnail">
+                            <img src="img/camera.jpg" alt="Sample Image">
+                            <div class="caption">
+                                <h3>Camera</h3>
+                                <P>Starting at <span class="price">$249</span></P>
+                                <p><a href="#" class="btn btn-success">View details &raquo;</a></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="span3">
+                        <div class="thumbnail">
+                            <img src="img/notebook.jpg" alt="Sample Image">
+                            <div class="caption">
+                                <h3>Laptop</h3>
+                                <P>Starting at <span class="price">$399</span></P>
+                                <p><a href="#" class="btn btn-success">View details &raquo;</a></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="span3">
+                        <div class="thumbnail">
+                            <img src="img/iphone.jpg" alt="Sample Image">
+                            <div class="caption">
+                                <h3>iPhone</h3>
+                                <P>Starting at <span class="price">$349</span></P>
+                                <p><a href="#" class="btn btn-success">View details &raquo;</a></p>
+                            </div>
+                        </div>
+                    </li>
+					<li class="span3">
+                        <div class="thumbnail">
+                            <img src="img/head-phone.jpg" alt="Sample Image">
+                            <div class="caption">
+                                <h3>Head Phone</h3>
+                                <P>Starting at <span class="price">$199</span></P>
+                                <p><a href="#" class="btn btn-success">View details &raquo;</a></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="span3">
+                        <div class="thumbnail">
+                            <img src="img/ipad.jpg" alt="Sample Image">
+                            <div class="caption">
+                                <h3>iPad Mini</h3>
+                                <P>Starting at <span class="price">$259</span></P>
+                                <p><a href="#" class="btn btn-success">View details &raquo;</a></p>
+                            </div>
+                        </div>
+                    </li>                    
+                </ul>
+            </div>
+        </div>  
+    </div>
+    <!-- Footer section -->
+    <div class="container">
+        <hr>
+        <div class="row">
+            <div class="span12">
+                <p class="pull-left">Copyright &copy; 2013 Gadget Store, Inc. All Right Reserved</p>
+                <p class="pull-right"><a href="user-agreement.html">Privacy Policy</a> | <a href="user-agreement.html">Terms of Use</a></p>
+            </div>
+        </div>
+    </div>
+    <div id="myModal" class="modal hide fade">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3>Log In</h3>
+        </div>
+        <div class="modal-body">
+            <form>
+            <label>Email Address</label>
+            <input type="text" placeholder="Email" class="input-xlarge">
+            <label>Password</label>
+            <input type="password" placeholder="Password" class="input-xlarge">
+            <label class="checkbox"><input type="checkbox"> Remember me</label>
+        </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn btn-primary">Login</a>
+            <a href="#" class="btn">Cancel</a>
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html> 
