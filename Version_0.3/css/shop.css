@@ -1,3 +1,36 @@
+/*Extention*/
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200&subset=latin,vietnamese);
+.panel-default {
+	border:none;
+    border-radius: 0;
+}
+.panel-default > .productHeader {
+    display: flex;
+    background-color: rgba(0, 0, 0, .85);
+    padding: 10px 25px;
+    height: 65px;
+    border:none;    
+    border-radius: 0;   
+}
+.productLabel {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    height: 64px;
+    width: 64px;
+    background-color: #CC0000;
+}
+@media only screen and (min-width: 768px) {
+    .panel-body img {
+        max-width: 350px;
+    }
+    .productHeader > .productLabel {
+        top: 1px;
+        left: 16px;
+    }
+}
+/*End of Extention*/
+
 .noPadding {
     padding: 0;
 }
@@ -9,11 +42,13 @@
     background-color: rgba(0, 0, 0, .5);
 }
 .productTitle {
-    font-size: 3rem;
+    font-size: 3em;
+    font-weight: bold;
     width: 100%;
     flex: 1;
     text-align: center;
     vertical-align: middle;
+    color: #fff;
 }
 .productIcon {
     color: rgb(255, 51, 51);
@@ -24,17 +59,17 @@
     
     pading: 1px;
 }
-.productCover {
- /*   border: 1px solid;*/
-}
 .hotProducts {
-    position: relative;        
+    position: relative;
 }
 .hotProductsTitle {
     font-size: 20px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 900;
     padding-top: 10px;
-    color: red;
+    color: #CC0000;    
 }
+
 /*Remove padding of column in small device*/
 
 @media only screen and (max-width: 768px) {
@@ -43,18 +78,13 @@
     }
 }
 @media only screen and (min-width: 768px) {
-    .productCover {
-        margin: 20px;
-        margin-top: 0;
-        position: relative;
-        /*top: -56px;*/
-    }
     .hotProducts {
         position: relative;
-        top: -180px;
-
+        top: -176px;        
     }
     .hotProductsTitle {
         font-size: 50px;
+        padding-bottom: 20px; 
+        font-weight: 200;       
     }
 }
