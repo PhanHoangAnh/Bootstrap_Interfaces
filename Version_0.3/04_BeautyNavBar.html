@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Navbar stick to top after scroll</title>
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!--script type="text/javascript" src='js/navbar.js'></script-->
+
+</head>
+
+<!-- HTML code from Bootply.com editor -->
+
+<body>
+    <style type="text/css">
+    body {
+        padding: 0;
+    }
+    header {
+        border: 1px solid #000;
+        min-height: 50px;
+    }
+    #nav {
+        position: fixed;
+        width: 100%;
+        top: -50px;
+        transition: top 1s;
+        -webkit-transition: top 1s;
+        /* Safari */
+    }
+    /*change font-size on certain screens*/
+    /*@media screen and (max-width: 991px) and (min-width: 768px) { #nav .navbar-nav { font-size: 12px; } }
+*/
+    
+    #nav.affix {
+        background: #000;
+        visibility: visible;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        opacity: 0.8;
+    }
+    </style>
+    <!-- masthead -->
+    <div id="masthead">
+        <div class="container">
+            
+            <div class="row cover">
+                <div class="col-md-7">
+                    <h1>Bootply
+                        <p class="lead">The easiest way to apply Bootstrap</p>
+                    </h1>
+                </div>
+                <div class="col-md-5">
+                    <div class="well well-lg">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <img src="http://lorempixel.com/160/160/sports/" class="img-responsive " id='avatar'>
+                            </div>
+                            <div class="col-sm-6">
+                                <strong>Important</strong>
+                                <p>Blah blah blah blah bla!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /cont -->
+    </div>
+    <!-- /masthead -->
+
+    <!-- NavBar -->
+    <div id="nav-wrapper">
+        <div id="nav" class="navbar navbar-inverse navbar-static-top navbar" role="navigation">
+            <div class="container">            
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/" class="navbar-brand">Bootply</a>                    
+                </div>
+                <nav class="collapse navbar-collapse" role="navigation">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#sec">Get Started</a>
+                        </li>
+                        <li>
+                            <a href="#sec">Edit</a>
+                        </li>
+                        <li>
+                            <a href="#sec">Visualize</a>
+                        </li>
+                        <li>
+                            <a href="#sec">Prototype</a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+    <!-- /NavBar -->
+
+
+
+
+
+    <div class="container" id="start-offset">
+        <div class="row">
+            <div class="col-md-4">
+                <h1>Hello World!</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean suscipit luctus tincidunt. Phasellus adipiscing lectus eleifend diam placerat, id commodo lorem ultricies. Etiam ut consectetur enim, sit amet auctor tortor. Ut ante nulla, elementum nec sagittis at, pulvinar nec metus. Phasellus eu fringilla nunc. Vestibulum massa justo, vehicula non sem ut, porttitor porta tortor. Nunc eu tortor ligula. Etiam at nisl sit amet mi accumsan eleifend.</p>
+                <p>Phasellus ac est magna. Etiam venenatis urna non vestibulum iaculis. Sed in ante pretium nulla iaculis malesuada id pellentesque nunc. Curabitur tincidunt purus ac tristique suscipit. Maecenas augue quam, aliquet quis sodales quis, hendrerit ac diam. Curabitur tristique elit non placerat rhoncus. Maecenas odio lacus, sodales vitae laoreet vitae, viverra in lacus.</p>
+            </div>
+            <div class="col-md-4">
+                <h1>Hello World!</h1>
+                <p>Phasellus ac est magna. Etiam venenatis urna non vestibulum iaculis. Sed in ante pretium nulla iaculis malesuada id pellentesque nunc. Curabitur tincidunt purus ac tristique suscipit. Maecenas augue quam, aliquet quis sodales quis, hendrerit ac diam. Curabitur tristique elit non placerat rhoncus. Maecenas odio lacus, sodales vitae laoreet vitae, viverra in lacus.</p>
+                <p>Duis adipiscing tincidunt nisi. Aliquam non blandit orci. Nullam mi turpis, fermentum a eros in, tincidunt cursus mauris. Phasellus nulla orci, faucibus eget mollis non, ultricies volutpat erat. Ut vitae ante est. Phasellus sit amet commodo libero. Proin eleifend imperdiet nisi ac ultrices. Duis congue vitae justo quis sagittis. Phasellus euismod orci ut risus venenatis, nec viverra leo rhoncus. Integer nec ligula vel velit laoreet mattis a sit amet justo. Aenean rhoncus mattis sem quis malesuada. Duis ut nibh lorem. Mauris eget lectus euismod, rhoncus enim a, dignissim risus. Pellentesque tincidunt at ligula et tincidunt.</p>
+                <p>Fusce blandit tincidunt nisl, vitae consequat metus faucibus vel. Aliquam fringilla venenatis ipsum, ut dignissim purus vulputate et. Nunc sodales massa in justo bibendum, vel adipiscing tellus porttitor. Aliquam faucibus lacinia augue pellentesque pellentesque. Morbi quis consequat risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum eget magna quis urna iaculis rutrum. Pellentesque eu lacinia libero. Vestibulum est ipsum, gravida dictum ligula sed, auctor fringilla nulla. Sed laoreet urna eget orci egestas, quis faucibus magna vehicula. Aliquam et orci imperdiet, egestas ipsum molestie, pharetra nisi. Suspendisse eu tellus porttitor, eleifend turpis at, aliquet lorem. Ut semper nisi eget euismod condimentum.</p>
+                <p>Praesent ut imperdiet metus, sit amet viverra nunc. Morbi ullamcorper erat purus, et molestie purus tristique ut. Morbi ac hendrerit leo. Nunc sed pretium arcu. Integer quis neque elementum, ornare erat at, sagittis nisl. Morbi eleifend lectus vitae nibh viverra, vitae volutpat arcu vehicula. Fusce tristique erat enim, ac tincidunt justo ultricies eu. Nunc dignissim risus ut leo laoreet, sed eleifend enim elementum. Duis sit amet turpis dui. Ut interdum congue mi sed dapibus. Nunc sagittis purus et tellus consequat, nec eleifend ipsum mollis. In eget tellus tristique, euismod eros vel, lacinia tortor. Etiam eleifend imperdiet varius. Sed interdum rutrum nisl, at pretium ante.</p>
+            </div>
+            <div class="col-md-4">
+                <h1>Hello World!</h1>
+                <p>Phasellus ac est magna. Etiam venenatis urna non vestibulum iaculis. Sed in ante pretium nulla iaculis malesuada id pellentesque nunc. Curabitur tincidunt purus ac tristique suscipit. Maecenas augue quam, aliquet quis sodales quis, hendrerit ac diam. Curabitur tristique elit non placerat rhoncus. Maecenas odio lacus, sodales vitae laoreet vitae, viverra in lacus.</p>
+                <p>Duis adipiscing tincidunt nisi. Aliquam non blandit orci. Nullam mi turpis, fermentum a eros in, tincidunt cursus mauris. Phasellus nulla orci, faucibus eget mollis non, ultricies volutpat erat. Ut vitae ante est. Phasellus sit amet commodo libero. Proin eleifend imperdiet nisi ac ultrices. Duis congue vitae justo quis sagittis. Phasellus euismod orci ut risus venenatis, nec viverra leo rhoncus. Integer nec ligula vel velit laoreet mattis a sit amet justo. Aenean rhoncus mattis sem quis malesuada. Duis ut nibh lorem. Mauris eget lectus euismod, rhoncus enim a, dignissim risus. Pellentesque tincidunt at ligula et tincidunt.</p>
+                <p>Fusce blandit tincidunt nisl, vitae consequat metus faucibus vel. Aliquam fringilla venenatis ipsum, ut dignissim purus vulputate et. Nunc sodales massa in justo bibendum, vel adipiscing tellus porttitor. Aliquam faucibus lacinia augue pellentesque pellentesque. Morbi quis consequat risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum eget magna quis urna iaculis rutrum. Pellentesque eu lacinia libero. Vestibulum est ipsum, gravida dictum ligula sed, auctor fringilla nulla. Sed laoreet urna eget orci egestas, quis faucibus magna vehicula. Aliquam et orci imperdiet, egestas ipsum molestie, pharetra nisi. Suspendisse eu tellus porttitor, eleifend turpis at, aliquet lorem. Ut semper nisi eget euismod condimentum.</p>
+                <p>Praesent ut imperdiet metus, sit amet viverra nunc. Morbi ullamcorper erat purus, et molestie purus tristique ut. Morbi ac hendrerit leo. Nunc sed pretium arcu. Integer quis neque elementum, ornare erat at, sagittis nisl. Morbi eleifend lectus vitae nibh viverra, vitae volutpat arcu vehicula. Fusce tristique erat enim, ac tincidunt justo ultricies eu. Nunc dignissim risus ut leo laoreet, sed eleifend enim elementum. Duis sit amet turpis dui. Ut interdum congue mi sed dapibus. Nunc sagittis purus et tellus consequat, nec eleifend ipsum mollis. In eget tellus tristique, euismod eros vel, lacinia tortor. Etiam eleifend imperdiet varius. Sed interdum rutrum nisl, at pretium ante.</p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script type="text/javascript">
+    /* Custom JS */
+    $(function() {
+        // $('#nav-wrapper').height($("#nav").height());
+        // $('#nav-wrapper').height(200);
+
+        $('#nav').affix({
+            offset: {
+                top: $('#start-offset').offset().top
+            }
+        });
+        
+    });
+    </script>
+
+
+</body>
+
+</html>
