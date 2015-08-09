@@ -4,7 +4,7 @@ body {
 #masthead {
     min-height: 270px;
     background-color: #000044;
-    background-image: url(http://lorempixel.com/output/nature-q-c-1400-300-10.jpg);
+    background-image: url(http://lorempixel.com/output/business-q-c-1200-480-8.jpg);
     color: #aaaacc;    
 }
 #masthead h1 {
@@ -20,7 +20,7 @@ body {
 }
 #masthead .well {
     margin-top: 13%;
-    background-color: #111155;
+    background-color: rgba(0,0,0,.5);
     border-color: #000033;
 }
 .icon-bar {
