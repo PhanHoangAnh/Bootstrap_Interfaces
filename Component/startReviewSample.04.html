@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css">
+.items {
+    border-top: dotted 1px;
+    padding: 5px;
+    margin-top: 5px;
+    text-align: center
+}
+.items .fa {
+    .grow {
+        transition: all .2s ease-in-out;
+    }
+    ;
+}
+/*.items:hover, .items:hover .fa{
+    color: red;    
+}*/
+.items:hover .fa {
+    color: red;
+    transform: scale(1.4);
+}
+.description {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    clear: both
+}
+.photo {
+    position: relative;
+}
+.photo .focus {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, .6);
+    -webkit-box-shadow: 0px 0px 15px 2px rgba(255, 255, 255, .75);
+    box-shadow: 0px 0px 15px 2px rgba(255, 255, 255, .75);
+    transition: all 1s ease;
+}
+.photo:hover .focus {
+    -webkit-transform: scale(.9);
+    transform: scale(.9);
+}
+/*.photo >img {
+    -webkit-transition: all 1s ease;
+    transition: all 1s ease;
+}
+.photo:hover >img {
+    -webkit-transform: rotateY(180deg);
+    -webkit-transform-style: preserve-3d;
+    transform: rotateY(180deg);
+    transform-style: preserve-3d;
+}*/
+
+.rating {
+    font-size: 150%;
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    float: left;
+}
+.rating > span {
+    /*float:left;*/
+    
+    width: 20%;
+}
+.rating > span:hover:before,
+.rating.selected:before {
+    content: "\2605";
+    position: absolute;
+    color: yellow;
+}
+/*.rating > span:hover:before,*/
+
+.rating > span:hover ~ span:before,
+.rating.selected ~ span:before {
+    content: "\2605";
+    position: absolute;
+    color: yellow;
+}
+.productInfo {} .productInfo >div {
+    border-bottom: 1px black dotted;
+    width: 100%;
+}
+</style>
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <h1 class="text-center">Component Test Bed</h1>
+    <a>http://jsfiddle.net/andrewleyva/88j0105g/</a>
+    <div class="container">
+        <div class="col-md-2 col-lg-2 productInfo">
+            <div>Customers Reviews</div>
+            <div class="rating">
+                <span>☆</span>
+                <span>☆</span>
+                <span>☆</span>
+                <span>☆</span>
+                <span>☆</span>
+            </div>
+        </div>
+
+        <div class=" col-md-1 col-lg-1"></div>
+        <div class=" col-md-3 col-lg-3">
+            <item-detail>
+                <div class="photo">
+                    <img src="img/Products/product3.jpg" class="img-responsive center-block">
+                    <div class='focus'></div>
+                </div>
+                <div class="rating">
+                    <span>☆</span>
+                    <span>☆</span>
+                    <span>☆</span>
+                    <span>☆</span>
+                    <span>☆</span>
+                </div>
+                <div></div>
+                <!-- style="display: inline-block;height: 4em;clear:both; /* white-space: nowrap; */ overflow: hidden; text-overflow: ellipsis" -->
+
+                <!-- <div product-title style='clear:both; white-space: nowrap; overflow: hidden; text-overflow: ellipsis'> -->
+                <div product-title class='description'>
+
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean
+
+                </div>
+                <div product-price>Price: 123$</div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0 ">
+                    <div add-toCart class="items">
+                        <i class="fa fa-cart-plus" style='font-side:24px'></i>
+                        <br>                        
+                            Add to Cart                        
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0">
+                    <div more-detail style="padding-left:0 " class="items">
+                        <div style="border-left: dotted 1px; padding-left: 5px">
+                            <i class="fa fa-list"></i>                            
+                            <br>
+                                More details                            
+                        </div>
+                    </div>
+                </div>
+            </item-detail>
+        </div>
+    </div>
+
+</body>
+
+</html>

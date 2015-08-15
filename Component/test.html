@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css">
+.rating {
+    font-size: 150%;
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    float:left;
+}
+.rating > span:hover:before {
+    content: "\2605";
+    position: absolute;
+    color: yellow;
+}
+/*.rating > span:hover:before,*/
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+   color: yellow;
+}
+
+</style>
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <h1 class="text-center">Component Test Bed</h1>
+    <div class="container">
+        <div class="col-md-2 col-lg-2">
+            <div>Customers Reviews</div>
+            <div class="rating">
+                <span>☆</span>
+                <span>☆</span>
+                <span>☆</span>
+                <span>☆</span>
+                <span>☆</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

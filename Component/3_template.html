@@ -24,6 +24,18 @@
     flex: 1 1 auto;
     flex-wrap: wrap;
 }
+@media (min-width: 979px) {
+    #sidebar.affix-top {
+        position: static;
+        margin-top: 30px;
+        width: 300px;
+    }
+    #sidebar.affix {
+        position: fixed;
+        top: 70px;
+        width: 300px;
+    }
+}
 #phasebeam {
     position: fixed;
     top: 0;
@@ -127,15 +139,46 @@
     <div class="container-fluid" id="start-offset">
         <!--left-->
 
+
+        <!--right-->
+        <div class="col-sm-3 col-md-push-9">
+            <div id='sidebar' class='sidebar'>
+                <h2>Side</h2>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Title</div>
+                    <div class="panel-body">Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
+                </div>
+                <hr>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Title</div>
+                    <div class="panel-body">Content here..</div>
+                </div>
+                <hr>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Title</div>
+                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
+                </div>
+                <hr>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Title</div>
+                    <div class="panel-body">Content here..</div>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <!--/right-->
+
+
+
         <!--/left-->
 
         <!--center-->
-        <div class="col-sm-9">
+        <div class="col-sm-9 col-md-pull-3">
             <div class="row">
 
                 <content-area>
                     <div class="container-fluid hotProducts">
-                        <p class = "hotProductsTitle">SẢN PHẨM MỚI</p>
+                        <p class="hotProductsTitle">SẢN PHẨM MỚI</p>
                         <div class="row equal">
                             <!--begin panel 1 -->
                             <div class="col-md-4">
@@ -232,31 +275,6 @@
         <!--/center-->
 
 
-        <!--right-->
-        <div class="col-sm-3">
-            <h2>Side</h2>
-            <div class="panel panel-default">
-                <div class="panel-heading">Title</div>
-                <div class="panel-body">Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
-            </div>
-            <hr>
-            <div class="panel panel-default">
-                <div class="panel-heading">Title</div>
-                <div class="panel-body">Content here..</div>
-            </div>
-            <hr>
-            <div class="panel panel-default">
-                <div class="panel-heading">Title</div>
-                <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
-            </div>
-            <hr>
-            <div class="panel panel-default">
-                <div class="panel-heading">Title</div>
-                <div class="panel-body">Content here..</div>
-            </div>
-            <hr>
-        </div>
-        <!--/right-->
 
 
     </div>
@@ -273,11 +291,17 @@
                 top: $('#start-offset').offset().top
             }
         });
+        // Sidebar affix
+        $('#sidebar').affix({
+            offset: {
+                top: $('#start-offset').offset().top
+            }
+        });
 
     });
     </script>
 
-<div id="phasebeam">
+    <div id="phasebeam">
         <canvas width="700" height="650"></canvas>
         <canvas width="700" height="650"></canvas>
         <canvas width="700" height="650"></canvas>

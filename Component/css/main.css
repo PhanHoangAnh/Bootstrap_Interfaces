@@ -70,9 +70,9 @@ header {
 .navbar-bright li > a:hover {
     background-color: #000033;
 }
-.affix-top, .affix {
+/*.affix-top, .affix {
     position: static;
-}
+}*/
 .logo, .site-name-and-slogan {    
     float: left;
 }

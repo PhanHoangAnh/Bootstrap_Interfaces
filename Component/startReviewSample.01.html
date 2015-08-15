@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<style type="text/css">
+.rating {
+    float:left;
+}
+
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+.rating:not(:checked) > input {
+/*    position:absolute;
+    top:-9999px;*/
+    display: none;
+    clip:rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rating > input:checked ~ label {
+    color: #f70;
+    text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: gold;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}
+</style>
+
+<body>
+    <h1 class="text-center">Component Test Bed</h1>
+    <div class="container">        
+        <div class="row">
+            <div class="col-md-3 col-lg-3">
+                <item-detail>
+                    <div class="photo">
+                        <img src="img/Products/product3.jpg" class="img-responsive center-block">
+                    </div>
+                    <div product-rating>
+                        <fieldset class="rating">
+                            <input type="radio" id="star5" name="rating" value='5' />
+                            <label for="star5" title="Rocks!">5 stars</label>
+                            <input type="radio" id="star4" name="rating" value = '4' />
+                            <label for="star4" title="Pretty good">4 stars</label>
+                            <input type="radio" id="star3" name="rating" value="3" />
+                            <label for="star3" title="Meh">3 stars</label>
+                            <input type="radio" id="star2" name="rating" value="2" />
+                            <label for="star2" title="Kinda bad">2 stars</label>
+                            <input type="radio" id="star1" name="rating" value="1" />
+                            <label for="star1" title="Sucks big time">1 star</label>
+                        </fieldset>
+                    </div>
+                    <div></div>
+                    <div product-title style='clear:both'>Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
+                    <div product-price>Price: 123$</div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0 ">
+                        <div add-toCart style="border-top:dotted 1px;  padding: 5px; margin-top:5px ; text-align:center">
+                            <i class="fa fa-cart-plus" style='font-side:24px'></i>
+                            <br>
+                            <div class="mobile hidden-xs">
+                                Add to Cart
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0">
+                        <div more-detail style="border-top:dotted 1px; padding:5px; margin-top:5px; text-align:center ">
+                            <div style="border-left: dotted 1px; padding-left: 5px">
+                                <i class="fa fa-list"></i>
+                                <div class="hidden-xs">
+                                    More details
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </item-detail>
+                <hr>
+                <item-detail>
+                    <div class="photo">
+                        <img src="img/Products/product3.jpg" class="img-responsive">
+                    </div>
+                    <div product-rating>
+                        <fieldset class="rating">
+                            <legend>Please rate:</legend>
+                            <input type="radio" id="star5-2" name="rating2" value = '5' />
+                            <label for="star5-2" title="Rocks!">5 stars</label>
+                            <input type="radio" id="star4-2" name="rating2" value = '4' />
+                            <label for="star4-2" title="Pretty good">4 stars</label>
+                            <input type="radio" id="star3-2" name="rating2" value="3" />
+                            <label for="star3-2" title="Meh">3 stars</label>
+                            <input type="radio" id="star2-2" name="rating2" value="2" />
+                            <label for="star2-2" title="Kinda bad">2 stars</label>
+                            <input type="radio" id="star1-2" name="rating2" value="1" />
+                            <label for="star1-2" title="Sucks big time">1 star</label>
+                        </fieldset>
+
+                    </div>
+                    <div></div>
+                    <div product-title style='clear:both'>Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
+                    <div product-price>Price: 123$</div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0 ">
+                        <div add-toCart style="border-top:dotted 1px;  padding: 5px; margin-top:5px ; text-align:center">
+                            <i class="fa fa-cart-plus" style='font-side:24px'></i>
+                            <br>
+                            <div class="mobile hidden-xs">
+                                Add to Cart
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0">
+                        <div more-detail style="border-top:dotted 1px; padding:5px; margin-top:5px; text-align:center ">
+                            <div style="border-left: dotted 1px; padding-left: 5px">
+                                <i class="fa fa-list"></i>
+                                <div class="hidden-xs">
+                                    More details
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </item-detail>
+                <hr>
+                <item-detail>
+                    <div class="photo">
+                        <img src="img/Products/product3.jpg" class="img-responsive">
+                    </div>
+                    <div product-rating>
+                        <fieldset class="rating">
+                            <legend>Please rate:</legend>
+                            <input type="radio" id="star5-3" name="rating3" value="5" />
+                            <label for="star5-3" title="Rocks!">5 stars</label>
+                            <input type="radio" id="star4-3" name="rating3" value="4" />
+                            <label for="star4-3" title="Pretty good">4 stars</label>
+                            <input type="radio" id="star3-3" name="rating3" value="3" />
+                            <label for="star3-3" title="Meh">3 stars</label>
+                            <input type="radio" id="star2-3" name="rating3" value="2" />
+                            <label for="star2-3" title="Kinda bad">2 stars</label>
+                            <input type="radio" id="star1-3" name="rating3" value="1" />
+                            <label for="star1-3" title="Sucks big time">1 star</label>
+                        </fieldset>
+                    </div>
+                    <div></div>
+                    <div product-title style='clear:both'>Lorem ipsum dolor sit amet, consectetur adipiscing elit</div>
+                    <div product-price>Price: 123$</div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0 ">
+                        <div add-toCart style="border-top:dotted 1px;  padding: 5px; margin-top:5px ; text-align:center">
+                            <i class="fa fa-cart-plus" style='font-side:24px'></i>
+                            <br>
+                            <div class="mobile hidden-xs">
+                                Add to Cart
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0">
+                        <div more-detail style="border-top:dotted 1px; padding:5px; margin-top:5px; text-align:center ">
+                            <div style="border-left: dotted 1px; padding-left: 5px">
+                                <i class="fa fa-list"></i>
+                                <div class="hidden-xs">
+                                    More details
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </item-detail>
+                <hr>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

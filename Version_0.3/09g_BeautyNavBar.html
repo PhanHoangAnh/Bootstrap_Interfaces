@@ -233,7 +233,7 @@
 
 
         <!--right-->
-        <div class="col-sm-3">
+        <div id = 'sidebar' class="col-sm-3">
             <h2>Side</h2>
             <div class="panel panel-default">
                 <div class="panel-heading">Title</div>
@@ -269,6 +269,12 @@
         // $('#nav-wrapper').height($("#nav").height());
         // $('#nav-wrapper').height(200);
         $('#nav').affix({
+            offset: {
+                top: $('#start-offset').offset().top
+            }
+        });
+        // Sidebar affix
+        $('#sidebar').affix({
             offset: {
                 top: $('#start-offset').offset().top
             }
