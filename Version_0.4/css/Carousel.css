@@ -32,7 +32,7 @@
 .carousel.carousel-fade .next , .carousel.carousel-fade .prev {
     /*left: 30;*/
     z-index: 1;
-    transition: all 1.5s ease-in-out;
+    transition: all 1.5s ease-in;
 }
 .carousel.carousel-fade .carousel-control {
     z-index: 3;

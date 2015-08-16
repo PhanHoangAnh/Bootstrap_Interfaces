@@ -20,6 +20,13 @@
 
 </head>
 <style type="text/css">
+#masthead{
+    background-size: 110% auto;
+}
+#masthead.start{
+    transition: all 10s ease-in;    
+    background-size: 100% auto;
+}
 .controls {
     margin-top: 15px;
     /*vertical-align: middle;*/
@@ -904,6 +911,12 @@
     });
     $('.carousel').carousel({
         interval: 2000 * 10
+    });
+    // for Avatar ini only 
+    $(document).ready(function() {
+     /** code inside **/
+        var masthead = $("#masthead");
+        masthead.addClass('start');
     });
     </script>
 
