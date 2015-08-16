@@ -1,0 +1,126 @@
+
+@import url(http://fonts.googleapis.com/css?family=Lobster&subset=latin,vietnamese);
+html, body {
+    /*padding-top: 50px;*/
+    
+    height: 100%
+}
+header {
+    background-color: #000;
+}
+/*.well-lg {
+    padding: 24px;
+    border-radius: 0px !important;
+}*/
+/*.custom-well{
+    border-radius: 0px ;
+}*/
+#masthead {
+    min-height: 100%;
+    background-color: #000044;
+    /*background-image: url(http://cdn.elegantthemes.com/preview/InStyle/wp-content/uploads/2008/11/s-1.jpg);*/
+    background-image: url(../img/background/beauty_01.jpg);
+    background-size: cover;
+    /* <------ */
+    
+    background-repeat: no-repeat;
+    background-position: center center;
+    color: #aaaacc;
+}
+#masthead h1 {
+    font-size: 55px;
+    line-height: 1;
+    text-shadow: 0 0 3px rgba(0, 0, 0, .8);
+    margin-top: 80px;
+}
+#masthead .cover {
+    padding-top: 10%;
+}
+#masthead .well {
+    margin-top: 13%;
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 0;
+    border-color: #000033;
+}
+#avatar {
+    border: 4px solid #fff;
+    border-radius: 2px;
+    height: 160px;
+    width: 160px;
+}
+.icon-bar {
+    background-color: #fff;
+}
+@media screen and (min-width: 768px) {
+    #masthead h1 {
+        font-size: 100px;
+    }
+}
+/*.nabbar {
+    font-family: 'Lobster', cursive !important;
+}*/
+.navbar-bright {
+    /*background-color: #111155;*/
+    
+    color: #fff;
+}
+.navbar-bright a, #masthead a, #masthead .lead {
+    color: #aaaacc;
+}
+.navbar-bright li > a:hover {
+    background-color: #000033;
+}
+/*.affix-top, .affix {
+    position: static;
+}*/
+.logo, .site-name-and-slogan {    
+    float: left;
+}
+.logo {
+    width: 55px;
+    margin: 10px 10px 10px 0;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    max-width:100%;    
+}
+.site-name {
+    font-family: 'Lobster', cursive !important;
+    margin-top: 6px;
+    font-size: 34px;
+    transition: all 0.3s ease-in-out;
+    color: #fff;
+    float: left;
+}
+.phone {
+    margin-left: 15px;
+    margin-right: 15px;
+    color: rgb(255, 51, 51);
+}
+.phone:hover {
+    background-color: #fff;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 2px
+}
+.fa-phone {
+    transform: rotate(135deg);
+}
+.fa-phone:hover {
+    color: red;
+    transform: rotate(90deg);
+    transition: all 1s;
+}
+@media only screen and (min-width: 768px) {
+    .site-name {
+        font-size: 30px;
+    }
+}
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed&subset=latin,vietnamese);
+body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    /*font-family: 'Tinos', serif;*/
+    /*font-family: 'Open Sans', sans-serif;*/    
+    font-family: 'Roboto Condensed', sans-serif;
+}
