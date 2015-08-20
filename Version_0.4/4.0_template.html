@@ -26,6 +26,20 @@
 #masthead.start {
     transition: all 7s ease-in-out;
     background-size: 100% auto;
+    top: 0;
+    left: 0;
+}
+
+@media only screen and (max-width: 768px) {
+    #masthead {
+        background-size: auto 150%;
+    }
+    #masthead.start {
+        transition: all 7s ease-in-out;
+        background-size: auto 100%;
+        top: 0;
+        left: 0;
+    }
 }
 
 .controls {
@@ -142,7 +156,8 @@
     <!-- /NavBar -->
     <!-- /Dont touch this section -->
     <div class="container-fluid" id="start-offset">
-        <div app-moveup: 0 style="position: relative; top: -128px;">
+        <!-- <div app-moveup: 0 style="position: relative; top: -128px;"> -->
+        <div app-moveup: 0 style="position: relative;">
             <!--left-->
             <!--right-->
             <div class="col-sm-3 col-md-push-9 hidden-xs">
@@ -780,6 +795,11 @@
         </div>
     </div>
     <div id="end-offset">
+        <section class="divider">
+            <div class="col-sm-6 col-sm-offset-3 text-center">
+                <h2 style="padding:20px;background-color:rgba(5,5,5,.8)">Try and Tweak Different Layouts</h2>
+            </div>
+        </section>
         <div class="container-fluid" style="background-color: #fff" id="section1">
             <div class="col-sm-8 col-sm-offset-2 text-center">
                 <h1>Mobile-first + Responsive</h1>
@@ -832,8 +852,8 @@
         // Sidebar affix
         $('#sidebar').affix({
             offset: {
-                top: $('#start-offset').offset().top - 128,
-                bottom: $('#end-offset').outerHeight() + 108
+                top: $('#start-offset').offset().top,
+                bottom: $('#end-offset').outerHeight() - 20
             }
         }).on('affix.bs.affix', function() { // before affix
             $(this).css({

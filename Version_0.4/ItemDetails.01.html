@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="css/itemDetails.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<style type="text/css">
+body {
+    background-color: rgba(0, 0, 0, 1);
+    width: 100%;
+    height: 100%;
+}
+
+#phasebeam {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+#phasebeam canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+</style>
+
+<body>
+    <!-- NavBar -->
+    <div id="nav-wrapper">
+        <div id="nav" class="navbar navbar-inverse navbar-static-top navbar" role="navigation">
+            <div class="container">
+                <div class="row">
+                    <div>
+                        <img src="img/CatLogo.png" class="logo">
+                    </div>
+                    <div class='site-name hidden-xs'>
+                        AbcJSC
+                    </div>
+                    <div class='navbar-left site-name phone'>
+                        <i class="fa fa-phone "></i>
+                    </div>
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <nav class="collapse navbar-collapse " role="navigation">
+                        <ul class="nav navbar-nav ">
+                            <li class='navbar-right'>
+                                <a href="#sec">Get Started</a>
+                            </li>
+                            <li class='navbar-right'>
+                                <a href="#sec">Edit</a>
+                            </li>
+                            <li class='navbar-right'>
+                                <a href="#sec">Visualize</a>
+                            </li>
+                            <li class='navbar-right'>
+                                <a href="#sec">Prototype</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /NavBar -->
+    <section class="divider"></section>
+    <div class="container-fluid" id="start-offset">
+        <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 " style="padding-right:0;padding-left:0">
+            <div class="col-md-7 col-lg-7 "  id="right_panel">
+                <div class="itemPanel">
+                    <img src="img/Products/product3.jpg" class="img-responsive center-block">
+                </div>
+                <div class="itemPanel clearfix">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" >
+                        <img src="img/Products/product3.jpg" class="img-responsive center-block">
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <img src="img/Products/product3.jpg" class="img-responsive center-block">
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" >
+                        <!-- <img src="img/Products/product3.jpg" class="img-responsive center-block"> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-lg-5 " id="left_panel" >
+                <div class="itemPanel" style="height:100%">
+                    Test
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="divider"></section>
+    <!-- Bottom of Page -->
+    <div id="phasebeam">
+        <canvas width="700" height="650"></canvas>
+        <canvas width="700" height="650"></canvas>
+        <canvas width="700" height="650"></canvas>
+    </div>
+    <script type="text/javascript" src="js/phasebeam.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $('#nav').affix({
+            offset: {
+                top: function() {
+                    // Do other stuff here-- chipl
+                    return $('#start-offset').offset().top / 2;
+                }
+            }
+        });
+    })
+    $(document).ready(function() {
+        /** code inside **/        
+        makeSameSide();    
+    });
+    window.addEventListener('resize', function(){
+       makeSameSide();        
+    }, true);
+    function makeSameSide(){
+        var height = Math.max($("#left_panel").height(),$("#right_panel").height());
+        $("#left_panel").height(height);
+        $("#right_panel").height(height);
+    }
+    </script>
+</body>
+
+</html>

@@ -1,3 +1,4 @@
+
 (function($){
 	var canvas = $('#phasebeam').children('canvas'),
 		background = canvas[0],
