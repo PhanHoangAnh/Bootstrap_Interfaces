@@ -124,9 +124,9 @@
     }
     ;
 }
-/*.items:hover, .items:hover .fa{
-    color: red;    
-}*/
+.items:hover{
+    background-color: rgba(0,0,0,.8);
+}
 .items:hover .fa {
     color: red;
     transform: scale(1.4);
@@ -160,16 +160,17 @@
     -webkit-transform: scale(.9);
     transform: scale(.9);
 }
-/*.photo >img {
+.photo >img {
     -webkit-transition: all 1s ease;
     transition: all 1s ease;
 }
 .photo:hover >img {
     -webkit-transform: rotateY(180deg);
     -webkit-transform-style: preserve-3d;
-    transform: rotateY(180deg);
+    /*transform: rotateY(180deg);*/
+    transform: scale(1.05);
     transform-style: preserve-3d;
-}*/
+}
 
 .rating {
     font-size: 150%;

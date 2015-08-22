@@ -5,7 +5,7 @@
     border-radius: 5px;
     background: #FFF;*/
 }
-.col-item .photo img
+/*.col-item .photo img
 {
     margin: 0 auto;
     width: 100%;
@@ -23,7 +23,7 @@
 }
 .col-item .price
 {
-    /*width: 50%;*/
+  
     float: left;
     margin-top: 5px;
 }
@@ -44,7 +44,7 @@
     color: #777;
 }
 
-/*.col-item .rating
+.col-item .rating
 {
     width: 50%;
     float: left;
@@ -53,7 +53,7 @@
     line-height: 52px;
     margin-bottom: 10px;
     height: 52px;
-}*/
+}
 
 .col-item .separator
 {
@@ -93,7 +93,7 @@
     width: 50%;
     float: left;
     padding-left: 10px;
-}
+}*/
 .controls
 {
     margin-top: 20px;

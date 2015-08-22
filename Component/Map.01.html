@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+</head>
+<style type="text/css">
+body,
+html {
+    height: 100%;
+    width: 100%;
+}
+
+.introduction .label {
+    background-color: #5CB85C;
+}
+</style>
+
+<body>
+    <h1 class="text-center">Map Test Bed</h1>
+    <div class="container-fluid" style="border-top: 1px solid black;display:flex">
+        <div class="col-md-6 col-lg-7" style="flex:1">
+            <h3>Giới thiệu</h3>
+            <div style="column-count:2">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum
+            </div>
+            <hr>
+            <h3>Sản phẩm</h3>
+            <div class="introduction">
+                <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span>
+            </div>
+            <hr>
+            <h3>Liên hệ:</h3>
+            <li class="list-unstyled">
+                <i class="fa fa-phone-square"></i>
+                <label>Phone:</label> 0912345678
+            </li>
+            <li class="list-unstyled">
+                <i class="fa fa-envelope"></i>
+                <label>email:</label> abc@gmail.com
+            </li>
+            <li class="list-unstyled">
+                <i class="fa fa-map-marker"></i>
+                <label>Địa chỉ:</label> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+            </li>
+        </div>
+        <div class="col-md-6 col-lg-5" style="flex:1" id="googleMap">
+        </div>
+    </div>
+</body>
+<script>
+var myCenter = new google.maps.LatLng(51.508742, -0.120850);
+
+function initialize() {
+
+    var mapProp = {
+        center: myCenter,
+        zoom: 5,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+    };
+
+
+    var marker = new google.maps.Marker({
+        position: myCenter,
+        animation: google.maps.Animation.DROP
+    });
+
+    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    marker.setMap(map);
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map, marker);
+    });
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+var infowindow = new google.maps.InfoWindow({
+    content: "Hello World!"
+});
+</script>
+
+</html>

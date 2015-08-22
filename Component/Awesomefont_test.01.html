@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<style type="text/css">
+.animatedIcon {
+    position: relative;
+    color: red;
+    font-size: 72px;
+    /*background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#F0A));*/
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: iconAni 2s infinite;
+    /* Safari 4+ */
+    -moz-animation: iconAni 2s infinite;
+    /* Fx 5+ */
+    -o-animation: iconAni 2s infinite;
+    /* Opera 12+ */
+    animation: iconAni 2s infinite;
+    /* IE 10+, Fx 29*/
+}
+
+@-webkit-keyframes iconAni {
+    0% {
+        background-color: #FFF;
+    }
+    50% {
+        background-color: #5CB85C;
+    }
+    100% {
+        background-color: #F0a;
+    }
+}
+
+@-moz-keyframes iconAni {
+    0% {
+        background-color: #FFF;
+    }
+    50% {
+        background-color: #5CB85C;
+    }
+    100% {
+        background-color: #F0a;
+    }
+}
+
+@-o-keyframes iconAni {
+    0% {
+        background-color: #FFF;
+    }
+    50% {
+        background-color: #5CB85C;
+    }
+    100% {
+        background-color: #F0a;
+    }
+}
+
+@keyframes iconAni {
+    0% {
+        background-color: #FFF;
+    }
+    50% {
+        background-color: #5CB85C;
+    }
+    100% {
+        background-color: #F0a;
+    }
+}
+</style>
+
+<body>
+    <h1 class="text-center">Awesome Font Filling Test</h1>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Panel title</h3>
+            </div>
+            <div class="panel-body">
+                <i class="fa fa-check-circle-o fa-5x" style="color:green"></i>
+                <i class="fa fa-check-circle-o fa-5x animatedIcon"></i>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
