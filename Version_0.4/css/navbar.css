@@ -28,8 +28,10 @@
     /*border-radius: 8px;*/
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
-    margin-left: 5%;
-    width: 90%;
+    margin-left: 30px;
+    right: 30px;
+    width: calc(100% - 60px);
+    /*width: 90%;*/
     margin-bottom: 93px;
     /*box-sizing: border-box;*/
 }
