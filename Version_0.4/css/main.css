@@ -136,3 +136,19 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     /*font-family: 'Open Sans', sans-serif;*/    
     font-family: 'Roboto Condensed', sans-serif;
 }
+.footer{
+    font-family: 'Lobster', cursive !important;
+}
+.footer li {
+    /*color:#9d9d9d;*/
+    list-style-type: none;
+    border-bottom: 1px dotted;    
+    font-size: 18px;
+    /*line-height: 20px;*/
+    padding: 7px;
+    padding-left: 30px;
+}
+.footer li:before{
+    content: "\f0c1  ";
+    font-family: FontAwesome;
+}
