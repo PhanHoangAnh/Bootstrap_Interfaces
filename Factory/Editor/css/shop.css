@@ -116,8 +116,7 @@
     border-top: dotted 1px;
     padding: 5px;
     margin-top: 5px;
-    text-align: center;
-    cursor:pointer;
+    text-align: center
 }
 .items .fa {
     .grow {
@@ -157,12 +156,15 @@
   background: rgba(0.0.0.0);
 }
 
+
+
+
+
+
 .photo {
     position: relative;
-    cursor:pointer;
 }
 .photo .focus {
-    cursor:pointer;
     width: 100%;
     height: 100%;
     position: absolute;

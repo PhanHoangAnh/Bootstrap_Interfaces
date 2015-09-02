@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<style type="text/css">
+.ini {
+    position: relative;
+    left: 200px;
+    top: 200px;
+    width: 300px;
+    height: 200px;
+    background-color: #f0f;
+}
+
+.show {
+    transition: all 3s ease;
+    left: 200px;
+    top: 200px;
+    width: 500px;
+    height: 200px;
+    background-color: #f0f;
+}
+
+
+</style>
+
+<body>
+    <h1 class="text-center">Component Test Bed</h1>
+    <!-- <div class="ini"></div> -->
+    <div id="root"></div>
+    <button onclick="transform()">Click</button>
+    <template id="myElem">
+        <div class="ini"></div>
+    </template>
+</body>
+<script type="text/javascript">
+function transform() {
+	var root = document.querySelector('#root');
+    var template_content = document.querySelector('#myElem').content;
+    root.appendChild(document.importNode(template_content, true));
+    var el = root.querySelector('.ini');
+    console.log(root);
+    el.classList.add('show');
+}
+</script>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" media="screen, print, handheld" type="text/css" href="css/calendar.css" />
+    <script type="text/javascript" src="js/calendar.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <h1 class="text-center">Component Test Bed</h1>
+    <script type="text/javascript">
+    calendar();
+    </script>
+    <script type="text/javascript">
+    function addTable() {
+        var table = document.createElement('table');
+        table.innerHTML = "<tr><td>123</td><td>456</td></tr>";
+        document.getElementById("addtable").appendChild(table);
+    }
+    </script>
+    <input type="submit" value="New Table" onClick="addTable()" />
+    <div id="addtable"></div>
+</body>
+
+</html>

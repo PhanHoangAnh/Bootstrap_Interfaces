@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" media="screen, print, handheld" type="text/css" href="css/calendar.css" />
+    <script type="text/javascript" src="js/calendar.02.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <h1 class="text-center">Calendar Bootstrap</h1>
+
+    <div id = "myCalendar"></div>
+
+    <script type="text/javascript">
+    var node = document.createElement("calendar" );
+    var parent = document.getElementById("myCalendar");
+    calendar(node, parent);
+        
+    </script>    
+</body>
+
+</html>
