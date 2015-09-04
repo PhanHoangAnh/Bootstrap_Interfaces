@@ -3,6 +3,12 @@
     border-bottom: 1px solid #e8e8e8;
 }
 
+.blog-excerpt img {
+    height: auto;
+    width: 100%;
+    cursor:pointer;
+}
+
 .blog-excerpt li .block {
     border-left: 3px solid #e8e8e8;
     padding: 2em 0 1em 1em;
@@ -19,19 +25,18 @@
     }
 }
 
-.blog-excerpt img {
-    height: auto;
-    width: 100%;
-}
-
 .blog-excerpt .post-title {
     position: relative;
     font-size: 18px;
     overflow: hidden;
     clear: both;
     height: 45px;
+    color: #888;
 }
-
+.blog-excerpt .post-title:hover {
+    color: #4cae4c;
+    cursor:pointer
+}
 .blog-excerpt .post-title:before {
     content: "";
     position: absolute;
@@ -106,39 +111,4 @@
     width: 70%;
     height: 1.2em;
     background: rgba(0.0.0.0);
-}
-
-.controlPanel {
-    transition: all 1s ease;
-    /*margin-top: 15px;   */
-    width: 100%;
-    height: 0px;
-    background-color: rgba(0, 0, 0, 0);
-    clear: both;
-}
-
-.controlPanel.show {
-    /*position: absolute;*/
-    transition: all 1s ease;
-    /*margin-top: 15px;    */
-    width: 100%;
-    height: 50px;
-    background-color: rgba(0, 0, 0, 0);
-    clear: both;
-}
-
-.controlPanel.gonne {
-    height: 0px;
-    transition: height 1s ease;
-}
-
-.controlPanel button.sh {
-    transition: all 1s ease;
-    color: #333;
-}
-
-.controlPanel button.go {
-    transition: all 1s ease;
-    color: rgba(0, 0, 0, 0);
-    border-color: rgba(0, 0, 0, 0);
 }
