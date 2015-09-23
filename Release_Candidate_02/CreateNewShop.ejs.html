@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>Create a new Shop</title>
+<meta name="generator" content="Bootply" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../public/css/navbar.css">
+<link rel="stylesheet" type="text/css" href="../public/css/shop.css">
+<link rel="stylesheet" type="text/css" href="../public/css/main.css">
+<link rel="stylesheet" type="text/css" href="../public/css/imagePreview.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!--script type="text/javascript" src='js/navbar.js'></script-->
+<style type="text/css">
+    html,body {
+        min-height: 100%;
+    }
+    #masthead {
+        background-size: 115% auto;
+    }
+
+    #masthead.start {
+        transition: all 3s ease-in-out;
+        background-size: 100% auto;
+        top: 0;
+        left: 0;
+        padding-top: 15%;
+    }
+
+    @media only screen and (max-width: 768px) {
+        #masthead {
+            background-size: auto 115%;
+        }
+        #masthead.start {
+            transition: all 5s ease-in-out;
+            background-size: auto 100%;
+            top: 0;
+            left: 0;
+            padding-top: 15%;
+            /*bottom: 0px;*/
+        }
+    }
+
+    .controls {
+        margin-top: 15px;
+        /*vertical-align: middle;*/
+    }
+
+    @media (min-width: 979px) {
+        #sidebar.affix-bottom {
+            position: absolute;
+        }
+        #sidebar.affix-top {
+            position: static;
+            /*margin-top: 30px;*/
+            /*width: 300px;*/
+        }
+        #sidebar.affix {
+            position: fixed;
+            top: 70px;
+            /*width: 300px;*/
+        }
+    }
+
+    #phasebeam {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    #phasebeam canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .introduction .label {
+        background-color: #5CB85C;
+    }
+
+    .animatedIcon {
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -webkit-animation: iconAni 2s infinite;
+        /* Safari 4+ */
+        -moz-animation: iconAni 2s infinite;
+        /* Fx 5+ */
+        -o-animation: iconAni 2s infinite;
+        /* Opera 12+ */
+        animation: iconAni 2s infinite;
+        /* IE 10+, Fx 29*/
+    }
+
+    @-webkit-keyframes iconAni {
+        0% {
+            background-color: #FFF;
+            margin-top: 0px;
+        }
+        50% {
+            background-color: #5CB85C;
+            margin-top: 25px;
+        }
+        100% {
+            background-color: #F0a;
+            margin-top: 10px;
+        }
+    }
+
+    @-moz-keyframes iconAni {
+        0% {
+            background-color: #FFF;
+            margin-top: 0px;
+        }
+        50% {
+            background-color: #5CB85C;
+            margin-top: 25px;
+        }
+        100% {
+            background-color: #F0a;
+            margin-top: 10px;
+        }
+    }
+
+    @-o-keyframes iconAni {
+        0% {
+            background-color: #FFF;
+            margin-top: 0px;
+        }
+        50% {
+            background-color: #5CB85C;
+            margin-top: 25px;
+        }
+        100% {
+            background-color: #F0a;
+            margin-top: 10px;
+        }
+    }
+
+    @keyframes iconAni {
+        0% {
+            background-color: #FFF;
+            margin-top: 0px;
+        }
+        50% {
+            background-color: #5CB85C;
+            margin-top: 25px;
+        }
+        100% {
+            background-color: #F0a;
+            margin-top: 10px;
+        }
+    }
+.hiddenElem{
+    display: none;
+}
+.hiddenElemSlow{      
+   transition:all 3s ease-in-out;
+   display: none;
+}
+
+</style>
+
+<body style="background-color: rgb(0,0,0)">
+    <!-- Dont touch this section -->
+    <!-- masthead -->
+    <div id="masthead">
+        <!-- <div style="height:100%; width: 100%; background-color: rgba(0,0,0,.6)"></div> -->
+        <div class="container-fluid">
+            <div class="row cover">
+                <div class="col-md-6 col-md-offset-1 ">
+                    <h1><app-showName id = "showName"><%=title%></app-showName>
+                        <!-- <hr style = "border-top: 1px solid rgba(255,255,255,.3)"> -->
+                        <p class="lead" ><app-slogan id = "slogan">Shop chuyên hàng hiệu...!</app-slogan></p>
+                    </h1>
+                </div>
+                <!-- <div class="col-md-5" style="padding-right:30px; bottom: 10px; right: 0px; position: absolute;"> -->
+                <div class="col-md-5" style="padding:30px">
+                    <!-- Primary Advertising Here -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <marketing-message>Tin tức khuyến mại</marketing-message>
+                        </div>
+                        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
+                    </div>
+                    <!-- /Primary Advertising Here -->
+                </div>
+            </div>
+        </div>
+        <!-- /cont -->        
+    </div>
+    <!-- NavBar -->
+    <div id="nav-wrapper">
+        <div id="nav" class="navbar navbar-inverse navbar-static-top navbar" role="navigation">
+            <div class="container">
+                <div class="row">
+                    <div>
+                        <img id = "logo" class="logo">
+                    </div>
+                    <div class='site-name hidden-xs' id = "companyName">
+                        <!-- AbcJSC -->
+                    </div>
+                    <div class='navbar-left site-name phone'>
+                        <i class="fa fa-phone "></i>
+                        <!-- <i class="fa fa-facebook"></i> -->
+                    </div>
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <nav class="collapse navbar-collapse " role="navigation">
+                        <ul class="nav navbar-nav ">
+                            <li class='navbar-right'>
+                                <a href="#sec">About</a>
+                            </li>
+                            <li class='navbar-right'>
+                                <a href="#sec">Khuyến mãi</a>
+                            </li>
+                            <li class='navbar-right'>
+                                <a href="#sec">Sản phẩm</a>
+                            </li>
+                            <li class='navbar-right '>
+                                <a href="#sec">Home</a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right" id = "visitor">
+                            <li class='navbar-right' id='visitorHolder'>
+                                <a href="#sec" id = "fb_login"> <i class="fa fa-facebook fa-2x "></i><span> Login with Facebook</span></a>
+                            </li>                            
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /NavBar -->
+    <div class="divider" style="min-height: 75px"></div>
+    <div class="container-fluid" style=";color: #fff" id="start-offset">
+        <div class="row" style="padding: 30px; margin-bottom: 30px; color:#fff">
+            <div class="col-md-1">
+                <h3>
+                    <i class="fa fa-cogs fa-2x"></i>    
+                </h3>                
+            </div>
+            <div class="col-md-11">
+                <h3>
+                     <span>Xin chào</span><span id = "helloVisior"></span>
+                </h3>
+                <div>Bắt đầu tạo shop nào...</div>
+            </div>
+        </div>
+        <hr>
+        <div id = "basicInfo" class="row">
+            <div class="col-md-2" style="padding:30px">
+                <img id ='secondAvatar' style=" margin:auto" class = "img-responsive">
+            </div>
+            <div class="col-md-10" style="color:#333 ; background-color:#f5f5f5; padding-left: 30px; border-left: 1px solid #fff">
+                <div style="margin-top: 15px" class = "row">
+                    <div class="col-md-4 " style="padding: 10px">
+                        <span style = "margin-bottom: 5px">Tên đường dẫn </span><br>
+                        <input type="text" class="form-control data-input" id = "pathName">
+                    </div>
+                    <div class="col-md-8 " style="vertical-align: middle;line-height: 90px">    
+                        <i> Tiếng Việt không dấu. Nếu bạn đặt là abcd, đường dẫn tên shop của bạn sẽ là localhost:3000/abcd</i>
+                    </div>                
+                </div>
+                    
+                <div style="margin-top: 15px" class = "row">
+                        <div class="col-md-4 " style="padding: 10px">
+                            <span style = "margin-bottom: 5px">Tên hiển thị của shops </span><br>
+                            <input type="text" class="form-control data-input" id = "showName">
+                        </div>
+                        <div class="col-md-8 " style="vertical-align: middle ;line-height: 90px;"> 
+                            <i>Có thể đặt bằng tiếng Việt hoặc tiếng Anh</i>                        
+                        </div>                    
+                </div>
+
+                <div style="margin-top: 15px" class = "row">
+                    <div class="col-md-4 " style="padding: 10px">
+                        <span style = "margin-bottom: 5px">Slogan của shop</span><br>
+                        <input type="text" class="form-control data-input" id = "slogan">
+                    </div>
+                    <div class="col-md-8 " style="vertical-align: middle ;line-height: 90px;">        
+                        <i>Truyền đạt giá trị bạn muốn đem đến cho khách hàng</i>                        
+                    </div>                
+                </div>
+
+                <div style="margin-top: 15px" class = "row">
+                    <div class="col-md-4 " style="padding: 10px">
+                        <span style = "margin-bottom: 5px">Tên công ty hay nhóm của bạn</span><br>
+                        <input type="text" class="form-control data-input" id = "companyName">
+                    </div>
+                    <div class="col-md-8 " style="vertical-align: middle ;line-height: 90px;">                    
+                        <i>Sẽ hiển thị trên góc trên bên trái của menu trong shop của bạn</i>                        
+                    </div>                
+                </div>
+
+                <div style="margin-top: 15px" class = "row">
+                    <div class="col-md-4 " style="padding: 10px">
+                        <span style="margin: 10px; display: inline-block; vertical-align: middle;">Chọn icon cho shop của bạn</span><button id = 'icon' type="button" style="margin: 10px" class="btn btn-success pull-left" data-toggle="modal" data-target="#m_icon">Icon</button>
+                    </div>
+                    <div class = "col-md-8" style="padding: 10px">
+                        <div style=" height: 74px; width: 74px">
+                            <img id = "iconHolder" style="width: 100%; height:auto">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 15px" class = "row">
+                    <div class="col-md-4 " style="padding: 10px">
+                        <span style="margin: 10px ; display: inline-block; vertical-align: middle;">Chọn hình nền cho shop của bạn</span>
+                        <button id ='wallPaper' type="button" style="margin: 10px" class="btn btn-success pull-left" data-toggle="modal" data-target="#m_wall">Wall</button>
+                    </div>  
+                    <div class = "col-md-8" style="padding: 10px">
+                        <div style=" widh: 100%; margin-bottom: 15px">
+                            <img id = "wallHolder" style=" max-width: 100%; height:auto " >
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <div id="extraInfo" class="col-md-12 hiddenElem" style="color:#333 ; background-color:#f5f5f5; padding-left: 30px; border-left: 1px solid #fff">
+            <div class="container-fluid" style="background-color: #f5f5f5; display:flex" id="section1">
+                <div class="col-md-6 col-lg-6" style="flex:1">
+                    <h3><i class="fa fa-microphone"></i> Giới thiệu</h3>
+                    <div style="column-count:2">
+                        <b><h4> Hãy giới thiệu về shop của bạn tại đây....</h4></b><br>
+                        <b>Sử dụng bản đồ bên tay phải (kéo quả bóng đỏ!.) để cung cấp địa chỉ của bạn cho khách hàng....</b><br>
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum
+                    </div>
+                    <hr>            
+                    <hr>
+                    <h3><i class="fa fa-anchor"></i> Liên hệ:</h3>
+                    <li class="list-unstyled">
+                        <i class="fa fa-phone-square"></i>
+                        <label>Phone:</label> Cập nhật thông tin điện thoại.. 0912345xxx
+                    </li>
+                    <li class="list-unstyled">
+                        <i class="fa fa-envelope"></i>
+                        <label>email:</label> Cập nhật địa chỉ emal... abc@gmail.com
+                    </li>
+                    <li class="list-unstyled">
+                        <i class="fa fa-map-marker"></i>
+                        <label>Địa chỉ:</label><app-address id = "address"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet</app-address>
+                    </li>
+                    <hr>
+                </div>
+                <div class="col-md-6 col-lg-6" style="padding:0; flex:1" id="googleMap">
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <hr>
+        <div class="row" id = "continueButton">
+            <div class="container-fluid">
+                <button  type="button" style="margin: 10px" class="btn btn-success pull-right">Tiếp tục</button>
+            </div>
+        </div>      
+    </div>    
+
+<div id="end-offset">
+    <footer>
+        <div class="container-fluid" style="background-color:rgba(0,0,0,.65); ">
+            <!--/col-->
+        </div>
+        <div style=" width: 100%; background-color: rgba(0,0,0,.85); height: 90px;">
+            @Copyright:abcd@abc.jsc
+        </div>
+    </footer>
+</div>
+<div class="modal fade" id="m_icon" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Chọn Icon cho shop của bạn.</h4>
+            </div>
+            <div class="modal-body">
+                <p>Drag the image to take an icon</p>
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="imageBox" id='iconImg' style="height: 400px;">
+                            <div class="thumbBox" id = "thumbIcon"></div>
+                            <div class="spinner" style="display: none" id = "spinnerIcon" >Loading...</div>
+                        </div>
+                        <div class="action">
+                            <span class="file-input btn btn-primary btn-file">
+                                Browse&hellip;
+                                <input type="file" multiple id='iconFile'>
+                            </span>
+                            <!--input type="button" id="btnCrop" class="btn btn-primary btncrop" value="Crop"-->
+                            <input type="button" id="icon_btnZoomIn" class="btn btn-primary" value="+" style="float: right">
+                            <input type="button" id="icon_btnZoomOut" class="btn btn-primary" value="-" style="float: right">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="preview">
+                            <img id='icon_preview' src="">
+                        </div>
+                        <div class="preview-md">
+                            <img id='icon_preview-md' src="">
+                        </div>
+                        <div class="preview-sm">
+                            <img id='icon_preview-sm' src="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .fullWidth{
+        width: 100%!important;
+        margin:0!important;
+    }
+</style>
+<div class="modal fade" id="m_wall" role="dialog">
+    <div class="modal-dialog fullWidth">
+        <!-- Modal content-->
+        <div class="modal-content" style="height: 120%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Chọn hình nền cho shop của bạn.</h4>
+            </div>
+            <div class="modal-body" style="padding:0; width: 100%; margin:0">
+                <p style="margin-left: 15px">Drag the image to take an wall</p>
+                <!-- <div class="row"> -->
+                <div class="col-md-12" style="padding:0">
+                    <div class="imageBox" id='wallImg' style="background-color: #F5F5F5">
+                        <div class="fullWidth" id = "thumbWall" style="height: 100%; "></div>
+                        <div class="spinner" style="display: none" id = "spinnerWall" >Loading...</div>
+                        <div id = 'openInput' class="spinner" style="background-color: rgba(0,0,0,0) color: #333"><h3>Click here ....</h3></div>
+                    </div>
+                    <div class="action" style="padding: 15px">
+                        <span class="file-input btn btn-primary btn-file">
+                            Browse&hellip;
+                            <input type="file" multiple id='wallFile'>
+                        </span>
+                        <!--input type="button" id="btnCrop" class="btn btn-primary btncrop" value="Crop"-->
+                        <input type="button" id="wall_btnZoomIn" class="btn btn-primary" value="+" style="float: right">
+                        <input type="button" id="wall_btnZoomOut" class="btn btn-primary" value="-" style="float: right">
+                    </div>
+                </div>
+                <div class="col-md-3" style=" padding: 15px">
+                    <div class="preview">
+                        <img id='wall_preview'>
+                    </div>
+                    <div class="preview-md">
+                        <img id='wall_preview-md'>
+                    </div>
+                    <div class="preview-sm">
+                        <img id='wall_preview-sm'>
+                    </div>
+                </div>
+                <!-- </div> -->
+            </div>
+            <div class="modal-footer" >
+                <button type="button" style="margin-top: 15px" class="btn btn-default" data-dismiss="modal">Done</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+<div id="phasebeam">
+    <canvas width="700" height="650"></canvas>
+    <canvas width="700" height="650"></canvas>
+    <canvas width="700" height="650"></canvas>
+</div>
+<script type="text/javascript" src="../public/js/phasebeam.js"></script>
+</body>
+<script type="text/javascript" src='../public/js/utils.js'></script>
+<script type="text/javascript" src="../public/js/Crypto/cryptoUtils.js"></script>
+<script type="text/javascript" src="../public/js/ImageSelector/chiplcrop.js"></script>
+<script type="text/javascript">
+    $(function() {
+    // $('#nav-wrapper').height($("#nav").height());
+    // $('#nav-wrapper').height(200);
+    $('#nav').affix({
+        offset: {
+            top: function() {
+                // Do other stuff here-- chipl
+                return $('#start-offset').offset().top / 2;
+            }
+        }
+    });
+    // Sidebar affix
+    $('#sidebar').affix({
+        offset: {
+            top: $('#start-offset').offset().top + 0,
+            bottom: $('#end-offset').outerHeight() - 20
+        }
+    }).on('affix.bs.affix', function() { // before affix
+        $(this).css({
+            /*'top': headerHeight,*/ // for fixed height
+            'width': $(this).outerWidth() // variable widths
+        });
+    }).on('affix-bottom.bs.affix', function() { // before affix-bottom
+        // $(this).css('bottom', 'auto'); // THIS is what makes the jumping
+    });;
+
+});
+
+var continueButton;
+// Initial ImagePreview Components
+$(document).ready(function() {
+    var masthead = $("#masthead");
+        // masthead.addClass('start hiddenElem');
+        masthead.addClass('hiddenElem');
+    
+    document.querySelector('#iconFile').addEventListener('change', function(el){
+        initIcon(this);
+    }, false);
+    document.querySelector('#wallFile').addEventListener('change', function() {
+        initWall(this);        
+    }, false);
+    var inputs = document.querySelectorAll('.data-input');
+    for(var i =0; i<inputs.length; i++){
+        inputs[i].addEventListener('input',function(event){
+            getInputData(this);
+        },false)
+    }
+    document.getElementById("openInput").addEventListener('click',function(){
+        document.getElementById("wallFile").click();
+    },false);
+    // continueButton is global element
+    continueButton = document.querySelector("#continueButton");
+    continueButton.classList.add('hiddenElem');
+    
+});
+
+var img_Icon;
+var img_Wall;
+
+function initIcon(el){
+    console.log("initIcon..");
+    options = {
+        imageBox: '#iconImg',
+        thumbBox: '#thumbIcon',
+        spinner: '#spinnerIcon',
+        imgSrc: ''
+    }
+    var reader = new FileReader();
+    cropper = new cropbox(options, iconPreview);
+    reader.onload = function(e) {
+        options.imgSrc = e.target.result;                    
+        cropper.resetOption(options);
+    }
+    reader.readAsDataURL(el.files[0]);
+    el.files = [];
+    document.querySelector('#icon_btnZoomIn').addEventListener('click', function() {
+        cropper.zoomIn();
+    })
+    document.querySelector('#icon_btnZoomOut').addEventListener('click', function() {
+        cropper.zoomOut();
+    })
+    $('#m_icon').on('hidden.bs.modal', function() {
+        console.log('close modal:');
+        document.getElementById('iconHolder').setAttribute('src',img_Icon);
+        document.getElementById('logo').setAttribute('src',img_Icon);
+    });
+    $('#m_icon').on('shown.bs.modal', function() {            
+        cropper.resetOption(options);
+    });
+    function iconPreview(data) {
+        //console.log('imgdata: ', data);
+        img_Icon = data;
+        document.getElementById('icon_preview').setAttribute('src', data);
+        document.getElementById('icon_preview-md').setAttribute('src', data);
+        document.getElementById('icon_preview-sm').setAttribute('src', data);        
+        //document.getElementById('Img_Avatar').setAttribute('src',data);
+    }
+
+};
+
+function initWall(el){
+    // console.log("initWall..");    
+    // document.getElementById("wallImg").style.height = screen.height + "px";
+    // document.getElementById("thumbWall").style.height = screen.height + "px";
+    options = {
+        imageBox: '#wallImg',
+        thumbBox: '#thumbWall',
+        spinner: '#spinnerWall',
+        imgSrc: ''
+    }
+    var reader = new FileReader();
+    cropper = new cropbox(options, wallPreview);
+    reader.onload = function(e) {
+        options.imgSrc = e.target.result;
+        cropper.resetOption(options);        
+    }
+    reader.readAsDataURL(el.files[0]);
+    el.files = [];
+    document.querySelector('#wall_btnZoomIn').addEventListener('click', function() {
+        cropper.zoomIn();
+    })
+    document.querySelector('#wall_btnZoomOut').addEventListener('click', function() {
+        cropper.zoomOut();
+    })
+    $('#m_wall').on('hidden.bs.modal', function() {
+        console.log('close modal:');
+        var masthead = document.getElementById('masthead');
+        var prop = "#f3f3f3 url('" +img_Wall+ "') no-repeat right top"
+        masthead.style.background = prop;
+        
+        masthead.classList.remove("hiddenElem");
+        // masthead.addClass('start');
+        setTimeout(function(){
+            masthead.classList.add('start');
+        }, 100);
+
+    });
+    $('#m_wall').on('shown.bs.modal', function() {            
+        cropper.resetOption(options);        
+    });    
+    function wallPreview(data) {
+        
+        img_Wall = data;
+        document.getElementById('wall_preview').setAttribute('src', data);
+        document.getElementById('wall_preview-md').setAttribute('src', data);
+        document.getElementById('wall_preview-sm').setAttribute('src', data);        
+        document.getElementById("openInput").classList.add("hiddenElem");
+        document.getElementById('wallHolder').setAttribute('src',data);
+        continueButton.classList.remove("hiddenElem");
+        // Add eventListener for continueButton
+        continueButton.addEventListener('click', function(){
+            document.getElementById("basicInfo").classList.add("hiddenElemSlow");
+            document.getElementById("extraInfo").classList.remove("hiddenElem");
+            setTimeout(function(){
+                google.maps.event.trigger(map, 'resize');
+                initialize();
+            },100);
+        },false);
+    }
+
+};
+
+// data to keep to update to server
+var post_data = {};
+// Update by realtime with input (oninput) events
+function getInputData(elem){    
+    var _id = elem.id;
+    //pathName
+    if(_id == 'pathName'){        
+        post_data.pathName = elem.value;
+    }
+    //showName
+    if(_id == 'showName'){        
+        post_data.showName = elem.value;
+        document.querySelector('#showName').innerHTML = innerHTML=elem.value;
+    }
+    //slogan
+    if(_id =='slogan'){        
+        post_data.slogan = elem.value;
+        document.querySelector('#slogan').innerHTML=elem.value;
+    }
+    //companyName
+    if(_id == 'companyName'){        
+        post_data.companyName = elem.value;
+        document.querySelector("#companyName").innerHTML = elem.value;
+    }
+};
+
+</script>
+<script type="text/javascript">
+// This function is called when someone finishes with the Login
+// Button.  See the onlogin handler attached to it in the sample
+// code below.
+var RSAPublicKey = <%-JSON.stringify(data)%>
+
+function checkLoginStatus() {
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
+}
+
+window.fbAsyncInit = function() {
+    FB.init({
+        appId: '203172309854130',
+        cookie: true, // enable cookies to allow the server to access 
+        // the session
+        xfbml: false, // parse social plugins on this page
+        version: 'v2.4' // use version 2.2
+    });
+
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
+
+};
+
+// Load the SDK asynchronously
+(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+
+var aes_key;
+var app_token;
+
+function getNewToken(uid, token) {
+    // console.log("uid: ", uid);
+    //    console.log("accessToken: ", token);
+    var _data = {
+        userName: uid,
+        password: token
+    };
+    aes_key = cryptoUtil.generateAESKey();
+    var json_data = {
+        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey, aes_key)
+    };
+    // console.log("stringify: ", JSON.stringify(_data));
+    console.log("cryptoUtil: ", cryptoUtil);
+
+    // _data = cryptoUtil.EncryptJSON(_data, RSAPublicKey, aes_key);
+    console.log('_data: ', _data);
+    $.ajax({
+        // url: './userToken',
+        url: './api/gettoken',
+
+        method: 'POST',
+        data: json_data,
+        // contentType:'application/json',
+        complete: function(data, status, jqXHR) {
+            console.log('result', data);
+            // console.log(typeof(data));
+            var obj = JSON.parse(data.responseText);
+            if (obj.err == 0) {
+                var encrypted_app_token = obj.encrypted_app_token;
+                // console.log('encrypted_app_token: ', encrypted_app_token);
+                var _app_token = cryptoUtil.aesDecryptor(encrypted_app_token, aes_key);
+                // console.log("typeof app_token: ", typeof(_app_token));
+                // console.log('app_token: ', JSON.parse(_app_token).app_token);
+                app_token = JSON.parse(_app_token).app_token;
+                localStorage.setItem("app_token", app_token);
+                addLinks();
+                post_data.fb_uid = uid;
+            }else{
+                    // for createNewShop id = "createNewShopMenu" class="createNewShop"
+                    var createNewLinks = document.querySelectorAll(".createNewShop");
+                    for (var i=0; i<createNewLinks.length; i++){            
+                        createNewLinks[i].addEventListener('click', preventCreateNewShop ,false);
+                    };
+                    post_data.fb_uid = null;
+                }
+
+            }
+        });
+}
+
+function checkToken(uid, accessToken) {
+    //1. check wheather token is existed in localStorage
+    if (localStorage.getItem("app_token") === null) {
+        getNewToken(uid, accessToken);
+        return;
+    }
+    //2. get Token from localStorage
+    app_token = localStorage.getItem("app_token");
+    // check Item validation
+    var _data = {
+        userName: uid,
+        password: app_token
+    };
+    // _aes_key = cryptoUtil.generateAESKey();
+    var json_data = {
+        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey)
+    };
+    $.ajax({
+        // url: './userToken',
+        url: './api/checktoken',
+        method: 'POST',
+        data: json_data,
+        complete: function(data, status, jqXHR) {
+            var obj = JSON.parse(data.responseText);
+            if (obj.err != 0) {
+                getNewToken(uid, accessToken);
+                return;
+            }
+            addLinks();
+            post_data.fb_uid = uid;
+        }
+    });
+}
+
+function addLinks(){
+    var createNewLinks = document.querySelectorAll(".createNewShop");
+    for (var i=0; i<createNewLinks.length; i++){            
+        createNewLinks[i].removeEventListener('click', preventCreateNewShop , false)
+        createNewLinks[i].setAttribute("href", "/createnewshop");
+    }
+}
+
+function fetchingInfo(callback) {
+
+    // console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', 'GET', {
+        "fields": "id,name,email"
+    }, function(response) {        
+        callback(response);
+    });
+
+}
+
+function handleFBData(response) {
+    // document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+    var visitorHolder = document.querySelector('#visitorHolder');        
+    // console.log("visitorHolder", visitorHolder);
+    var parent = visitorHolder.parentNode;
+    parent.removeChild(visitorHolder);
+    FB.api('/me/picture?type=large', function(response) {
+        // document.getElementById("profileImage").setAttribute("src", response.data.url);
+        console.log(response.data.url);
+        var _img = document.querySelector("#avatar");        
+        _img.setAttribute("src", response.data.url);
+        _img.style.border = "0";
+        var sedond_img = document.querySelector("#secondAvatar");
+        sedond_img.setAttribute("src", response.data.url);
+        sedond_img.style.border = "0";
+
+    });
+
+    var _li = document.createElement('li');
+    _li.classList.add ("navbar-right");    
+    // _li.style.marginTop= "10px";
+    var _a = document.createElement('a');
+    var _span = document.createElement('span');
+    var _div = document.createElement('div');
+    var _img = document.createElement('img');
+
+    _div.classList.add('navbar-right');
+    _div.style.with = "25px";
+    _div.style.height = "25px";
+    _div.style.width = "204x";
+    _div.style.overflow = "hidden";
+
+    _img.style.width = "25px";
+    _img.style.height = "auto";
+    // _img.style.paddingLeft = "10px";
+    _img.setAttribute("id", "avatar");    
+    _div.appendChild(_img);
+    _span.appendChild(_div);
+
+    _a.appendChild(_span);
+    _a.style.color = "#fff";
+    var t = document.createTextNode( String.fromCharCode(160)+ response.name +  String.fromCharCode(160));
+    _a.appendChild(t);
+    _li.appendChild(_a)
+    parent.appendChild(_li);
+    // console.log("parent", parent);
+    var temp = t.cloneNode(true);
+    document.querySelector('#helloVisior').appendChild(temp);
+
+}
+
+// This is called with the results from from FB.getLoginStatus().
+function statusChangeCallback(response) {
+
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+        fetchingInfo(handleFBData);
+        var uid = response.authResponse.userID;
+        var accessToken = response.authResponse.accessToken;        
+        checkToken(uid, accessToken);
+
+    } else if (response.status === 'not_authorized') {
+        // The person is logged into Facebook, but not your app.
+        // document.getElementById('status').innerHTML += 'Please log ' +
+        // 'into this app.';
+        addLoginListener();
+    } else {
+        // The person is not logged into Facebook, so we're not sure if
+        // they are logged into this app or not.
+        // document.getElementById('status').innerHTML += 'Please log ' +
+        // 'into Facebook.';
+        addLoginListener();
+    }
+    function addLoginListener(){
+        var login = document.querySelector('#visitor');
+        login.addEventListener('click',fb_enter,false);
+    }    
+}
+
+function fb_enter() {
+    // console.log("okie here");
+    FB.login(function(response) {
+        console.log(response);
+        if (response.status === 'connected') {
+            statusChangeCallback(response);
+        }
+    }, {})
+}
+</script>
+<!-- GoogleMap Section -->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+    var geocoder = new google.maps.Geocoder();
+    var map;
+    function geocodePosition(pos) {
+        geocoder.geocode({
+            latLng: pos
+        }, function(responses) {
+            if (responses && responses.length > 0) {
+                updateMarkerAddress(responses[0].formatted_address);
+            } else {
+                updateMarkerAddress('Cannot determine address at this location.');
+            }
+        });
+    }
+
+    function updateMarkerStatus(str) {
+        // document.getElementById('markerStatus').innerHTML = str;
+    }
+
+    function updateMarkerPosition(latLng) {
+        // document.getElementById('info').innerHTML = [
+        //     latLng.lat(),
+        //     latLng.lng()
+        // ].join(', ');
+        post_data.longitude = latLng.lng();
+        post_data.latitude = latLng.lat();
+    }
+
+    function updateMarkerAddress(str) {
+        document.getElementById('address').innerHTML = str;
+    }
+
+    function err_Handler(err) {
+        console.log(err);
+    }
+
+    function initialize() {
+
+        var latLng
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(updatePos, err_Handler) ;
+        } 
+        updatePos();
+
+        function updatePos(pos) {
+
+            if(pos== null|| pos == undefined){
+                latLng = new google.maps.LatLng(-34.397, 150.644);    
+            }else{
+                console.log(pos);
+                latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
+            }
+
+            map = new google.maps.Map(document.getElementById('googleMap'), {
+                zoom: 15,
+                center: latLng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+            var marker = new google.maps.Marker({
+                position: latLng,
+                title: 'Vị trí hiện tại của bạn',
+                map: map,
+                draggable: true
+            });
+
+            // Update current position info.
+            updateMarkerPosition(latLng);
+            geocodePosition(latLng);
+
+            // Add dragging event listeners.
+            google.maps.event.addListener(marker, 'dragstart', function() {
+                updateMarkerAddress('Dragging...');
+            });
+
+            google.maps.event.addListener(marker, 'drag', function() {
+                updateMarkerStatus('Dragging...');
+                updateMarkerPosition(marker.getPosition());
+            });
+
+            google.maps.event.addListener(marker, 'dragend', function() {
+                updateMarkerStatus('Drag ended');
+                geocodePosition(marker.getPosition());
+            });
+        }
+
+    }
+
+    // Onload handler to fire off the app.
+    google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+</html>
