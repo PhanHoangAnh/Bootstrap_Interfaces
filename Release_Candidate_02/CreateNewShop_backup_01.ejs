@@ -220,12 +220,12 @@
                             <span class="icon-bar"></span>
                         </button>
                     </div>
-                    <nav class="collapse navbar-collapse " role="navigation">
-                        <!-- <ul class="nav navbar-nav ">
+                    <nav class="collapse navbar-collapse " role="navigation">                                            
+                        <ul class="nav navbar-nav ">
                             <li class='navbar-right'>
-                                <a href="#sec">About</a>
+                                <a href="#sec">    Creating a new Shop...</a>
                             </li>
-                            <li class='navbar-right'>
+                            <!-- <li class='navbar-right'>
                                 <a href="#sec">Khuyến mãi</a>
                             </li>
                             <li class='navbar-right'>
@@ -233,8 +233,8 @@
                             </li>
                             <li class='navbar-right '>
                                 <a href="#sec">Home</a>
-                            </li>
-                        </ul> -->
+                            </li> -->
+                        </ul>
                         <ul class="nav navbar-nav navbar-right" id = "visitor">
                             <li class='navbar-right' id='visitorHolder'>
                                 <a href="#sec" id = "fb_login"> <i class="fa fa-facebook fa-2x "></i><span> Login with Facebook</span></a>
@@ -330,7 +330,7 @@
                                     <i class="fa fa-envelope"></i>
                                     <label>email:</label> <div class="excerpt">Cập nhật địa chỉ emal... abc@gmail.com</div>
                                 </li>
-                                <li class="list-unstyled">
+                                <li class="list-unstyled" style="margin-bottom:15px">
                                     <i class="fa fa-map-marker"></i>
                                     <label>Địa chỉ:</label><app-address id = "address" class="excerpt"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet</app-address>
                                 </li>
@@ -463,8 +463,7 @@
 </div>
 
 <template id="ControlPanel">
-        <div class="controlPanel col-md-10" style="text-align: center;">
-            <button type="button" class="btn btn-default go" id='_delete'><i class="fa fa-trash-o"></i> Delete</button>
+        <div class="controlPanel col-md-10" style="text-align: center;">            
             <button type="button" class="btn btn-default go" id='_edit'><i class="fa fa-pencil-square-o"></i> Edit</button>
             <button type="button" class="btn btn-default go" id="_done"><i class="fa fa-check-square-o"></i> Done</button>
         </div>
@@ -570,9 +569,11 @@ function initIcon(el){
         cropper.zoomOut();
     })
     $('#m_icon').on('hidden.bs.modal', function() {
-        console.log('close modal:');
+        // console.log('close modal:');
         document.getElementById('iconHolder').setAttribute('src',img_Icon);
         document.getElementById('logo').setAttribute('src',img_Icon);
+        // upload icon
+        uploadImage("avatars");
     });
     $('#m_icon').on('shown.bs.modal', function() {            
         cropper.resetOption(options);
@@ -613,7 +614,7 @@ function initWall(el){
         cropper.zoomOut();
     })
     $('#m_wall').on('hidden.bs.modal', function() {
-        console.log('close modal:');
+        
         var masthead = document.getElementById('masthead');
         var prop = "#f3f3f3 url('" +img_Wall+ "') no-repeat right top"
         masthead.style.background = prop;
@@ -623,6 +624,8 @@ function initWall(el){
         setTimeout(function(){
             masthead.classList.add('start');
         }, 100);
+        // upload wall
+        uploadImage("walls");
 
     });
     $('#m_wall').on('shown.bs.modal', function() {            
@@ -689,6 +692,12 @@ function addControlPanel(el) {
                 buttons[i].addEventListener('click', function(_event) {
                     bnt_EditClick(_event, this, el);
                 }, false);
+                break;
+            case '_done':
+                buttons[i].addEventListener('click', function(_event){
+                    var bnt_Edit = document.querySelector("#_edit");
+                    bnt_DoneClick(_event, bnt_Edit, el);
+                },false);
                 break;
         }
     }
@@ -778,6 +787,9 @@ function bnt_EditClick(_event, target, _parent) {
     }
 }
 
+function bnt_DoneClick(_event, target, _parent){
+    bnt_EditClick(_event, target, _parent);
+}
 
 function changeContentEditable(state, el) {
     var title = el.querySelector('.post-title');
@@ -813,6 +825,46 @@ function changeContentEditable(state, el) {
 
 }
 
+
+function uploadImage(str_objType){
+    // create encrypted temporary JWT from app_token    
+    app_token = localStorage.getItem("app_token");
+    // check Item validation
+    var _data = {
+        userName: post_data.fb_uid,
+        password: app_token
+    };
+    // _aes_key = cryptoUtil.generateAESKey();    
+    var json_data = {
+        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey)
+    };
+    if (str_objType == "avatars"){
+        json_data.img = img_Icon.toString();        
+    }else if (str_objType = "walls"){
+        json_data.img = img_Wall;
+    }
+    else{
+
+    };    
+    json_data.u_type = str_objType;
+    
+    $.ajax({
+        // url: './userToken',
+        url: './api/uploadImage',
+        method: 'POST',
+        data: json_data,
+        // img: up_img,
+        // u_type : str_objType,
+        complete: function(data, status, jqXHR) {
+            var obj = JSON.parse(data.responseText);
+            if (obj.err != 0 || obj.err == null) {
+                
+                return;
+            }
+        }
+    });
+
+}
 
 </script>
 <script type="text/javascript">
@@ -906,12 +958,13 @@ function getNewToken(uid, token) {
         });
 }
 
+
 function checkToken(uid, accessToken) {
     //1. check wheather token is existed in localStorage
     if (localStorage.getItem("app_token") === null) {
         getNewToken(uid, accessToken);
         return;
-    }
+    }    
     //2. get Token from localStorage
     app_token = localStorage.getItem("app_token");
     // check Item validation

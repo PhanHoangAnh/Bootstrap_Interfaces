@@ -569,9 +569,11 @@ function initIcon(el){
         cropper.zoomOut();
     })
     $('#m_icon').on('hidden.bs.modal', function() {
-        console.log('close modal:');
+        // console.log('close modal:');
         document.getElementById('iconHolder').setAttribute('src',img_Icon);
         document.getElementById('logo').setAttribute('src',img_Icon);
+        // upload icon
+        uploadImage("avatars");
     });
     $('#m_icon').on('shown.bs.modal', function() {            
         cropper.resetOption(options);
@@ -612,7 +614,7 @@ function initWall(el){
         cropper.zoomOut();
     })
     $('#m_wall').on('hidden.bs.modal', function() {
-        console.log('close modal:');
+        
         var masthead = document.getElementById('masthead');
         var prop = "#f3f3f3 url('" +img_Wall+ "') no-repeat right top"
         masthead.style.background = prop;
@@ -622,6 +624,8 @@ function initWall(el){
         setTimeout(function(){
             masthead.classList.add('start');
         }, 100);
+        // upload wall
+        uploadImage("walls");
 
     });
     $('#m_wall').on('shown.bs.modal', function() {            
@@ -821,6 +825,47 @@ function changeContentEditable(state, el) {
 
 }
 
+
+function uploadImage(str_objType){
+    // create encrypted temporary JWT from app_token    
+    app_token = localStorage.getItem("app_token");
+    // check Item validation
+    var _data = {
+        userName: post_data.fb_uid,
+        password: app_token
+    };
+    // _aes_key = cryptoUtil.generateAESKey();    
+    var json_data = {
+        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey)
+    };
+    if (str_objType == "avatars"){
+        json_data.img = img_Icon.toString();        
+    }else if (str_objType = "walls"){
+        json_data.img = img_Wall;
+    }
+    else{
+
+    };    
+    json_data.u_type = str_objType;
+    
+    $.ajax({
+        // url: './userToken',
+        url: './api/uploadImage',
+        method: 'POST',
+        data: json_data,
+        // img: up_img,
+        // u_type : str_objType,
+        complete: function(data, status, jqXHR) {
+            var obj = JSON.parse(data.responseText);
+            if (obj.err != 0 || obj.err == null) {
+                
+                return;
+            }
+        }
+    });
+
+}
+
 </script>
 <script type="text/javascript">
 // This function is called when someone finishes with the Login
@@ -913,12 +958,13 @@ function getNewToken(uid, token) {
         });
 }
 
+
 function checkToken(uid, accessToken) {
     //1. check wheather token is existed in localStorage
     if (localStorage.getItem("app_token") === null) {
         getNewToken(uid, accessToken);
         return;
-    }
+    }    
     //2. get Token from localStorage
     app_token = localStorage.getItem("app_token");
     // check Item validation
