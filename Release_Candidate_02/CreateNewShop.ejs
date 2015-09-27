@@ -285,15 +285,15 @@
                             <i>Truyền đạt giá trị bạn muốn đem đến cho khách hàng</i>                
                             <input type="text" class="form-control data-input" id="slogan">                    
                     </div>
-                    <div style="margin-top: 15px" class="row">                
-                            <span style="margin-bottom: 5px"><b>Tên công ty hay nhóm của bạn</b></span>                            
+                    <div style="margin-top: 15px" class="row">
+                            <span style="margin-bottom: 5px"><b>Tên công ty hay nhóm của bạn</b></span>
                             <br>
                             <i>Sẽ hiển thị trên góc trên bên trái của menu trong shop của bạn</i>
                             <input type="text" class="form-control data-input" id="companyName">
                     </div>
                     <div style="margin-top: 15px" class="row">
                         <div class="col-md-4 " style="padding: 10px">
-                            <span style="margin: 10px; display: inline-block; vertical-align: middle;">Chọn icon cho shop của bạn</span>
+                            <span style="margin: 10px; display: inline-block; vertical-align: middle;"><b>Chọn icon cho shop của bạn</b></span>
                             <button id='icon' type="button" style="margin: 10px" class="btn btn-success pull-left" data-toggle="modal" data-target="#m_icon">Icon</button>
                         </div>
                         <div class="col-md-8" style="padding: 10px">
@@ -304,7 +304,7 @@
                     </div>
                     <div style="margin-top: 15px" class="row">
                         <div class="col-md-4 " style="padding: 10px">
-                            <span style="margin: 10px ; display: inline-block; vertical-align: middle;">Chọn hình nền cho shop của bạn</span>
+                            <span style="margin: 10px ; display: inline-block; vertical-align: middle;"><b>Chọn hình nền cho shop của bạn</b></span>
                             <button id='wallPaper' type="button" style="margin: 10px" class="btn btn-success pull-left" data-toggle="modal" data-target="#m_wall">Wall</button>
                         </div>
                         <div class="col-md-8" style="padding: 10px">
@@ -316,23 +316,21 @@
                         <div class="row block ">
                             <h3><i class="fa fa-microphone"></i> Giới thiệu</h3>
                             <div class="editarea">
-                                <div style="column-count:2" class="post-title">
-                                    <b><h4> Hãy giới thiệu về shop của bạn tại đây....</h4></b><br>
-                                    <b>Sử dụng bản đồ bên tay phải (kéo quả bóng đỏ trong bản đồ!.) để cung cấp địa chỉ của bạn cho khách hàng....</b><br>
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum
+                                <div style="column-count:2" class="post-title data-input" id="post_title" contenteditable="true">
+                                <b><h4> Hãy giới thiệu về shop của bạn tại đây....</h4></b>Di chuột hoặc click vào khu vực này để thấy nút edit dưới màn hinh<br>Sử dụng bản đồ bên tay phải (kéo quả bóng đỏ trong bản đồ!.) để cung cấp địa chỉ của bạn cho khách hàng....<br>Click chuột vào những khu vực chuyển màu xám để thay đổi thông tin mà bạn muốn cập nhật đến khách hàng.<br>Nhấn nút Done để cập nhập thông tin khi bạn hoàn tất<br>Chúc các bạn thành công..
                                 </div>
                                 <h3><i class="fa fa-anchor"></i> Liên hệ:</h3>
                                 <li class="list-unstyled">
                                     <i class="fa fa-phone-square"></i>
-                                    <label>Phone:</label><div class="excerpt"> Cập nhật thông tin điện thoại.. 0912345xxx</div>
+                                    <label>Phone:</label><div class="excerpt data-input" id = 'contact_phone'> Cập nhật thông tin điện thoại.. 0912345xxx</div>
                                 </li>
                                 <li class="list-unstyled">
-                                    <i class="fa fa-envelope"></i>
-                                    <label>email:</label> <div class="excerpt">Cập nhật địa chỉ emal... abc@gmail.com</div>
+                                    <i class="fa fa-envelope" ></i>
+                                    <label>email:</label> <div class="excerpt data-input" id = 'contact_email'>Cập nhật địa chỉ emal... abc@gmail.com</div>
                                 </li>
                                 <li class="list-unstyled" style="margin-bottom:15px">
                                     <i class="fa fa-map-marker"></i>
-                                    <label>Địa chỉ:</label><app-address id = "address" class="excerpt"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet</app-address>
+                                    <label>Địa chỉ:</label><app-address id = "address" class="excerpt data-input"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet</app-address>
                                 </li>
                             </div>
                         </div>
@@ -349,7 +347,7 @@
         <hr>
         <div class="row" id = "continueButton">
             <div class="container-fluid">
-                <button  type="button" style="margin: 10px" class="btn btn-success pull-right">Tiếp tục</button>
+                <button id = "bnt_continues" type="button" style="margin: 10px" class="btn btn-success pull-right">Tiếp tục</button>
             </div>
         </div>
     </div>    
@@ -539,15 +537,23 @@ $(document).ready(function() {
         blocks[i].addEventListener('mouseout', function(_event) {
             removeControlPanel(_event, this);
         }, false);
-    }
-    
+    };
+    document.getElementById("bnt_continues").addEventListener('click', function(){
+        createShop();
+    }, false);    
 });
 
+// data to keep to update to server
 var img_Icon;
 var img_Wall;
 
-function initIcon(el){
-    console.log("initIcon..");
+var isUploadIcon;
+var isUploadImage;
+    isUploadIcon = false;
+    isUploadImage = false;
+var post_data = {};
+
+function initIcon(el){    
     options = {
         imageBox: '#iconImg',
         thumbBox: '#thumbIcon',
@@ -643,27 +649,35 @@ function initWall(el){
 
 };
 
-// data to keep to update to server
-var post_data = {};
 // Update by realtime with input (oninput) events
 function getInputData(elem){    
     var _id = elem.id;
+    // console.log ("elemen id: ", _id);
+   
     //pathName
-    if(_id == 'pathName'){        
+    if(_id == 'pathName'){
+        // console.log('str.charAt', elem.value.charAt(elem.value.length));
+        var _ch = elem.value.substring(elem.value.length-1, elem.value.length);
+        var validChars = "abcdefghijklmnopqrstuvwxyz0123456789";        
+        if (validChars.indexOf(_ch.toLowerCase())== -1){
+            var _display = elem.value.substring(0,elem.value.length -1);
+            elem.value = _display;
+            return;
+        }        
         post_data.pathName = elem.value;
     }
     //showName
-    if(_id == 'showName'){        
+    else if(_id == 'showName'){        
         post_data.showName = elem.value;
         document.querySelector('#showName').innerHTML = innerHTML=elem.value;
     }
     //slogan
-    if(_id =='slogan'){        
+    else if(_id =='slogan'){        
         post_data.slogan = elem.value;
         document.querySelector('#slogan').innerHTML=elem.value;
     }
     //companyName
-    if(_id == 'companyName'){        
+    else if(_id == 'companyName'){        
         post_data.companyName = elem.value;
         document.querySelector("#companyName").innerHTML = elem.value;
     }
@@ -703,6 +717,10 @@ function addControlPanel(el) {
     }
 }
 function removeControlPanel(e, el) {    
+    if (buttonState == 1){
+        return;
+    };
+
     var controlPanel = el.querySelector('.' + 'controlPanel');
     if (mouseTracking(e, el) == true) {
         var buttons = controlPanel.querySelectorAll('button');
@@ -788,6 +806,18 @@ function bnt_EditClick(_event, target, _parent) {
 }
 
 function bnt_DoneClick(_event, target, _parent){
+    // update for post_data
+    //id = 'post-title'
+    //id = 'contact=phone'
+    //id = 'contact-email'
+    //id = "address"
+    var elemIDs = ['post_title', 'contact_phone', 'contact_email', 'address'];
+    for (var i = 0; i < elemIDs.length; i++){        
+        post_data[elemIDs[i]] = document.getElementById(elemIDs[i]).innerHTML;
+    }
+    if (buttonState == 0 || typeof(buttonState) == 'undefined'){
+        return;
+    }
     bnt_EditClick(_event, target, _parent);
 }
 
@@ -828,7 +858,7 @@ function changeContentEditable(state, el) {
 
 function uploadImage(str_objType){
     // create encrypted temporary JWT from app_token    
-    app_token = localStorage.getItem("app_token");
+    
     // check Item validation
     var _data = {
         userName: post_data.fb_uid,
@@ -847,31 +877,95 @@ function uploadImage(str_objType){
 
     };    
     json_data.u_type = str_objType;
-    
     $.ajax({
         // url: './userToken',
         url: './api/uploadImage',
         method: 'POST',
         data: json_data,
-        // img: up_img,
-        // u_type : str_objType,
         complete: function(data, status, jqXHR) {
             var obj = JSON.parse(data.responseText);
-            if (obj.err != 0 || obj.err == null) {
-                
+            // 
+            if (obj.err != 0 || obj.err == null) {                 
                 return;
+            }
+            if(obj.uploadType=="avatars"){
+                    isUploadIcon = true;
+            }else if(obj.uploadType = "walls"){
+                    isUploadImage = true;
+            }else{
+
             }
         }
     });
 
 }
 
+
+function createShop (){
+
+    var elemIDs = ['post-title', 'contact-phone', 'contact-email', 'address','pathName', 'showName','slogan','companyName'];
+    var isMissing = false;
+    var missingObj = {};
+    for( var i = 0; i< elemIDs.length; i ++){        
+        if(post_data[elemIDs[i]] == null || post_data[elemIDs[i]] == undefined) {            
+            isMissing = true;
+            missingObj[elemIDs[i]] =0;
+            continue;            
+        }
+    }
+
+    missingObj.isUploadIcon = isUploadIcon;
+    missingObj.isUploadImage = isUploadImage;
+
+    var isMissing = isMissing*(isUploadImage == false) * (isUploadIcon == false);
+    console.log('isMissing', isMissing, 'missingObj', missingObj);
+    if (isMissing == true) {
+        displayMissingInfo();
+        return;
+    }
+    var _data = {
+        userName: post_data.fb_uid,
+        password: app_token
+    };
+    // _aes_key = cryptoUtil.generateAESKey();    
+    var json_data = {
+        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey)
+    };
+    for (var info in post_data){
+        if (info != "fb_uid" ){
+            json_data[info]=post_data[info];
+        }
+    }
+    
+    $.ajax({
+        // url: './userToken',
+        url: './api/createShop',
+        method: 'POST',
+        data: json_data,
+        complete: function(data, status, jqXHR) {
+            var obj = JSON.parse(data.responseText);
+            // 
+            if (obj.err != 0 || obj.err == null) {              
+                return;
+            }
+            else if (obj.err == 0){
+                var sURL =  post_data.pathName + '/' + 'addItem';
+                console.log ('sURL', sURL);
+                window.location.href = sURL;
+            }
+        }
+    });
+    function displayMissingInfo(){
+    }
+}
+
+
 </script>
 <script type="text/javascript">
 // This function is called when someone finishes with the Login
 // Button.  See the onlogin handler attached to it in the sample
 // code below.
-var RSAPublicKey = <%-JSON.stringify(data)%>
+var RSAPublicKey = <%-JSON.stringify(data)%>;
 
 function checkLoginStatus() {
     FB.getLoginStatus(function(response) {
@@ -1126,10 +1220,6 @@ function fb_enter() {
     }
 
     function updateMarkerPosition(latLng) {
-        // document.getElementById('info').innerHTML = [
-        //     latLng.lat(),
-        //     latLng.lng()
-        // ].join(', ');
         post_data.longitude = latLng.lng();
         post_data.latitude = latLng.lat();
     }
@@ -1190,9 +1280,7 @@ function fb_enter() {
                 geocodePosition(marker.getPosition());
             });
         }
-
     }
-
     // Onload handler to fire off the app.
     google.maps.event.addDomListener(window, 'load', initialize);
     </script>
