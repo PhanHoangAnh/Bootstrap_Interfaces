@@ -715,6 +715,7 @@ function addControlPanel(el) {
                 break;
         }
     }
+    google.maps.event.trigger(map, "resize");
 }
 function removeControlPanel(e, el) {    
     if (buttonState == 1){
@@ -1128,6 +1129,13 @@ function updateShop(shop){
     post_data = shop;    
     isUploadIcon=post_data.isUploadIcon = true;
     isUploadImage=post_data.isUploadImage = true;
+    var pos = {};
+    pos.coords = {};
+    pos.coords.latitude = "";
+    pos.coords.longitude = "";
+    pos.coords.latitude = shop.latitude;
+    pos.coords.longitude = shop.longitude;
+    updatePos(pos);
     google.maps.event.trigger(map, "resize");        
 }
 
@@ -1152,7 +1160,7 @@ function handleFBData(response) {
     parent.removeChild(visitorHolder);
     FB.api('/me/picture?type=large', function(response) {
         // document.getElementById("profileImage").setAttribute("src", response.data.url);
-        console.log(response.data.url);
+        // console.log(response.data.url);
         var _img = document.querySelector("#avatar");        
         _img.setAttribute("src", response.data.url);
         _img.style.border = "0";
@@ -1278,12 +1286,12 @@ function fb_enter() {
         } 
         updatePos();
 
-        function updatePos(pos) {
+    }
+    function updatePos(pos) {
 
             if(pos== null|| pos == undefined){
                 latLng = new google.maps.LatLng(-34.397, 150.644);    
-            }else{
-                console.log(pos);
+            }else{                
                 latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
             }
 
@@ -1317,7 +1325,6 @@ function fb_enter() {
                 updateMarkerStatus('Drag ended');
                 geocodePosition(marker.getPosition());
             });
-        }
     }
     // Onload handler to fire off the app.
     google.maps.event.addDomListener(window, 'load', initialize);
