@@ -277,19 +277,19 @@
                             <span style="margin-bottom: 5px"><b>Tên hiển thị của shops</b></span>                            
                             <br>
                             <i>Có thể đặt bằng tiếng Việt hoặc tiếng Anh</i>                
-                            <input type="text" class="form-control data-input" id="showName">                    
+                            <input type="text" class="form-control data-input" id="_showName">            
                     </div>
                     <div style="margin-top: 15px" class="row">                
                             <span style="margin-bottom: 5px"><b>Slogan của shop</b></span>                            
                             <br>
                             <i>Truyền đạt giá trị bạn muốn đem đến cho khách hàng</i>                
-                            <input type="text" class="form-control data-input" id="slogan">                    
+                            <input type="text" class="form-control data-input" id="_slogan">                    
                     </div>
                     <div style="margin-top: 15px" class="row">
                             <span style="margin-bottom: 5px"><b>Tên công ty hay nhóm của bạn</b></span>
                             <br>
                             <i>Sẽ hiển thị trên góc trên bên trái của menu trong shop của bạn</i>
-                            <input type="text" class="form-control data-input" id="companyName">
+                            <input type="text" class="form-control data-input" id="_companyName">
                     </div>
                     <div style="margin-top: 15px" class="row">
                         <div class="col-md-4 " style="padding: 10px">
@@ -655,7 +655,7 @@ function getInputData(elem){
     // console.log ("elemen id: ", _id);
    
     //pathName
-    if(_id == 'pathName'){
+    if(_id == '_pathName'){
         // console.log('str.charAt', elem.value.charAt(elem.value.length));
         var _ch = elem.value.substring(elem.value.length-1, elem.value.length);
         var validChars = "abcdefghijklmnopqrstuvwxyz0123456789";        
@@ -667,17 +667,17 @@ function getInputData(elem){
         post_data.pathName = elem.value;
     }
     //showName
-    else if(_id == 'showName'){        
+    else if(_id == '_showName'){        
         post_data.showName = elem.value;
         document.querySelector('#showName').innerHTML = innerHTML=elem.value;
     }
     //slogan
-    else if(_id =='slogan'){        
+    else if(_id =='_slogan'){        
         post_data.slogan = elem.value;
         document.querySelector('#slogan').innerHTML=elem.value;
     }
     //companyName
-    else if(_id == 'companyName'){        
+    else if(_id == '_companyName'){        
         post_data.companyName = elem.value;
         document.querySelector("#companyName").innerHTML = elem.value;
     }
@@ -1091,12 +1091,21 @@ function checkToken(uid, accessToken) {
 
 function updateShop(shop){
     console.log(shop);
-    var pathHolder = document.querySelector("#pathHolder");
-    pathHolder.style.display = "none";
+    var pathName = document.querySelector("#pathName");
+    pathName.value = shop.pathName;
+    pathName.disabled = true;    
     post_data.pathName = shop.pathName;
     var masthead = document.querySelector("#masthead");    
     masthead.style.backgroundImage  = "url('" + shop.walls +"')";        
     document.getElementById('logo').setAttribute('src',shop.avatars);
+
+    var elems = ['showName','companyName','slogan'];
+    for(var i = 0; i < elems.length; i ++){
+        var elem = document.querySelector("#_"+elems[i]);
+        elem.value = shop[elems[i]];        
+    }
+    document.querySelector("#iconHolder").setAttribute('src', shop.avatars);    
+    document.querySelector("#wallHolder").setAttribute('src', shop.walls);
     
     var cols = ['showName','companyName','slogan','shop_description','contact_phone','contact_email','address'];
     for(var i = 0; i< cols.length; i++){
@@ -1113,6 +1122,7 @@ function updateShop(shop){
                 }                
             }
     }
+
     masthead.classList.remove("hiddenElem");
     masthead.classList.add('start');
     post_data = shop;    
