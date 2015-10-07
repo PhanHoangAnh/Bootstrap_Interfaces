@@ -771,7 +771,6 @@ function mouseTracking(e, el) {
     }
 }
 // Business functions comes here
-
 //  bnt_EditClick, just change state of bnt_Edit and return id of parent div
 // and also change state of it's contendeditable.
 var buttonState;
@@ -803,6 +802,19 @@ function bnt_EditClick(_event, target, _parent) {
         changeContentEditable(false, _parent);
         buttonState = 0;
     }
+    preventGenDiv();
+    function preventGenDiv(){
+        $('div[contenteditable]').keydown(function(e) {
+    // trap the return key being pressed
+    if (e.keyCode === 13) {
+      // insert 2 br tags (if only one br tag is inserted the cursor won't go to the next line)
+      document.execCommand('insertHTML', false, '<br><br>');
+      // document.execCommand('insertHTML', false, '\n');
+      // prevent the default behaviour of return key pressed
+      return false;
+            }
+        });
+    }
 }
 
 function bnt_DoneClick(_event, target, _parent){
@@ -812,8 +824,9 @@ function bnt_DoneClick(_event, target, _parent){
     //id = 'contact-email'
     //id = "address"
     var elemIDs = ['shop_description', 'contact_phone', 'contact_email', 'address'];
-    for (var i = 0; i < elemIDs.length; i++){        
-        post_data[elemIDs[i]] = document.getElementById(elemIDs[i]).innerHTML;
+    for (var i = 0; i < elemIDs.length; i++){
+        // var str_temp = 
+        post_data[elemIDs[i]] = document.getElementById(elemIDs[i]).innerText;
     }
     if (buttonState == 0 || typeof(buttonState) == 'undefined'){
         return;
@@ -903,7 +916,7 @@ function uploadImage(str_objType){
 
 function createShop (){
 
-    var elemIDs = ['post-title', 'contact-phone', 'contact-email', 'address','pathName', 'showName','slogan','companyName'];
+    var elemIDs = ['shop_description', 'contact_phone', 'contact_email', 'address','pathName', 'showName','slogan','companyName'];
     var isMissing = false;
     var missingObj = {};
     for( var i = 0; i< elemIDs.length; i ++){        
@@ -958,13 +971,7 @@ function createShop (){
     function displayMissingInfo(){
     }
 }
-
-
-</script>
-<script type="text/javascript">
-// This function is called when someone finishes with the Login
-// Button.  See the onlogin handler attached to it in the sample
-// code below.
+// Facebook
 var RSAPublicKey = <%-JSON.stringify(data)%>;
 
 function checkLoginStatus() {
@@ -1090,34 +1097,28 @@ function updateShop(shop){
     var masthead = document.querySelector("#masthead");    
     masthead.style.backgroundImage  = "url('" + shop.walls +"')";        
     document.getElementById('logo').setAttribute('src',shop.avatars);
-    var t;
-    t = document.createTextNode(shop.showName);
-    document.getElementById("showName").innerText = null;
-    document.getElementById("showName").appendChild(t);
-    t = document.createTextNode(shop.companyName);
-    document.getElementById("companyName").innerText = null;
-    document.getElementById("companyName").appendChild(t);
-    t = document.createTextNode(shop.slogan);
-    document.getElementById("slogan").innerText = null;
-    document.getElementById("slogan").appendChild(t);
-    t = document.createTextNode(shop.shop_description);
-    document.getElementById("shop_description").innerText = null;
-    document.getElementById("shop_description").appendChild(t);
-    t = document.createTextNode(shop.contact_phone);
-    document.getElementById("contact_phone").innerText = null;
-    document.getElementById("contact_phone").appendChild(t);
-    t = document.createTextNode(shop.contact_email);
-    document.getElementById("contact_email").innerText = null;
-    document.getElementById("contact_email").appendChild(t);
-    t = document.createTextNode(shop.address);
-    document.getElementById("address").innerText = null;
-    document.getElementById("address").appendChild(t);
+    
+    var cols = ['showName','companyName','slogan','shop_description','contact_phone','contact_email','address'];
+    for(var i = 0; i< cols.length; i++){
+        // console.log(shop[cols[i]]);
+        var str_arr = shop[cols[i]].split("\n");
+        document.getElementById(cols[i]).innerText = null;
+        for(var j = 0; j<str_arr.length;j++){
+                // console.log(str_arr[j], j);                    
+                var t = document.createTextNode(str_arr[j]);
+                document.getElementById(cols[i]).appendChild(t);
+                var br = document.createElement("br");
+                if (j != str_arr.length -1){
+                    document.getElementById(cols[i]).appendChild(br);
+                }                
+            }
+    }
     masthead.classList.remove("hiddenElem");
     masthead.classList.add('start');
     post_data = shop;    
     isUploadIcon=post_data.isUploadIcon = true;
     isUploadImage=post_data.isUploadImage = true;
-        
+    google.maps.event.trigger(map, "resize");        
 }
 
 function fetchingInfo(callback) {
@@ -1130,6 +1131,8 @@ function fetchingInfo(callback) {
     });
 
 }
+
+
 
 function handleFBData(response) {
     // document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
@@ -1308,5 +1311,10 @@ function fb_enter() {
     }
     // Onload handler to fire off the app.
     google.maps.event.addDomListener(window, 'load', initialize);
+    google.maps.event.addDomListener(window, "resize", function() {
+        var center = map.getCenter();
+        google.maps.event.trigger(map, "resize");
+        map.setCenter(center); 
+    });
     </script>
 </html>
