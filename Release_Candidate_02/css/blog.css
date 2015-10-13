@@ -142,15 +142,3 @@
     color: rgba(0, 0, 0, 0);
     border-color: rgba(0, 0, 0, 0);
 }
-.anibox {
-    box-sizing: border-box;
-    border: 1px dotted #f00;
-    background-color: #f2f2f2;
-    /*animation: EDITABLE 2s infinite;*/
-}
-.anibox .post-title{
-    background-color: #C8C8C8;   
-}
-.anibox .excerpt{
-    background-color: #C8C8C8;   
-}

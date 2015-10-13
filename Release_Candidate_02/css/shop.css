@@ -160,7 +160,6 @@
 .photo {
     position: relative;
     cursor:pointer;
-    overflow: hidden;
 }
 .photo .focus {
     cursor:pointer;

@@ -55,6 +55,7 @@ var cropbox = function(options, fn_cb) {
                 setBackground();
             },
             resetOption: function(opt) {
+                el.style.backgroundImage = "none";
                 obj.options = opt;
                 obj.bgX = 0;
                 obj.bgY = 0;

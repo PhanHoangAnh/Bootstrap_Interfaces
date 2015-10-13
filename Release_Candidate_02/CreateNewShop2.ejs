@@ -222,8 +222,8 @@
                     </div>
                     <nav class="collapse navbar-collapse " role="navigation">                                            
                         <ul class="nav navbar-nav ">
-                            <li class='navbar-right'>
-                                <a href="#sec">    Creating a new Shop...</a>
+                            <li class='navbar-right' id ="create_editItem">
+                                <a href="#sec">    Creating new Item</a>
                             </li>
                             <!-- <li class='navbar-right'>
                                 <a href="#sec">Khuyến mãi</a>
@@ -266,7 +266,7 @@
                             <div>Bắt đầu tạo shop nào...</div>
                         </div>
                     </div>                    
-                    <div style="margin-top: 15px" class="row">      
+                    <div style="margin-top: 15px" class="row" id = "pathHolder">      
                             <span style="margin-bottom: 5px"><b>Tên đường dẫn</b></span>
                             <br>                
                             <i> Tiếng Việt không dấu. Nếu bạn đặt là abcd, đường dẫn tên shop của bạn sẽ là localhost:3000/abcd</i>
@@ -277,19 +277,19 @@
                             <span style="margin-bottom: 5px"><b>Tên hiển thị của shops</b></span>                            
                             <br>
                             <i>Có thể đặt bằng tiếng Việt hoặc tiếng Anh</i>                
-                            <input type="text" class="form-control data-input" id="showName">                    
+                            <input type="text" class="form-control data-input" id="_showName">            
                     </div>
                     <div style="margin-top: 15px" class="row">                
                             <span style="margin-bottom: 5px"><b>Slogan của shop</b></span>                            
                             <br>
                             <i>Truyền đạt giá trị bạn muốn đem đến cho khách hàng</i>                
-                            <input type="text" class="form-control data-input" id="slogan">                    
+                            <input type="text" class="form-control data-input" id="_slogan">                    
                     </div>
                     <div style="margin-top: 15px" class="row">
                             <span style="margin-bottom: 5px"><b>Tên công ty hay nhóm của bạn</b></span>
                             <br>
                             <i>Sẽ hiển thị trên góc trên bên trái của menu trong shop của bạn</i>
-                            <input type="text" class="form-control data-input" id="companyName">
+                            <input type="text" class="form-control data-input" id="_companyName">
                     </div>
                     <div style="margin-top: 15px" class="row">
                         <div class="col-md-4 " style="padding: 10px">
@@ -622,7 +622,7 @@ function initWall(el){
     $('#m_wall').on('hidden.bs.modal', function() {
         
         var masthead = document.getElementById('masthead');
-        var prop = "#f2f2f2 url('" +img_Wall+ "') no-repeat right top"
+        var prop = "#f3f3f3 url('" +img_Wall+ "') no-repeat right top"
         masthead.style.background = prop;
         
         masthead.classList.remove("hiddenElem");
@@ -655,7 +655,7 @@ function getInputData(elem){
     // console.log ("elemen id: ", _id);
    
     //pathName
-    if(_id == 'pathName'){
+    if(_id == '_pathName'){
         // console.log('str.charAt', elem.value.charAt(elem.value.length));
         var _ch = elem.value.substring(elem.value.length-1, elem.value.length);
         var validChars = "abcdefghijklmnopqrstuvwxyz0123456789";        
@@ -667,17 +667,17 @@ function getInputData(elem){
         post_data.pathName = elem.value;
     }
     //showName
-    else if(_id == 'showName'){        
+    else if(_id == '_showName'){        
         post_data.showName = elem.value;
         document.querySelector('#showName').innerHTML = innerHTML=elem.value;
     }
     //slogan
-    else if(_id =='slogan'){        
+    else if(_id =='_slogan'){        
         post_data.slogan = elem.value;
         document.querySelector('#slogan').innerHTML=elem.value;
     }
     //companyName
-    else if(_id == 'companyName'){        
+    else if(_id == '_companyName'){        
         post_data.companyName = elem.value;
         document.querySelector("#companyName").innerHTML = elem.value;
     }
@@ -715,6 +715,7 @@ function addControlPanel(el) {
                 break;
         }
     }
+    google.maps.event.trigger(map, "resize");
 }
 function removeControlPanel(e, el) {    
     if (buttonState == 1){
@@ -771,7 +772,6 @@ function mouseTracking(e, el) {
     }
 }
 // Business functions comes here
-
 //  bnt_EditClick, just change state of bnt_Edit and return id of parent div
 // and also change state of it's contendeditable.
 var buttonState;
@@ -803,6 +803,19 @@ function bnt_EditClick(_event, target, _parent) {
         changeContentEditable(false, _parent);
         buttonState = 0;
     }
+    preventGenDiv();
+    function preventGenDiv(){
+        $('div[contenteditable]').keydown(function(e) {
+    // trap the return key being pressed
+    if (e.keyCode === 13) {
+      // insert 2 br tags (if only one br tag is inserted the cursor won't go to the next line)
+      document.execCommand('insertHTML', false, '<br><br>');
+      // document.execCommand('insertHTML', false, '\n');
+      // prevent the default behaviour of return key pressed
+      return false;
+            }
+        });
+    }
 }
 
 function bnt_DoneClick(_event, target, _parent){
@@ -812,8 +825,9 @@ function bnt_DoneClick(_event, target, _parent){
     //id = 'contact-email'
     //id = "address"
     var elemIDs = ['shop_description', 'contact_phone', 'contact_email', 'address'];
-    for (var i = 0; i < elemIDs.length; i++){        
-        post_data[elemIDs[i]] = document.getElementById(elemIDs[i]).innerHTML;
+    for (var i = 0; i < elemIDs.length; i++){
+        // var str_temp = 
+        post_data[elemIDs[i]] = document.getElementById(elemIDs[i]).innerText;
     }
     if (buttonState == 0 || typeof(buttonState) == 'undefined'){
         return;
@@ -903,7 +917,7 @@ function uploadImage(str_objType){
 
 function createShop (){
 
-    var elemIDs = ['post-title', 'contact-phone', 'contact-email', 'address','pathName', 'showName','slogan','companyName'];
+    var elemIDs = ['shop_description', 'contact_phone', 'contact_email', 'address','pathName', 'showName','slogan','companyName'];
     var isMissing = false;
     var missingObj = {};
     for( var i = 0; i< elemIDs.length; i ++){        
@@ -958,13 +972,7 @@ function createShop (){
     function displayMissingInfo(){
     }
 }
-
-
-</script>
-<script type="text/javascript">
-// This function is called when someone finishes with the Login
-// Button.  See the onlogin handler attached to it in the sample
-// code below.
+// Facebook
 var RSAPublicKey = <%-JSON.stringify(data)%>;
 
 function checkLoginStatus() {
@@ -1011,12 +1019,10 @@ function getNewToken(uid, token) {
     };
     aes_key = cryptoUtil.generateAESKey();
     var json_data = {
-        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey, aes_key)
+        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey, aes_key),
+        fromCreateNewShop : 1
     };
-    // console.log("stringify: ", JSON.stringify(_data));
-    console.log("cryptoUtil: ", cryptoUtil);
-
-    // _data = cryptoUtil.EncryptJSON(_data, RSAPublicKey, aes_key);
+    
     console.log('_data: ', _data);
     $.ajax({
         // url: './userToken',
@@ -1030,21 +1036,15 @@ function getNewToken(uid, token) {
             // console.log(typeof(data));
             var obj = JSON.parse(data.responseText);
             if (obj.err == 0) {
-                var encrypted_app_token = obj.encrypted_app_token;
-                // console.log('encrypted_app_token: ', encrypted_app_token);
-                var _app_token = cryptoUtil.aesDecryptor(encrypted_app_token, aes_key);
-                // console.log("typeof app_token: ", typeof(_app_token));
-                // console.log('app_token: ', JSON.parse(_app_token).app_token);
+                var encrypted_app_token = obj.encrypted_app_token;                
+                var _app_token = cryptoUtil.aesDecryptor(encrypted_app_token, aes_key);                
                 app_token = JSON.parse(_app_token).app_token;
-                localStorage.setItem("app_token", app_token);
-                addLinks();
+                localStorage.setItem("app_token", app_token);                
                 post_data.fb_uid = uid;
+                if(obj.isShop == 1){
+                    updateShop(obj.shop);
+                }
             }else{
-                    // for createNewShop id = "createNewShopMenu" class="createNewShop"
-                    var createNewLinks = document.querySelectorAll(".createNewShop");
-                    for (var i=0; i<createNewLinks.length; i++){            
-                        createNewLinks[i].addEventListener('click', preventCreateNewShop ,false);
-                    };
                     post_data.fb_uid = null;
                 }
 
@@ -1068,7 +1068,8 @@ function checkToken(uid, accessToken) {
     };
     // _aes_key = cryptoUtil.generateAESKey();
     var json_data = {
-        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey)
+        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey),
+        fromCreateNewShop : 1
     };
     $.ajax({
         // url: './userToken',
@@ -1081,18 +1082,61 @@ function checkToken(uid, accessToken) {
                 getNewToken(uid, accessToken);
                 return;
             }
-            addLinks();
+            if(obj.isShop == 1){                
+                updateShop(obj.shop);
+            }
             post_data.fb_uid = uid;
         }
     });
 }
 
-function addLinks(){
-    var createNewLinks = document.querySelectorAll(".createNewShop");
-    for (var i=0; i<createNewLinks.length; i++){            
-        createNewLinks[i].removeEventListener('click', preventCreateNewShop , false)
-        createNewLinks[i].setAttribute("href", "/createnewshop");
+function updateShop(shop){
+    console.log(shop);
+    var pathName = document.querySelector("#pathName");
+    pathName.value = shop.pathName;
+    pathName.disabled = true;    
+    post_data.pathName = shop.pathName;
+    var masthead = document.querySelector("#masthead");    
+    masthead.style.backgroundImage  = "url('" + shop.walls +"')";        
+    document.getElementById('logo').setAttribute('src',shop.avatars);
+
+    var elems = ['showName','companyName','slogan'];
+    for(var i = 0; i < elems.length; i ++){
+        var elem = document.querySelector("#_"+elems[i]);
+        elem.value = shop[elems[i]];        
     }
+    document.querySelector("#iconHolder").setAttribute('src', shop.avatars);    
+    document.querySelector("#wallHolder").setAttribute('src', shop.walls);
+    
+    var cols = ['showName','companyName','slogan','shop_description','contact_phone','contact_email','address'];
+    for(var i = 0; i< cols.length; i++){
+        // console.log(shop[cols[i]]);
+        var str_arr = shop[cols[i]].split("\n");
+        document.getElementById(cols[i]).innerText = null;
+        for(var j = 0; j<str_arr.length;j++){
+                // console.log(str_arr[j], j);                    
+                var t = document.createTextNode(str_arr[j]);
+                document.getElementById(cols[i]).appendChild(t);
+                var br = document.createElement("br");
+                if (j != str_arr.length -1){
+                    document.getElementById(cols[i]).appendChild(br);
+                }                
+            }
+    }
+
+    masthead.classList.remove("hiddenElem");
+    masthead.classList.add('start');
+    post_data = shop;    
+    isUploadIcon=post_data.isUploadIcon = true;
+    isUploadImage=post_data.isUploadImage = true;
+    var pos = {};
+    pos.coords = {};
+    pos.coords.latitude = "";
+    pos.coords.longitude = "";
+    pos.coords.latitude = shop.latitude;
+    pos.coords.longitude = shop.longitude;
+    updatePos(pos);
+    google.maps.event.trigger(map, "resize");        
 }
 
 function fetchingInfo(callback) {
@@ -1106,6 +1150,8 @@ function fetchingInfo(callback) {
 
 }
 
+
+
 function handleFBData(response) {
     // document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
     var visitorHolder = document.querySelector('#visitorHolder');        
@@ -1114,7 +1160,7 @@ function handleFBData(response) {
     parent.removeChild(visitorHolder);
     FB.api('/me/picture?type=large', function(response) {
         // document.getElementById("profileImage").setAttribute("src", response.data.url);
-        console.log(response.data.url);
+        // console.log(response.data.url);
         var _img = document.querySelector("#avatar");        
         _img.setAttribute("src", response.data.url);
         _img.style.border = "0";
@@ -1240,12 +1286,12 @@ function fb_enter() {
         } 
         updatePos();
 
-        function updatePos(pos) {
+    }
+    function updatePos(pos) {
 
             if(pos== null|| pos == undefined){
                 latLng = new google.maps.LatLng(-34.397, 150.644);    
-            }else{
-                console.log(pos);
+            }else{                
                 latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
             }
 
@@ -1279,9 +1325,13 @@ function fb_enter() {
                 updateMarkerStatus('Drag ended');
                 geocodePosition(marker.getPosition());
             });
-        }
     }
     // Onload handler to fire off the app.
     google.maps.event.addDomListener(window, 'load', initialize);
+    google.maps.event.addDomListener(window, "resize", function() {
+        var center = map.getCenter();
+        google.maps.event.trigger(map, "resize");
+        map.setCenter(center); 
+    });
     </script>
 </html>
