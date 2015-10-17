@@ -6,11 +6,11 @@
 <meta name="generator" content="Bootply" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../public/css/navbar.css">
-<link rel="stylesheet" type="text/css" href="../public/css/shop.css">
-<link rel="stylesheet" type="text/css" href="../public/css/main.css">
-<link rel="stylesheet" type="text/css" href="../public/css/blog.css">
-<link rel="stylesheet" type="text/css" href="../public/css/imagePreview.css">
+<link rel="stylesheet" type="text/css" href="/public/css/navbar.css">
+<link rel="stylesheet" type="text/css" href="/public/css/shop.css">
+<link rel="stylesheet" type="text/css" href="/public/css/main.css">
+<link rel="stylesheet" type="text/css" href="/public/css/blog.css">
+<link rel="stylesheet" type="text/css" href="/public/css/imagePreview.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -950,7 +950,7 @@ function createShop (){
     var isMissing = isMissing*(isUploadImage == false) * (isUploadIcon == false);
     console.log('isMissing', isMissing, 'missingObj', missingObj);
     if (isMissing == true) {
-        displayMissingInfo();
+        displayMissingInfo(missingObj);
         return;
     }
     var _data = {
@@ -969,7 +969,7 @@ function createShop (){
     
     $.ajax({
         // url: './userToken',
-        url: './api/createShop',
+        url: '/api/createShop',
         method: 'POST',
         data: json_data,
         complete: function(data, status, jqXHR) {
@@ -980,13 +980,14 @@ function createShop (){
             }
             else if (obj.err == 0){
                 // var sURL =  post_data.pathName + '/' + 'addItem';
-                var sURL =  "createNewShop" + '/' + 'addItem';
+                var sURL =  "/createNewShop" + '/' + 'addItem';
                 console.log ('sURL', sURL);
                 window.location.href = sURL;
             }
         }
     });
-    function displayMissingInfo(){
+    function displayMissingInfo(missingObj){
+        console.log(missingObj);
     }
 }
 // Facebook
@@ -1043,7 +1044,7 @@ function getNewToken(uid, token) {
     console.log('_data: ', _data);
     $.ajax({
         // url: './userToken',
-        url: './api/gettoken',
+        url: '/api/gettoken',
 
         method: 'POST',
         data: json_data,
@@ -1090,7 +1091,7 @@ function checkToken(uid, accessToken) {
     };
     $.ajax({
         // url: './userToken',
-        url: './api/checktoken',
+        url: '/api/checktoken',
         method: 'POST',
         data: json_data,
         complete: function(data, status, jqXHR) {
@@ -1114,20 +1115,21 @@ function updateShop(shop){
     pathName.disabled = true;    
     post_data.pathName = shop.pathName;
     var masthead = document.querySelector("#masthead");    
-    masthead.style.backgroundImage  = "url('" + shop.walls +"')";        
-    document.getElementById('logo').setAttribute('src',shop.avatars);
+    masthead.style.backgroundImage  = "url('" +'/'+ shop.walls +"')";        
+    document.getElementById('logo').setAttribute('src','/'+shop.avatars);
 
     var elems = ['showName','companyName','slogan'];
     for(var i = 0; i < elems.length; i ++){
         var elem = document.querySelector("#_"+elems[i]);
         elem.value = shop[elems[i]];        
     }
-    document.querySelector("#iconHolder").setAttribute('src', shop.avatars);    
-    document.querySelector("#wallHolder").setAttribute('src', shop.walls);
+    document.querySelector("#iconHolder").setAttribute('src','/'+ shop.avatars);    
+    document.querySelector("#wallHolder").setAttribute('src','/'+ shop.walls);
     
     var cols = ['showName','companyName','slogan','shop_description','contact_phone','contact_email','address'];
     for(var i = 0; i< cols.length; i++){
         // console.log(shop[cols[i]]);
+        post_data[cols[i]] = shop[cols[i]];
         var str_arr = shop[cols[i]].split("\n");
         document.getElementById(cols[i]).innerText = null;
         for(var j = 0; j<str_arr.length;j++){

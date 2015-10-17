@@ -6,16 +6,16 @@
 <meta name="generator" content="Bootply" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../public/css/navbar.css">
-<link rel="stylesheet" type="text/css" href="../public/css/shop.css">
-<link rel="stylesheet" type="text/css" href="../public/css/main.css">
-<link rel="stylesheet" type="text/css" href="../public/css/blog.css">
-<link rel="stylesheet" type="text/css" href="../public/css/imagePreview.css">
-<link rel="stylesheet" media="screen, print, handheld" type="text/css" href="../public/css/calendar.css" />
+<link rel="stylesheet" type="text/css" href="/public/css/navbar.css">
+<link rel="stylesheet" type="text/css" href="/public/css/shop.css">
+<link rel="stylesheet" type="text/css" href="/public/css/main.css">
+<link rel="stylesheet" type="text/css" href="/public/css/blog.css">
+<link rel="stylesheet" type="text/css" href="/public/css/imagePreview.css">
+<link rel="stylesheet" media="screen, print, handheld" type="text/css" href="/public/css/calendar.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../public/js/calendar.02.js"></script>
+<script type="text/javascript" src="/public/js/calendar.02.js"></script>
 <!--script type="text/javascript" src='js/navbar.js'></script-->
 <style type="text/css">
     html,body {
@@ -227,15 +227,6 @@
                             <li class='navbar-right' id ="create_editItem">
                                 <a href="#sec">    Creating new Item</a>
                             </li>
-                            <!-- <li class='navbar-right'>
-                                <a href="#sec">Khuyến mãi</a>
-                            </li>
-                            <li class='navbar-right'>
-                                <a href="#sec">Sản phẩm</a>
-                            </li>
-                            <li class='navbar-right '>
-                                <a href="#sec">Home</a>
-                            </li> -->
                         </ul>
                         <ul class="nav navbar-nav navbar-right" id = "visitor">
                             <li class='navbar-right' id='visitorHolder'>
@@ -268,7 +259,7 @@
                     <span style="margin-bottom: 5px"><b>Xuất xứ sản phẩm</b></span>                            
                     <br>
                     <i>Country of origin</i>          
-                    <input type="text" class="form-control data-input" id="_contry_ofOrigin">            
+                    <input type="text" class="form-control data-input" id="_country_ofOrigin">            
                 </div>
                 <div style="margin-top: 15px" class="row">        
                     <span style="margin-bottom: 5px"><b>Nhản hiệu sản phẩm</b></span>                            
@@ -280,7 +271,7 @@
                     <span style="margin-bottom: 5px"><b>Mã sản phẩm</b></span>                            
                     <br>
                     <i>Product ID</i>
-                    <input type="text" class="form-control data-input" id="_productId">            
+                    <input type="text" class="form-control data-input" id="_productId" disabled>            
                 </div>
                 <div style="margin-top: 15px" class="row">        
                     <span style="margin-bottom: 5px"><b>Mô tả sản phẩm</b></span>                            
@@ -363,7 +354,7 @@
 </div>    
 <div class="row" id = "continueButton">
     <div class="container-fluid">
-            <button id = "bnt_continues" type="button" style="margin: 10px" class="btn btn-success pull-right">Tiếp tục</button>
+            <button id = "bnt_continues" onclick="location.href='/createNewShop/addItem'" type="button" style="margin: 10px" class="btn btn-success pull-right" >Tạo sản phẩm mới</button>
     </div>
 </div>
 <div id="end-offset">
@@ -424,11 +415,11 @@
     <canvas width="700" height="650"></canvas>
     <canvas width="700" height="650"></canvas>
 </div>
-<script type="text/javascript" src="../public/js/phasebeam.js"></script>
+<script type="text/javascript" src="/public/js/phasebeam.js"></script>
 </body>
-<script type="text/javascript" src='../public/js/utils.js'></script>
-<script type="text/javascript" src="../public/js/Crypto/cryptoUtils.js"></script>
-<script type="text/javascript" src="../public/js/ImageSelector/chiplcrop.js"></script>
+<script type="text/javascript" src='/public/js/utils.js'></script>
+<script type="text/javascript" src="/public/js/Crypto/cryptoUtils.js"></script>
+<script type="text/javascript" src="/public/js/ImageSelector/chiplcrop.js"></script>
 <script type="text/javascript">
 $(function() {
     // $('#nav-wrapper').height($("#nav").height());
@@ -445,7 +436,7 @@ $(function() {
     $('#sidebar').affix({
         offset: {
             top: $('#start-offset').offset().top + 30,
-            bottom: $('#end-offset').outerHeight() + 45
+            bottom: $('#end-offset').outerHeight() + 30
         }
     }).on('affix.bs.affix', function() { // before affix
         $(this).css({
@@ -470,7 +461,7 @@ $(document).ready(function() {
             uploadImageItem(this);
         }, false)
     }
-    var inputItems = ['_productName', '_contry_ofOrigin', '_brandName', '_productId', '_productDescription', '_categories', '_isNewProduct' ,'_isHotProduct'];
+    var inputItems = ['_productName', '_country_ofOrigin', '_brandName', '_productId', '_productDescription', '_categories', '_isNewProduct' ,'_isHotProduct'];
     for (var i = 0 ; i < inputItems.length; i ++){
         document.getElementById(inputItems[i]).addEventListener("change",function(e){
             getInputData(this);
@@ -501,25 +492,33 @@ document.querySelector('#icon_btnZoomOut').addEventListener('click', function() 
 var base64_img;
 
 $('#m_item').on('hidden.bs.modal', function hidden(e) {
-    
     if(role_element == "main_img"){
         imgs[0] = new Object();
         imgs[0].image = base64_img;
-        imgs[0].name = generateUUID();
+        if(!imgs[0].name){
+            imgs[0].name = productId + ".0";    
+        }        
         post_data.imgName[0] = imgs[0].name;
+        imgs[0].isDownloaded = false;
         document.querySelector("#_main_img").setAttribute('src', imgs[0].image);
     }
     if(role_element == "compl_img_1"){
         imgs[1] = new Object();
         imgs[1].image = base64_img;
-        imgs[1].name = generateUUID();
+        if(!imgs[1].name){
+            imgs[1].name = productId + ".1";    
+        }
         post_data.imgName[1] = imgs[1].name;
+        imgs[1].isDownloaded = false;
         document.querySelector("#_compl_img_1").setAttribute('src', imgs[1].image);
     }
     if(role_element == "compl_img_2"){
         imgs[2] = new Object();
         imgs[2].image = base64_img;
-        imgs[2].name = generateUUID();
+        if(!imgs[2].name){
+            imgs[2].name = productId + ".2";    
+        };
+        imgs[2].isDownloaded = false;
         post_data.imgName[2] = imgs[2].name;
         document.querySelector("#_compl_img_2").setAttribute('src', imgs[2].image);
     }
@@ -529,8 +528,6 @@ $('#m_item').on('hidden.bs.modal', function hidden(e) {
     options.imgSrc = '';
     cropper.resetOption(options);
     if(checkMissingInfo() == false && checkImageArrays(imgs) == true){
-        // upload image
-        // upload item
         var uploadBnt = document.querySelector("#bnt_update");
         uploadBnt.classList.remove("hiddenElem");
     }    
@@ -567,6 +564,8 @@ function itemPreview(data) {
     base64_img = data;
 }
 var post_data = {};
+post_data.isNewproduct = false;
+post_data.isHotProduct = false;
 post_data.imgName = [];
 // Update by realtime with input (oninput) events
 function getInputData(elem){    
@@ -576,7 +575,7 @@ function getInputData(elem){
         case '_productName':
             post_data.productName = elem.value
             break;
-        case '_contry_ofOrigin':
+        case '_country_ofOrigin':
             post_data.country_ofOrigin = elem.value
             break;
         case '_brandName' :
@@ -589,7 +588,7 @@ function getInputData(elem){
             post_data.productDescription = elem.value
             break;
         case '_categories' :
-            post_data.categories = elem.value.split(" ")
+            post_data.categories = elem.value.split(",")
             break;
         case '_isNewProduct' :
             post_data.isNewproduct = elem.checked
@@ -607,7 +606,7 @@ function getInputData(elem){
     }
 };
 function checkMissingInfo(){
-    var inputItems = ['_productName', '_contry_ofOrigin', '_brandName', '_productId', '_productDescription', '_categories'];
+    var inputItems = ['_productName', '_country_ofOrigin', '_brandName', '_productId', '_productDescription', '_categories'];
     for (var i = 0; i < inputItems.length; i ++){
         var value = document.getElementById(inputItems[i]).value
         if (!value ){                
@@ -628,19 +627,9 @@ function checkImageArrays(arr){
     return true;
 }
 
-function generateUUID() {
-    var d = new Date().getTime();
-    var uuid = 'xxxxxxxx_xxxx_4xxx_yxxx_xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = (d + Math.random()*16)%16 | 0;
-        d = Math.floor(d/16);
-        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
-    });
-    return uuid;
-};
-
-
 function uploadAllItem(){
     for(var i = 0; i < 3; i ++){
+        console.log(imgs[i]);
         uploadImage('Products',imgs[i]);
     }
     uploadItem();
@@ -649,7 +638,9 @@ function uploadAllItem(){
 
 function uploadImage(str_objType, img){
     // create encrypted temporary JWT from app_token    
-       
+    if(img.isDownloaded == true){
+        return;
+    }
     // check Item validation
     var _data = {
         userName: post_data.fb_uid,
@@ -670,7 +661,7 @@ function uploadImage(str_objType, img){
     json_data.u_type = str_objType;
     $.ajax({
         // url: './userToken',
-        url: '../api/uploadImage',
+        url: '/api/uploadImage',
         method: 'POST',
         data: json_data,
         complete: function(data, status, jqXHR) {
@@ -695,7 +686,7 @@ function uploadItem(){
     json_data.item = post_data;
     $.ajax({
         // url: './userToken',
-        url: '../api/updateItem',
+        url: '/api/updateItem',
         method: 'POST',
         data: json_data,
         complete: function(data, status, jqXHR) {
@@ -710,8 +701,54 @@ function uploadItem(){
     });    
 }
 
-// Facebook
+
 var RSAPublicKey = <%-JSON.stringify(data)%>;
+var itemNumber = <%-JSON.stringify(itemNumber)%>;
+document.querySelector('#_productId').value = itemNumber;
+post_data._productId = itemNumber;
+var isItem = <%-JSON.stringify(isItem)%>;
+var origin_item = <%-JSON.stringify(item)%>;
+console.log(origin_item);
+var productId = itemNumber;
+// console.log(origin_item, isItem);
+
+function updateItem(){
+    if(isItem == true){
+    var inputItems = ['_productName', '_country_ofOrigin', '_brandName', '_productDescription' ];
+    for (var i = 0;i< inputItems.length; i ++){
+        var elem = inputItems[i].substring(1);        
+        document.getElementById(inputItems[i]).value = origin_item[elem];
+        post_data[elem] = origin_item[elem];
+    }
+    document.getElementById('_productId').value = origin_item._productId;
+    var cats = origin_item['categories'];
+    post_data.categories = cats;
+    for(var i = 0;i<cats.length;i++){
+        document.getElementById('_categories').value += cats[i].concat(',');
+    }
+    document.getElementById('_isNewProduct').checked = origin_item['isNewproduct'];
+    document.getElementById('_isHotProduct').checked = origin_item['isHotProduct'];
+    var imgName = origin_item.imgName;
+    post_data.imgName = imgName;
+    document.getElementById('_main_img').setAttribute('src',"/public/products/" + imgName[0] + ".png");
+    document.getElementById('_compl_img_1').setAttribute('src',"/public/products/" + imgName[1] + ".png");
+    document.getElementById('_compl_img_2').setAttribute('src',"/public/products/" + imgName[2] + ".png");
+    for(var i = 0; i< 3; i ++){
+        imgs[i] = new Object();
+        imgs[i].isDownloaded = true;
+    }
+    console.log("checkMissingInfo:",checkMissingInfo());
+    if(checkMissingInfo() == false){        
+        setTimeout(function(){
+            document.querySelector("#bnt_update").classList.remove("hiddenElem");
+            console.log(document.querySelector("#bnt_update"));
+        }, 100)        
+    }    
+}    
+}
+
+
+// Facebook
 
 function checkLoginStatus() {
     FB.getLoginStatus(function(response) {
@@ -764,7 +801,7 @@ function getNewToken(uid, token) {
     console.log('_data: ', _data);
     $.ajax({
         // url: './userToken',
-        url: '../api/gettoken',
+        url: '/api/gettoken',
 
         method: 'POST',
         data: json_data,
@@ -811,7 +848,7 @@ function checkToken(uid, accessToken) {
     };
     $.ajax({
         // url: './userToken',
-        url: '../api/checktoken',
+        url: '/api/checktoken',
         method: 'POST',
         data: json_data,
         complete: function(data, status, jqXHR) {
@@ -832,8 +869,8 @@ function updateShop(shop){
     console.log(shop);    
     
     var masthead = document.querySelector("#masthead");    
-    masthead.style.backgroundImage  = "url('../" + shop.walls +"')";
-    var src = '.' + shop.avatars
+    masthead.style.backgroundImage  = "url('/" + shop.walls +"')";
+    var src = '/' + shop.avatars
     document.getElementById('logo').setAttribute('src',src);
 
     var cols = ['showName','companyName','slogan'];
@@ -851,15 +888,10 @@ function updateShop(shop){
                 }                
             }
     }
-
     masthead.classList.remove("hiddenElem");
     masthead.classList.add('start');
-    // post_data = shop;    
     post_data.shop = shop.pathName;
-    // for (var i in shop){
-    //     post_data[i] = shop[i];
-    // }
-    
+    updateItem();
 }
 
 function fetchingInfo(callback) {
