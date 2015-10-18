@@ -285,20 +285,46 @@
                     <i>Keywords</i><br><span style = "font-size:75%; color: red"><i> (Sản phẩm có thể có nhiều keyword, đặt cách nhau bằng dấu phẩy ",")</i></span>
                     <input type="text" class="form-control data-input" id="_categories">            
                 </div>
-                <div style="padding: 20px"></div>
-                <div style="margin-top: 15px" class="row">        
-                    <label><input type="checkbox" value="" id = "_isNewProduct">   Đặt là sản phẩm mới</label>
-                    <br>
-                    <br><span style = "font-size:75%; color: red"><i> (Bạn chỉ được đặt tối đa 9 sản phẩm mới)</i></span>
+                <div class = "col-md-6">
+                    <div style="margin-top: 15px" class="row">        
+                    <span style="margin-bottom: 5px"><b>Gía sản phẩm trước đây </b></span>
+                        <br><span style = "font-size:75%; color: red"><i> (Nhập chữ số thể hiện giá sản phẩm)</i></span>
+                        <input type="text" class="form-control data-input" id="_oldPrice">            
+                    </div>
                 </div>
-                <div style="padding: 20px"></div>
-                <div style="margin-top: 15px" class="row">        
-                    <label><input type="checkbox" value="" id = "_isHotProduct">   Đặt là sản phẩm bán chạy nhất</label>
-                    <br>
-                    <br><span style = "font-size:75%; color: red"><i> (Bạn chỉ được đặt tối đa 16 sản phẩm bán chạy nhất)</i></span>                         
+                <div class = "col-md-6">
+                    <div style="margin-top: 15px; margin-bottom: 15px" class="row">        
+                        <span style="margin-bottom: 5px"><b>Gía sản phẩm hiện tại</b></span>
+                            <br><span style = "font-size:75%; color: red"><i> (Nhập chữ số thể hiện giá sản phẩm)</i></span>
+                            <input type="text" class="form-control data-input" id="_newPrice">            
+                    </div>
+                </div>
+                <div class = "col-md-6">
+                    <div style="margin-top: 15px; margin-bottom: 15px" class="row">        
+                        <span style="margin-bottom: 5px"><b>Đơn vị tính</b></span>                            
+                            <br><span style = "font-size:75%; color: red"><i> (đơn vị tính.."kg","chiếc","chục"..vvv)</i></span>
+                            <input type="text" class="form-control data-input" id="_unit">            
+                    </div>
+                </div >
+                <div class = "col-md-12">
+                    <div style="margin-top: 15px" class="row">        
+                        <label><input type="checkbox" id = "_isNewProduct">   Đặt là sản phẩm mới</label>
+                        <br><span style = "font-size:75%; color: red"><i> (Bạn chỉ được đặt tối đa 9 sản phẩm mới)</i></span>
+                    </div>
+                    <div style="padding: 20px"></div>
+                    <div style="margin-top: 15px; margin-bottom: 15px" class="row">        
+                        <label><input type="checkbox" id = "_isHotProduct">   Đặt là sản phẩm bán chạy nhất</label>
+                        <br><span style = "font-size:75%; color: red"><i> (Bạn chỉ được đặt tối đa 16 sản phẩm bán chạy nhất)</i></span>                         
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div id = "msg_info" class="alert alert-success fade in hiddenElem" style="margin-top: 30px">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close" >&times;</a>
+                        <strong>Chúc mừng!</strong>..Sản phẩm của bạn đã được cập nhật. 
+                        </div>                    
                 </div>
             </div>
-            <div class = 'col-md-6' style="border-left: 3px solid #e8e8e8; min-height:1000px">
+            <div class = 'col-md-6' style="border-left: 3px solid #e8e8e8; min-height:1300px">
                 <div style="margin-top: 15px" class="row">
                     <div class="col-md-12 " style="padding: 10px">
                         <span style="margin: 10px; display: inline-block; vertical-align: middle;"><b>Chọn ảnh đại diện cho sản phẩm</b></span>
@@ -354,7 +380,10 @@
 </div>    
 <div class="row" id = "continueButton">
     <div class="container-fluid">
-            <button id = "bnt_continues" onclick="location.href='/createNewShop/addItem'" type="button" style="margin: 10px" class="btn btn-success pull-right" >Tạo sản phẩm mới</button>
+        <div class = 'col-md-12' style="text-align: center">            
+            <button id = "bnt_deleteItem"  style="margin: 10px; width: 146px" class="btn btn-success" >Xóa sản phẩm </button>
+            <button id = "bnt_continues" onclick="location.href='/createNewShop/addItem'" type="button" style="margin: 10px" class="btn btn-success " >Tạo sản phẩm mới</button>
+        </div>
     </div>
 </div>
 <div id="end-offset">
@@ -461,7 +490,7 @@ $(document).ready(function() {
             uploadImageItem(this);
         }, false)
     }
-    var inputItems = ['_productName', '_country_ofOrigin', '_brandName', '_productId', '_productDescription', '_categories', '_isNewProduct' ,'_isHotProduct'];
+    var inputItems = ['_productName', '_country_ofOrigin', '_brandName', '_productId', '_productDescription', '_categories', '_isNewProduct' ,'_isHotProduct', '_oldPrice', '_newPrice','_unit'];
     for (var i = 0 ; i < inputItems.length; i ++){
         document.getElementById(inputItems[i]).addEventListener("change",function(e){
             getInputData(this);
@@ -472,7 +501,27 @@ $(document).ready(function() {
     uploadBnt.addEventListener('click',function(e){
         uploadAllItem();
     },false);
+    document.getElementById('_oldPrice').addEventListener('input', function(e){
+        checkValidNumber(this);
+    },false);
+    document.getElementById('_newPrice').addEventListener('input', function(e){
+        checkValidNumber(this);
+    },false);
+    document.getElementById('bnt_deleteItem').addEventListener('click',function(e){
+        removeItem();
+    },false)
+
 });
+
+function checkValidNumber(elem){
+    var _ch = elem.value.substring(elem.value.length-1, elem.value.length);
+        var validChars = "1234567890.,";        
+        if (validChars.indexOf(_ch.toLowerCase())== -1){
+            var _display = elem.value.substring(0,elem.value.length -1);
+            elem.value = _display;
+            return;
+        }
+}
 
 var imgs = [];
 var role_element;
@@ -570,7 +619,7 @@ post_data.imgName = [];
 // Update by realtime with input (oninput) events
 function getInputData(elem){    
     var _id = elem.id;
-    // console.log(_id, elem);
+    console.log(_id, elem);
     switch (_id){
         case '_productName':
             post_data.productName = elem.value
@@ -591,13 +640,22 @@ function getInputData(elem){
             post_data.categories = elem.value.split(",")
             break;
         case '_isNewProduct' :
-            post_data.isNewproduct = elem.checked
+            post_data.isNewproduct = elem.checked;
             break;
         case '_isHotProduct' :
-            post_data.isHotProduct = elem.checked
+            post_data.isHotProduct = elem.checked;
+            break;
+        case '_oldPrice':
+            post_data.oldPrice = elem.value
+            break;
+        case '_newPrice':
+            post_data.newPrice = elem.value
+            break;
+        case '_unit':
+            post_data.unit = elem.value
             break;
     }
-    console.log(checkMissingInfo());
+    console.log(checkMissingInfo(),post_data);
     if(checkMissingInfo() == false && checkImageArrays(imgs) == true){
         // upload image
         // upload item
@@ -606,7 +664,7 @@ function getInputData(elem){
     }
 };
 function checkMissingInfo(){
-    var inputItems = ['_productName', '_country_ofOrigin', '_brandName', '_productId', '_productDescription', '_categories'];
+    var inputItems = ['_productName', '_country_ofOrigin', '_brandName', '_productId', '_productDescription', '_categories','_oldPrice','_newPrice', '_unit'];
     for (var i = 0; i < inputItems.length; i ++){
         var value = document.getElementById(inputItems[i]).value
         if (!value ){                
@@ -629,7 +687,6 @@ function checkImageArrays(arr){
 
 function uploadAllItem(){
     for(var i = 0; i < 3; i ++){
-        console.log(imgs[i]);
         uploadImage('Products',imgs[i]);
     }
     uploadItem();
@@ -696,7 +753,8 @@ function uploadItem(){
                 return;
             }
             console.log(obj);
-
+            var msg_info = document.getElementById('msg_info');
+            msg_info.classList.remove('hiddenElem')
         }
     });    
 }
@@ -708,43 +766,72 @@ document.querySelector('#_productId').value = itemNumber;
 post_data._productId = itemNumber;
 var isItem = <%-JSON.stringify(isItem)%>;
 var origin_item = <%-JSON.stringify(item)%>;
-console.log(origin_item);
+// console.log(origin_item);
 var productId = itemNumber;
-// console.log(origin_item, isItem);
+console.log(origin_item, isItem);
 
 function updateItem(){
     if(isItem == true){
-    var inputItems = ['_productName', '_country_ofOrigin', '_brandName', '_productDescription' ];
-    for (var i = 0;i< inputItems.length; i ++){
-        var elem = inputItems[i].substring(1);        
-        document.getElementById(inputItems[i]).value = origin_item[elem];
-        post_data[elem] = origin_item[elem];
-    }
-    document.getElementById('_productId').value = origin_item._productId;
-    var cats = origin_item['categories'];
-    post_data.categories = cats;
-    for(var i = 0;i<cats.length;i++){
-        document.getElementById('_categories').value += cats[i].concat(',');
-    }
-    document.getElementById('_isNewProduct').checked = origin_item['isNewproduct'];
-    document.getElementById('_isHotProduct').checked = origin_item['isHotProduct'];
-    var imgName = origin_item.imgName;
-    post_data.imgName = imgName;
-    document.getElementById('_main_img').setAttribute('src',"/public/products/" + imgName[0] + ".png");
-    document.getElementById('_compl_img_1').setAttribute('src',"/public/products/" + imgName[1] + ".png");
-    document.getElementById('_compl_img_2').setAttribute('src',"/public/products/" + imgName[2] + ".png");
-    for(var i = 0; i< 3; i ++){
-        imgs[i] = new Object();
-        imgs[i].isDownloaded = true;
-    }
-    console.log("checkMissingInfo:",checkMissingInfo());
-    if(checkMissingInfo() == false){        
-        setTimeout(function(){
-            document.querySelector("#bnt_update").classList.remove("hiddenElem");
-            console.log(document.querySelector("#bnt_update"));
-        }, 100)        
+        var inputItems = ['_productName', '_country_ofOrigin', '_brandName', '_productDescription','_oldPrice','_newPrice','_unit' ];
+        for (var i = 0;i< inputItems.length; i ++){
+            var elem = inputItems[i].substring(1);        
+            document.getElementById(inputItems[i]).value = origin_item[elem];
+            post_data[elem] = origin_item[elem];
+        }
+        document.getElementById('_productId').value = origin_item._productId;
+        var cats = origin_item['categories'];
+        post_data.categories = cats;
+        for(var i = 0;i<cats.length;i++){
+            document.getElementById('_categories').value += cats[i].concat(',');
+        }
+        document.getElementById('_isNewProduct').checked = (origin_item['isNewproduct']=='true');
+        document.getElementById('_isHotProduct').checked = (origin_item['isHotProduct']=='true');
+        var imgName = origin_item.imgName;
+        post_data.imgName = imgName;
+        document.getElementById('_main_img').setAttribute('src',"/public/products/" + imgName[0] + ".png");
+        document.getElementById('_compl_img_1').setAttribute('src',"/public/products/" + imgName[1] + ".png");
+        document.getElementById('_compl_img_2').setAttribute('src',"/public/products/" + imgName[2] + ".png");
+        for(var i = 0; i< 3; i ++){
+            imgs[i] = new Object();
+            imgs[i].isDownloaded = true;
+        }
+        console.log("checkMissingInfo:",checkMissingInfo());
+        if(checkMissingInfo() == false){        
+            setTimeout(function(){
+                document.querySelector("#bnt_update").classList.remove("hiddenElem");
+            }, 100)        
+        }    
     }    
-}    
+}
+
+function removeItem(){
+    console.log('here');
+   var _data = {
+    userName: post_data.fb_uid,
+    password: app_token
+    };    
+    // _aes_key = cryptoUtil.generateAESKey();    
+    var json_data = {
+        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey)
+    };
+    json_data.item = post_data;
+    $.ajax({
+        // url: './userToken',
+        url: '/api/removeItem',
+        method: 'POST',
+        data: json_data,
+        complete: function(data, status, jqXHR) {
+            var obj = JSON.parse(data.responseText);
+            // 
+            if (obj.err != 0 || obj.err == null) {                 
+                return;
+            }
+            console.log(obj);
+            var sURL =  "/createNewShop" + '/' + 'addItem';
+            console.log ('sURL', sURL);
+            window.location.href = sURL;
+        }
+    });       
 }
 
 

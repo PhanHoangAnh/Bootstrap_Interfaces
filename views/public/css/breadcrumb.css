@@ -12,6 +12,7 @@
 
 .crumbs ul li a {
     /*display: block;*/
+    width: 200px;
     list-style-type: none;
     float: left;
     height: 40px;
