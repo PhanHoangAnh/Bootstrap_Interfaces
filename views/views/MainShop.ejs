@@ -184,9 +184,9 @@
         <div class="container-fluid">
             <div class="row cover">
                 <div class="col-md-6 col-md-offset-1 ">
-                    <h1><%=title%>
+                    <h1><app-showname id="showName"></app-showname>
                         <!-- <hr style = "border-top: 1px solid rgba(255,255,255,.3)"> -->
-                        <p class="lead"><app-slogan>Shop chuyên hàng hiệu...!</app-slogan></p>
+                        <p class="lead"><app-slogan id = 'slogan'>Shop chuyên hàng hiệu...!</app-slogan></p>
                     </h1>
                 </div>
                 <!-- <div class="col-md-5" style="padding-right:30px; bottom: 10px; right: 0px; position: absolute;"> -->
@@ -210,10 +210,10 @@
         <div id="nav" class="navbar navbar-inverse navbar-static-top navbar" role="navigation">
             <div class="container">
                 <div class="row">
-                    <div>
-                        <img src="../public/img/CatLogo.png" class="logo">
+                    <div >
+                        <img id = "avatars" src="../public/img/CatLogo.png" class="logo">
                     </div>
-                    <div class='site-name hidden-xs'>
+                    <div id = 'companyName' class='site-name hidden-xs'>
                         AbcJSC
                     </div>
                     <div class='navbar-left site-name phone'>
@@ -920,28 +920,26 @@
         <div class="container-fluid" style="background-color: #fff; display:flex" id="section1">
             <div class="col-md-6 col-lg-6" style="flex:1">
                 <h3><i class="fa fa-microphone"></i> Giới thiệu</h3>
-                <div style="column-count:2">
+                <div id = 'shop_description' >
                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum
                 </div>
                 <hr>
                 <h3><i class="fa fa-user-plus"></i> Sản phẩm</h3>
-                <div class="introduction">
-                    <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span>
-                    <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span>
+                <div class="introduction" id = 'introduction'>
                 </div>
                 <hr>
                 <h3><i class="fa fa-anchor"></i> Liên hệ:</h3>
                 <li class="list-unstyled">
                     <i class="fa fa-phone-square"></i>
-                    <label>Phone:</label> 0912345678
+                    <label>Phone:</label><app-contact id = 'contact_phone'></app-contact>
                 </li>
                 <li class="list-unstyled">
                     <i class="fa fa-envelope"></i>
-                    <label>email:</label> abc@gmail.com
+                    <label>email:</label><app-contact id = 'contact_email'></app-contact> 
                 </li>
                 <li class="list-unstyled">
                     <i class="fa fa-map-marker"></i>
-                    <label>Địa chỉ:</label> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+                    <label>Địa chỉ:</label><app-address id = 'address'></app-address>                     
                 </li>
                 <hr>
             </div>
@@ -1003,6 +1001,9 @@
             </div>
         </footer>
     </div>
+    <template id = 'keyword'>
+        <span class="label label-default"><app-cat app-role="cat" ></app-cat></span>
+    </template>
     <script type="text/javascript" src='../public/js/utils.js'></script>
     <script src="http://maps.googleapis.com/maps/api/js"></script>
     <script type="text/javascript" src="../public/js/Crypto/cryptoUtils.js"></script>
@@ -1042,16 +1043,18 @@
     // for Banner ini only 
     $(document).ready(function() {
         /** code inside **/
-        var masthead = $("#masthead");
-        masthead.addClass('start');
+        
     });
 
     function preventCreateNewShop(){
         console.log ("you have to login before create new Shop");
     }
     //-// Google map    
+    var pos = {};
     var myCenter = new google.maps.LatLng(21.030668, 105.852284);
-
+    if(pos.lat && pos.lon){
+        myCenter = new google.maps.LatLng(pos.lat, pos.lon);
+    }    
     function initialize() {
         var mapProp = {
             center: myCenter,
@@ -1061,6 +1064,10 @@
 
         var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
+        if(pos.lat && pos.lon){
+            myCenter = new google.maps.LatLng(pos.lat, pos.lon);
+            console.log(pos.lat, pos.lon);
+        }
         var marker = new google.maps.Marker({
             position: myCenter,
             animation: google.maps.Animation.DROP
@@ -1088,6 +1095,46 @@
 // Button.  See the onlogin handler attached to it in the sample
 // code below.
 var RSAPublicKey = <%-JSON.stringify(data)%>
+var shop = <%-JSON.stringify(shop)%>
+
+updateShop(shop);
+
+function updateShop(shop){
+    if(!shop){
+        return;
+    }    
+    console.log(shop);
+    var masthead = document.querySelector("#masthead");    
+    masthead.style.backgroundImage  = "url('" +'/'+ shop.walls +"')";
+    masthead.classList.remove("hiddenElem");
+    masthead.classList.add('start');
+    document.getElementById('avatars').setAttribute('src',shop['avatars']);    
+    var base_infos = ['address','companyName','contact_email','contact_phone','pathName','shop_description','showName','slogan'];
+    for (var i = 0; i< base_infos.length; i ++){        
+        var elem = document.getElementById(base_infos[i])
+        // console.log(base_infos[i], shop[base_infos[i]], !elem);
+        if(elem){
+            var txt = document.createTextNode(shop[base_infos[i]]);
+            elem.innerHTML = null;
+            elem.appendChild(txt);
+        }
+    }
+    var latitude = parseFloat(shop.latitude);
+    var longitude = parseFloat(shop.longitude);    
+    pos.lat  = latitude;
+    pos.lon = longitude;
+    //update categories
+    var keyword = document.getElementById('keyword').content;
+    
+    var introduction = document.getElementById('introduction');
+    for(var i in shop.categories){
+        var appCat  = keyword.querySelector('[app-role="cat"]');        
+        var txt = document.createTextNode(shop.categories[i]);
+        appCat.innerHTML = null;
+        appCat.appendChild(txt);
+        introduction.appendChild(document.importNode(keyword, true));
+    }
+}
 
 function checkLoginStatus() {
     FB.getLoginStatus(function(response) {

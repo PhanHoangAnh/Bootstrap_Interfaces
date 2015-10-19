@@ -974,7 +974,8 @@ function createShop (){
         data: json_data,
         complete: function(data, status, jqXHR) {
             var obj = JSON.parse(data.responseText);
-            // 
+            //
+            console.log(obj) ;
             if (obj.err != 0 || obj.err == null) {              
                 return;
             }
@@ -1108,6 +1109,7 @@ function checkToken(uid, accessToken) {
     });
 }
 
+var isUpdated = false;
 function updateShop(shop){
     console.log(shop);
     var pathName = document.querySelector("#pathName");
@@ -1156,6 +1158,7 @@ function updateShop(shop){
     pos.coords.longitude = shop.longitude;
     updatePos(pos);
     google.maps.event.trigger(map, "resize");        
+    isUpdated = true;
 }
 
 function fetchingInfo(callback) {
@@ -1300,7 +1303,7 @@ function fb_enter() {
     function initialize() {
 
         var latLng
-        if (navigator.geolocation) {
+        if (navigator.geolocation|| !isUpdated) {
             navigator.geolocation.getCurrentPosition(updatePos, err_Handler) ;
         } 
         updatePos();
