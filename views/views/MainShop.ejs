@@ -478,7 +478,7 @@
                 <item-detail>
                 <div class="photo" >
                     <img app-role ='imgName'  class="img-responsive center-block">
-                    <div class='focus'></div>
+                    <div class='focus' app-role = "handler"></div>
                 </div>
                 <div class="rating">
                     <span>☆</span>
@@ -492,7 +492,7 @@
                 <!-- <div product-title style='clear:both; white-space: nowrap; overflow: hidden; text-overflow: ellipsis'> -->
                 <div product-title class='description' app-role = 'productDescription'>
                 </div>
-                <div product-price app-role = 'price'>Price: 123$</div>
+                <div product-price app-role = 'price'></div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0 ">
                     <div add-toCart class="items">
                         <i class="fa fa-cart-plus" style='font-side:24px'></i>
@@ -517,7 +517,7 @@
                 <item-detail>
                 <div class="photo">
                     <img app-role ='imgName' class="img-responsive center-block">
-                    <div class='focus'></div>
+                    <div class='focus' app-role = "handler"></div>
                 </div>
                 <div class="rating">
                     <span>☆</span>
@@ -650,14 +650,13 @@ function updateShop(shop){
     }    
     console.log(shop);
     var masthead = document.querySelector("#masthead");    
-    masthead.style.backgroundImage  = "url('" +'/'+ shop.walls +"')";
+    masthead.style.backgroundImage  = "url('" + shop.walls.substring(1) +"')";
     masthead.classList.remove("hiddenElem");
     masthead.classList.add('start');
-    document.getElementById('avatars').setAttribute('src',shop['avatars']);    
+    document.getElementById('avatars').setAttribute('src',shop['avatars'].substring(1));    
     var base_infos = ['address','companyName','contact_email','contact_phone','pathName','shop_description','showName','slogan'];
     for (var i = 0; i< base_infos.length; i ++){        
         var elem = document.getElementById(base_infos[i])
-        // console.log(base_infos[i], shop[base_infos[i]], !elem);
         if(elem){
             var txt = document.createTextNode(shop[base_infos[i]]);
             elem.innerHTML = null;
@@ -689,6 +688,8 @@ function updateShop(shop){
         var product_image = hotItemElem.querySelector("[app-role ='imgName']")
         var imgPath = '/public/products/'+ hotItems[i].imgName[0] +'.png';
         product_image.setAttribute('src', imgPath);
+        var handler = hotItemElem.querySelector('[app-role = "handler"]');        
+        handler.setAttribute('app-itemNumber', hotItems[i]._productId);
         var productDescription = hotItemElem.querySelector("[app-role = 'productDescription']");
         productDescription.innerHTML = null;
         txt = document.createTextNode(hotItems[i].productDescription);
@@ -715,10 +716,12 @@ function updateShop(shop){
         var product_img = newItem.querySelector("[app-role ='imgName']");
         imgPath = '/public/products/'+ newItems[i].imgName[0] +'.png';        
         product_img.setAttribute('src', imgPath);
+        product_image.setAttribute('src', imgPath);
+        var _handler = newItem.querySelector('[app-role = "handler"]');
+        _handler.setAttribute ('app-itemNumber', newItems[i]._productId);
         var productDescription = newItem.querySelector("[app-role = 'productDescription']");
         productDescription.innerHTML = null;
-        txt = document.createTextNode(newItems[i].productDescription);
-        console.log(i,newItems[i].productDescription, txt);
+        txt = document.createTextNode(newItems[i].productDescription);        
         productDescription.appendChild(txt);
         var price = newItem.querySelector("[app-role = 'price']");
         price.innerHTML = null;
@@ -731,6 +734,17 @@ function updateShop(shop){
         if(i>0){
             newProductRoot.appendChild(document.importNode(newItem,true));
         }
+    }
+
+    var imgs = document.querySelectorAll('[app-role = "handler"]');    
+    for(var i = 0; i<imgs.length;i++){        
+        imgs[i].addEventListener('click',function(e){
+            // console.log('okie',this.getAttribute('app-itemNumber'));
+            // var sURL =  "/createNewShop" + '/' + 'addItem' +'/'+this.getAttribute('app-itemNumber');
+            var sURL =  '/' + shop.pathName +'/'+this.getAttribute('app-itemNumber');            
+            console.log ('sURL', sURL);
+            window.location.href = sURL;
+        },false);
     }
 
 }
@@ -788,7 +802,7 @@ function getNewToken(uid, token) {
     console.log('_data: ', _data);
     $.ajax({
         // url: './userToken',
-        url: './api/gettoken',
+        url: '/api/gettoken',
 
         method: 'POST',
         data: json_data,
@@ -837,7 +851,7 @@ function checkToken(uid, accessToken) {
     };
     $.ajax({
         // url: './userToken',
-        url: './api/checktoken',
+        url: '/api/checktoken',
         method: 'POST',
         data: json_data,
         complete: function(data, status, jqXHR) {
