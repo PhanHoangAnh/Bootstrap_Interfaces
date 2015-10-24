@@ -473,7 +473,7 @@
         <span class="label label-default"><app-cat app-role="cat" ></app-cat></span>
     </template>
     <template id = "hotItem">
-        <div class="col-sm-4">
+        <div class="col-sm-4" style="padding-bottom: 20px; padding-top: 20px">
             <div class="col-item">
                 <item-detail>
                 <div class="photo" >
@@ -512,7 +512,7 @@
         </div>
     </template>
     <template id = "newItem">
-        <div class="col-sm-3">
+        <div class="col-sm-3" style="padding-bottom: 20px">
             <div class="col-item">
                 <item-detail>
                 <div class="photo">
@@ -746,7 +746,7 @@ function updateShop(shop){
             window.location.href = sURL;
         },false);
     }
-
+    startFacebook(document, 'script', 'facebook-jssdk');
 }
 
 function checkLoginStatus() {
@@ -770,15 +770,14 @@ window.fbAsyncInit = function() {
 
 };
 
-// Load the SDK asynchronously
-(function(d, s, id) {
+function startFacebook(d, s, id){
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s);
     js.id = id;
     js.src = "//connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+}
 
 
 var aes_key;

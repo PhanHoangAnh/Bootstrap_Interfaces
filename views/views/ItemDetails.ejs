@@ -6,16 +6,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/main.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/shop.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/itemDetails.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/shop.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/itemDetails.css">
     <link rel="stylesheet" href="../public/css/animate.css">
     <link rel="stylesheet" href="../public/css/component.css">
     <link rel="stylesheet" type="text/css" href="../public/css/breadcrumb.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" media="screen, print, handheld" type="text/css" href="../public/css/calendar.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../public/js/calendar.02.js"></script>
 </head>
 <style type="text/css">
 body {
@@ -34,9 +36,11 @@ item-detail {
 .photo >img {
     width: 100%;
 }
-.footer li{
+
+.footer li {
     color: #333;
 }
+
 
 /*div[class*='col-'] hr{
     border-top: dotted;
@@ -66,8 +70,19 @@ item-detail {
 .crumbs ul {
     list-style-type: none;
 }
+
 #nav li {
-    padding-top:0;
+    padding-top: 0;
+}
+.affix {
+    /*position: fixed;*/
+    top: 70px;
+}
+.affix-bottom {
+    position: relative
+}
+.hiddenElem{
+    display: none;
 }
 </style>
 
@@ -77,9 +92,9 @@ item-detail {
         <div id="nav" class="navbar navbar-inverse navbar-static-top navbar" role="navigation">
             <div class="container">
                 <div class="row">
-                    <div>
+                    <a id = "backToHome" app-backToHome=true>
                         <img id = "_avatar" class="logo">
-                    </div>
+                    </a>
                     <div class='site-name hidden-xs'>
                         <app-showName></app-showName>
                     </div>
@@ -106,8 +121,13 @@ item-detail {
                                 <a href="#sec">Sản phẩm</a>
                             </li>
                             <li class='navbar-right'>
-                                <a href="#sec">Home</a>
-                            </li>
+                                <a href="#sec" app-backToHome=true >Home</a>
+                            </li>                            
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right" id = "visitor">
+                            <li class='navbar-right' id='visitorHolder'>
+                                <a href="#sec" id = "login"> <i class="fa fa-facebook fa-2x "></i><span> Login with Facebook</span></a>
+                            </li>                            
                         </ul>
                     </nav>
                 </div>
@@ -115,13 +135,13 @@ item-detail {
         </div>
     </div>
     <!--  -->
-    <section class="divider" style="position: relative">
+    <section class="divider" style="position: relative" >
         <div class="container-fluid">
             <!-- Breadcrumb stay here -->
-            <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1" style="bottom: 0; position: absolute; padding:0">
+            <div class="col-md-12" style="bottom: 0; position: absolute; padding:0">
                 <div class="crumbs">
                     <ul>
-                        <li><a href="#1"><i class="fa fa-home"></i> Home</a></li>
+                        <li><a app-backToHome=true><i class="fa fa-home"></i> Home</a></li>
                         <li><a href="#2" class="two"><i class="fa fa-user-plus"></i> Keyword</a></li>
                         <li><a href="#3" class="three">Item</a></li>
                         <!--                         <li><a href="#4" class="four">Four</a></li>
@@ -131,110 +151,119 @@ item-detail {
                 <!-- /Breadcrumb -->
             </div>
     </section>
-    <div class="container-fluid" id="start-offset" style="padding:0">
-        <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-            <hr>
+    <div class="container-fluid"  style="padding:10px"></div>
+    <div class="container-fluid"  style="padding:0" id="start-offset">
+        <div class="col-md-9 ">            
             <div style="background-color:rgba(0,0,0,0.6); padding:15px" class="clearfix animated bounceInLeft" id="cover">
-                <!-- Product Images -->
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="padding:0">
-                    <div>
-                        <img class="img-responsive" style="margin-left:auto; height: 400px;" id = "DisplayImg">
-                    </div>
-                    <div style="position:absolute;top:0;width:20%" class="clearfix">
-                        <div>
-                            <img class="img-responsive center-block" style="padding-bottom:1px" id = "img_0" app-role = "complementImage">
-                        </div>
-                        <div>
-                            <img class="img-responsive center-block" style="padding-bottom:1px" id = "img_1" app-role = "complementImage">
-                        </div>
-                        <div>
-                            <img class="img-responsive center-block" style="padding-bottom:1px" id = "img_2" app-role = "complementImage">
-                        </div>
-                    </div>
-                </div>
                 <!-- Product Description -->
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="color:white">
                     <li class="heading">
-                        <app-productName></app-productName> 
-                    </li>
-                    <li>
-                        <!-- <div class="rating"> -->
-                        <span>☆</span>
-                        <span>☆</span>
-                        <span>☆</span>
-                        <span>☆</span>
-                        <span>☆</span>
-                        <!-- </div> -->
-                    </li>
-                    <li>
-                        <label>Brand</label>
-                        <app-brandName></app-brandName>
-                    </li>
-                    <li>
-                        <label>Country of Origin</label>
-                        <app-country></app-country>
-                    </li>
-                    <li>
-                        <label>Product ID</label>
-                        <app-ProductId></app-ProductId>
-                    </li>
-                    <li>
-                        <label>Tags</label>
-                        <app-Tags></app-Tags>
-                    </li>
-                    <li>
-                        <label>Description</label>
-                        <app-productDescription></app-productDescription>
-                    </li>
-                    <li>
-                        <label>Price</label>
-                        <span style="text-decoration: line-through; color:red"><app-oldPrice></app-oldPrice></span>
-                        <span><app-newPrice></app-newPrice></span>
-                    </li>
+                            <app-productName></app-productName><button id = "bnt_edit" type="button" class=" hiddenElem btn btn-success pull-right">Edit Item</button>
+                        </li>
+                        <li>
+                            <!-- <div class="rating"> -->
+                            <span>☆</span>
+                            <span>☆</span>
+                            <span>☆</span>
+                            <span>☆</span>
+                            <span>☆</span>
+                            <!-- </div> -->
+                        </li>
+                        <li>
+                            <label>Brand</label>
+                            <app-brandName></app-brandName>
+                        </li>
+                        <li>
+                            <label>Country of Origin</label>
+                            <app-country></app-country>
+                        </li>
+                        <li>
+                            <label>Product ID</label>
+                            <app-ProductId></app-ProductId>
+                        </li>
+                        <li>
+                            <label>Tags</label>
+                            <app-Tags></app-Tags>
+                        </li>
+                        <li>
+                            <label>Description</label>
+                            <app-productDescription></app-productDescription>
+                        </li>
+                        <li>
+                            <label>Price</label>
+                            <span style="text-decoration: line-through; color:red"><app-oldPrice></app-oldPrice></span>
+                            <span><app-newPrice></app-newPrice></span>
+                        </li>
                 </div>
+                <!-- Product Images -->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="padding:0">
+                    <div>
+                        <img class="img-responsive" style="margin-left:auto; height: auto; width: 100% " id = "DisplayImg">
+                    </div>
+                    <div style="position:absolute;top:0;width:20%" class="clearfix">
+                        <div>
+                            <img class="img-responsive center-block" style="padding-bottom:1px;cursor: pointer;" id = "img_0" app-role = "complementImage">
+                        </div>
+                        <div>
+                            <img class="img-responsive center-block" style="padding-bottom:1px; cursor: pointer;" id = "img_1" app-role = "complementImage">
+                        </div>
+                        <div>
+                            <img class="img-responsive center-block" style="padding-bottom:1px; cursor: pointer;" id = "img_2" app-role = "complementImage">
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <hr>
-        </div>
-    </div>
-    </div>
-    <!-- <section class="divider"></section> -->
-    <div class="container-fluid" style="padding:0">
-        <div class="col-sm-10 col-sm-offset-1">
-            <div class="panel panel-default ">
-                <div class="panel-heading">
-                    Sản phẩm tương tự
-                </div>
-                <div class="panel-body" id = "similarPanel">
-                </div>
-            </div>
-            <!--/col-->
-            <hr>
-        </div>
-    </div>
-    <section class="divider">
-        <div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
-            <div class="introduction">
-                <div class="panel panel-default">
+            <div style="padding:10px"></div>
+            <div class="container-fluid" style="padding:0">
+                <div class="panel panel-default ">
                     <div class="panel-heading">
-                        Sản phẩm...
+                        Sản phẩm tương tự
                     </div>
-                    <div class="panel-body">
-                        <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span>
-                        <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span> <span class="label label-default">keyword</span> <span class="label ">keyword</span>
+                    <div class="panel-body" id = "similarPanel">
+
+                    </div>
+                </div>
+                
+                    <div class="introduction">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Sản phẩm...
+                            </div>
+                            <div class="panel-body" id = 'introduction'>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <app-sideBar>
+            <div class='col-md-3 hidden-xs'>
+                <div id='sidebar' class='sidebar'>
+                    <div id="myCalendar"></div>
+                    <hr>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <marketing-message>Giới thiệu</marketing-message>
+                        </div>
+                        <div class="panel-body" style = "max-heigh: 600px; color:#aaa">
+                            <app-description></app-description>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class = "divider"></section>
-    <footer>
-        <div class="container-fluid" style="background-color:rgba(0,0,0,.65)">
+        </app-sideBar>
+    </div>
+    </div>
+    <footer id='end-offset'>
+        <div class="container-fluid" style="background-color:rgba(0,0,0,.65)" >
             <div class=" footer row cover " style="padding-top: 20px; padding-bottom: 40px; ">
-                <div class="col-md-10 col-md-offset-1" >
+                <div class="col-md-10 col-md-offset-1">
                     <div class="col-md-4" style='text-align: center; margin-top: 30px'>
                         <span style="font-size: 24px; color:white" id = "footerName"></span>
                         <p></p>
-                        <img id = "footerAvatar" style="width: 40%; margin-top: 30px">
+                        <a app-backToHome=true>
+                            <img id = "footerAvatar" style="width: 40%; margin-top: 30px" >
+                        </a>
                         <p></p>
                         <app-slogan id = "slogan"></app-slogan>
                     </div>
@@ -264,11 +293,12 @@ item-detail {
             @Copyright:abcd@abc.jsc
         </div>
     </footer>
+    <!-- Bottom of Page -->
     <template id = "similarElems" > 
         <div class=" col-md-2 col-lg-2">
             <item-detail>
             <div class="photo">
-            <img app-role = "imageHolder" class="img-responsive center-block">
+                <img app-role = "imageHolder" class="img-responsive center-block">
                 <div class='focus' app-role = "handler"></div>
             </div>
             <div class="rating">
@@ -283,63 +313,97 @@ item-detail {
                 <app-product-title></app-product-title>
             </div>
             <div product-price>Price: <app-product-price></app-product-price></div>
-        </item-detail>
-    </div>
+            </item-detail>
+        </div>
     </template>
-    <!-- Bottom of Page -->
+    <template id = 'keyword'>
+        <span class="label label-default"><app-cat app-role="cat" ></app-cat></span>
+    </template>
     <div id="phasebeam">
         <canvas width="700" height="650"></canvas>
         <canvas width="700" height="650"></canvas>
         <canvas width="700" height="650"></canvas>
     </div>
-    <script type="text/javascript" src="../public/js/phasebeam.js"></script>
-    <script type="text/javascript" src="../public/js/utils.js"></script>
+    <script type="text/javascript" src="/public/js/phasebeam.js"></script>
+    <script type="text/javascript" src="/public/js/utils.js"></script>
+    <script type="text/javascript" src="/public/js/Crypto/cryptoUtils.js"></script>
     <script type="text/javascript">
     var RSAPublicKey = <%-JSON.stringify(data)%>    
     var item =  <%-JSON.stringify(item)%>
     var shop =  <%-JSON.stringify(shop)%>
     var similarItems = <%-JSON.stringify(similarItems)%>
     $(function() {
-            $('#nav').affix({
-                offset: {
-                    top: function() {
-                        // Do other stuff here-- chipl
-                        return $('#start-offset').offset().top / 2;
-                    }
+        $('#nav').affix({
+            offset: {
+                top: function() {
+                // Do other stuff here-- chipl
+                return $('#start-offset').offset().top / 2;
                 }
+            }
+        });
+        $('#sidebar').affix({
+            offset: {
+                top: $('#start-offset').offset().top /2 ,
+                bottom: $('#end-offset').outerHeight() + 38
+            }
+        }).on('affix.bs.affix', function() { // before affix
+            $(this).css({
+                /*'top': headerHeight,*/ // for fixed height
+                'width': $(this).outerWidth() // variable widths
             });
-        })
-    $(document).ready(function() {        
-        var imgs = item.imgName;
-        document.getElementById('DisplayImg').setAttribute('src','/public/products/'+imgs[0]+'.png');
-        document.getElementById('img_0').setAttribute('src','/public/products/'+imgs[0]+'.png');
-        document.getElementById('img_1').setAttribute('src','/public/products/'+imgs[1]+'.png');
-        document.getElementById('img_2').setAttribute('src','/public/products/'+imgs[2]+'.png');
-        var complementImages = document.querySelectorAll('[app-role = "complementImage"]')
-        for(var i = 0;i< complementImages.length;i ++){
-            complementImages[i].addEventListener("click",function(e){
-                document.getElementById('DisplayImg').setAttribute('src',this.getAttribute('src'));
-            },false)
-        }        
-        document.querySelector("app-productName").innerHTML = item.productName;
-        document.querySelector("app-brandName").innerHTML = item.brandName;
-        document.querySelector("app-country").innerHTML = item.country_ofOrigin;
-        document.querySelector("app-ProductId").innerHTML = item._productId;
-        document.querySelector("app-productDescription").innerHTML = item.productDescription;
-        document.querySelector("app-Tags").innerHTML = item.categories.toString();        
-        
-        document.querySelector("app-oldPrice").innerHTML = item.oldPrice + "/" + item.unit;
-        document.querySelector("app-newPrice").innerHTML = item.newPrice + "/" + item.unit;
-        console.log(shop);
+        }).on('affix-bottom.bs.affix', function() { // before affix-bottom
+            // $(this).css('bottom', 'auto'); // THIS is what makes the jumping            
+        });
+
+        var node = document.createElement("calendar");
+        var parent = document.getElementById("myCalendar");
+        calendar(node, parent);
+    })
+        $(document).ready(function() {        
+        updateItem(item);
+        function updateItem(item){
+            var imgs = item.imgName;
+            document.getElementById('DisplayImg').setAttribute('src','/public/products/'+imgs[0]+'.png');
+            document.getElementById('img_0').setAttribute('src','/public/products/'+imgs[0]+'.png');
+            document.getElementById('img_1').setAttribute('src','/public/products/'+imgs[1]+'.png');
+            document.getElementById('img_2').setAttribute('src','/public/products/'+imgs[2]+'.png');
+            var complementImages = document.querySelectorAll('[app-role = "complementImage"]')
+            for(var i = 0;i< complementImages.length;i ++){
+                complementImages[i].addEventListener("click",function(e){
+                    document.getElementById('DisplayImg').setAttribute('src',this.getAttribute('src'));
+                },false)
+            }        
+            document.querySelector("app-productName").innerHTML = item.productName;
+            document.querySelector("app-brandName").innerHTML = item.brandName;
+            document.querySelector("app-country").innerHTML = item.country_ofOrigin;
+            document.querySelector("app-ProductId").innerHTML = item._productId;
+            document.querySelector("app-productDescription").innerHTML = item.productDescription;
+            document.querySelector("app-Tags").innerHTML = item.categories.toString();        
+            
+            document.querySelector("app-oldPrice").innerHTML = item.oldPrice + "/" + item.unit;
+            document.querySelector("app-newPrice").innerHTML = item.newPrice + "/" + item.unit;
+        }
+        if(shop.shop_description.length>600){
+            document.querySelector("app-description").innerHTML = shop.shop_description.substring(0,600);
+        }
+        var backToHomes = document.querySelectorAll('[app-backToHome=true]');
+        for(var i = 0; i< backToHomes.length;i++){
+            // console.log(i, backToHomes(i));
+            backToHomes[i].setAttribute("href", "/"+shop.pathName);
+        }
+
         document.querySelector("app-showName").innerHTML = shop.showName;
-        document.getElementById("_avatar").setAttribute("src", shop.avatars.substring(1));
+        document.getElementById("_avatar").setAttribute("src", shop.avatars.substring(1));            
         document.getElementById("footerName").innerHTML = shop.showName;
         document.getElementById("slogan").innerHTML = shop.slogan;
         document.getElementById("footerAvatar").setAttribute("src",shop.avatars.substring(1));
 
         var similarElems = document.getElementById('similarElems').content
         var similarPanel = document.getElementById('similarPanel');
-        for(var i = 0 ; i< similarItems.length; i++){
+        updateSimilar(similarItems);
+        function updateSimilar(similarItems){
+            similarPanel.innerHTML = null;
+            for(var i = 0 ; i< similarItems.length; i++){
             var imageHolder = similarElems.querySelector('[app-role = "imageHolder"]')
             imageHolder.setAttribute("src",'/public/products/'+similarItems[i].imgName[0]+".png");
             var description = similarElems.querySelector('app-product-title');
@@ -349,20 +413,268 @@ item-detail {
             var handler = similarElems.querySelector('[app-role = "handler"]');
             handler.setAttribute('app-itemNumber', similarItems[i]._productId)
             similarPanel.appendChild(document.importNode(similarElems,true));
-
+            }
+            var imgs = document.querySelectorAll('[app-role = "handler"]');    
+            for(var i = 0; i<imgs.length;i++){        
+                imgs[i].addEventListener('click',function(e){
+                for(var i in similarItems){
+                    if (similarItems[i]._id == this.getAttribute('app-itemNumber')){
+                        item = similarItems[i];
+                        updateItem(similarItems[i]);
+                        $.ajax({
+                            // url: './userToken',
+                            url:"similar/"+similarItems[i]._id,
+                            method: 'GET',
+                            complete: function(data, status, jqXHR) {
+                                var obj = JSON.parse(data.responseText);
+                                updateSimilar(obj);
+                            }
+                        });
+                    }
+                }
+                    // var sURL =  "/createNewShop" + '/' + 'addItem' +'/'+this.getAttribute('app-itemNumber');
+                    // var sURL =  '/' + shop.pathName +'/'+this.getAttribute('app-itemNumber');            
+                    // console.log ('sURL', sURL);
+                    // window.location.href = sURL;
+                },false);
+            }    
         }
-        var imgs = document.querySelectorAll('[app-role = "handler"]');    
-        for(var i = 0; i<imgs.length;i++){        
-            imgs[i].addEventListener('click',function(e){
-            // console.log('okie',this.getAttribute('app-itemNumber'));
-            // var sURL =  "/createNewShop" + '/' + 'addItem' +'/'+this.getAttribute('app-itemNumber');
-            var sURL =  '/' + shop.pathName +'/'+this.getAttribute('app-itemNumber');            
-            console.log ('sURL', sURL);
-            window.location.href = sURL;
-        },false);
+    var keyword = document.getElementById('keyword').content;    
+    var introduction = document.getElementById('introduction');
+    for(var i in shop.categories){
+        var appCat  = keyword.querySelector('[app-role="cat"]');        
+        var txt = document.createTextNode(shop.categories[i]);
+        appCat.innerHTML = null;
+        appCat.appendChild(txt);
+        introduction.appendChild(document.importNode(keyword, true));
+    };
+    startFacebook(document, 'script', 'facebook-jssdk');
+    });
+
+
+function checkLoginStatus() {
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
+}
+
+window.fbAsyncInit = function() {
+    FB.init({
+        appId: '203172309854130',
+        cookie: true, // enable cookies to allow the server to access 
+        // the session
+        xfbml: false, // parse social plugins on this page
+        version: 'v2.4' // use version 2.2
+    });
+
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
+
+};
+
+// Load the SDK asynchronously
+
+startFacebook =function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+};
+
+
+var aes_key;
+var app_token;
+
+function getNewToken(uid, token) {
+    // console.log("uid: ", uid);
+    //    console.log("accessToken: ", token);
+    var _data = {
+        userName: uid,
+        password: token
+    };
+    aes_key = cryptoUtil.generateAESKey();
+    var json_data = {
+        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey, aes_key)
+    };
+
+    $.ajax({
+        // url: './userToken',
+        url: '/api/gettoken',
+        method: 'POST',
+        data: json_data,
+        // contentType:'application/json',
+        complete: function(data, status, jqXHR) {
+            console.log('result', data);
+            // console.log(typeof(data));
+            var obj = JSON.parse(data.responseText);
+            if (obj.err == 0) {
+                var encrypted_app_token = obj.encrypted_app_token;
+                // console.log('encrypted_app_token: ', encrypted_app_token);
+                var _app_token = cryptoUtil.aesDecryptor(encrypted_app_token, aes_key);
+                // console.log("typeof app_token: ", typeof(_app_token));
+                // console.log('app_token: ', JSON.parse(_app_token).app_token);
+                app_token = JSON.parse(_app_token).app_token;
+                localStorage.setItem("app_token", app_token);
+                checkOwner(obj);
+            }
         }
     });
-        
+}
+
+function checkToken(uid, accessToken) {
+    //1. check wheather token is existed in localStorage
+    if (localStorage.getItem("app_token") === null) {
+        getNewToken(uid, accessToken);
+        return;
+    }
+    //2. get Token from localStorage
+    app_token = localStorage.getItem("app_token");
+    // check Item validation
+    var _data = {
+        userName: uid,
+        password: app_token
+    };
+    // _aes_key = cryptoUtil.generateAESKey();
+    var json_data = {
+        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey)
+    };
+    $.ajax({
+        // url: './userToken',
+        url: '/api/checktoken',
+        method: 'POST',
+        data: json_data,
+        complete: function(data, status, jqXHR) {
+            var obj = JSON.parse(data.responseText);
+            if (obj.err != 0) {
+                getNewToken(uid, accessToken);
+                return;
+            }else{
+                checkOwner(obj);
+            }
+            
+        }
+    });
+}
+
+function checkOwner(obj){
+    // console.log(obj.shop._id==shop._id);    
+    if(obj.shop._id==shop._id){
+        var bnt_edit = document.getElementById('bnt_edit');
+        bnt_edit.classList.remove("hiddenElem");
+        bnt_edit.addEventListener('click',function(e){
+            console.log("okie");
+            // /createNewShop/addItem
+            var sURL =  "/createNewShop" + '/' + 'addItem/'+ item._id;
+            console.log ('sURL', sURL);
+            window.location.href = sURL;
+        },false)
+    }
+}
+
+
+function fetchingInfo(callback) {
+
+    // console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', 'GET', {
+        "fields": "id,name,email"
+    }, function(response) {        
+        callback(response);
+    });
+
+}
+
+function handleFBData(response) {
+    // document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
+    var visitorHolder = document.querySelector('#visitorHolder');        
+    // console.log("visitorHolder", visitorHolder);
+    var parent = visitorHolder.parentNode;
+    parent.removeChild(visitorHolder);
+    FB.api('/me/picture?type=small', function(response) {
+        // document.getElementById("profileImage").setAttribute("src", response.data.url);
+        console.log(response.data.url);
+        var _img = document.querySelector("#avatar");        
+        _img.setAttribute("src", response.data.url);
+        _img.style.border = "0";
+
+    });
+
+    var _li = document.createElement('li');
+    _li.classList.add ("navbar-right");    
+    // _li.style.marginTop= "10px";
+    var _a = document.createElement('a');
+    var _span = document.createElement('span');
+    var _div = document.createElement('div');
+    var _img = document.createElement('img');
+
+    _div.classList.add('navbar-right');
+    _div.style.with = "25px";
+    _div.style.height = "25px";
+    _div.style.width = "204x";
+    _div.style.overflow = "hidden";
+
+    _img.style.width = "25px";
+    _img.style.height = "auto";
+    // _img.style.paddingLeft = "10px";
+    _img.setAttribute("id", "avatar");    
+    _div.appendChild(_img);
+    _span.appendChild(_div);
+
+    _a.appendChild(_span);
+    _a.style.color = "#fff";
+    var t = document.createTextNode( String.fromCharCode(160)+ response.name +  String.fromCharCode(160));
+    _a.appendChild(t);
+    _li.appendChild(_a)
+    parent.appendChild(_li);
+    // console.log("parent", parent);
+
+}
+
+// This is called with the results from from FB.getLoginStatus().
+function statusChangeCallback(response) {
+
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+        fetchingInfo(handleFBData);
+        var uid = response.authResponse.userID;
+        var accessToken = response.authResponse.accessToken;        
+        checkToken(uid, accessToken);
+
+    } else if (response.status === 'not_authorized') {
+        // The person is logged into Facebook, but not your app.
+        // document.getElementById('status').innerHTML += 'Please log ' +
+        // 'into this app.';
+        addLoginListener();
+    } else {
+        // The person is not logged into Facebook, so we're not sure if
+        // they are logged into this app or not.
+        // document.getElementById('status').innerHTML += 'Please log ' +
+        // 'into Facebook.';
+        addLoginListener();
+    }
+    function addLoginListener(){
+        var login = document.querySelector('#visitor');
+        login.addEventListener('click',fb_enter,false);
+    }    
+}
+
+
+
+function fb_enter() {
+    // console.log("okie here");
+    FB.login(function(response) {
+        console.log(response);
+        if (response.status === 'connected') {
+            statusChangeCallback(response);
+        }
+    }, {})
+
+} 
     </script>
 </body>
 

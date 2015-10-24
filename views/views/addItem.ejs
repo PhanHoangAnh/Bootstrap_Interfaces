@@ -741,6 +741,7 @@ function uploadItem(){
         data: cryptoUtil.EncryptJSON(_data, RSAPublicKey)
     };
     json_data.item = post_data;
+    // console.log("from add Item:",post_data);
     $.ajax({
         // url: './userToken',
         url: '/api/updateItem',
@@ -781,11 +782,13 @@ function updateItem(){
         document.getElementById('_productId').value = origin_item._productId;
         var cats = origin_item['categories'];
         post_data.categories = cats;
-        for(var i = 0;i<cats.length;i++){
-            document.getElementById('_categories').value += cats[i].concat(',');
-        }
+        // for(var i = 0;i<cats.length;i++){
+            document.getElementById('_categories').value += cats.toString();
+        // }
         document.getElementById('_isNewProduct').checked = (origin_item['isNewproduct']=='true');
         document.getElementById('_isHotProduct').checked = (origin_item['isHotProduct']=='true');
+        post_data.isNewproduct = origin_item['isNewproduct'];
+        post_data.isHotProduct = origin_item['isHotProduct'];
         var imgName = origin_item.imgName;
         post_data.imgName = imgName;
         document.getElementById('_main_img').setAttribute('src',"/public/products/" + imgName[0] + ".png");
@@ -800,7 +803,7 @@ function updateItem(){
             setTimeout(function(){
                 document.querySelector("#bnt_update").classList.remove("hiddenElem");
             }, 100)        
-        }    
+        }
     }    
 }
 
