@@ -160,6 +160,18 @@
         margin-top: 10px;
     }
 }
+.table {
+    border-bottom: 0px !important;
+}
+
+.table th,
+.table td {
+    border: 0px !important;
+}
+
+.fixed-table-container {
+    border: 0px !important;
+}
 
 .hideElement {
     display: none;
@@ -428,9 +440,11 @@
                         <div class="col-md-4" style='text-align: center; margin-top: 30px'>
                             <span style="font-size: 24px; color:white;  ">CON MÈO</span>
                             <p></p>
-                            <img src="../public/img/CatLogo.png" style="width: 40%; margin-top: 30px">
+                            <a app-backToHome=true>
+                                <img id = "footerAvatar" style="width: 40%; margin-top: 30px" >
+                            </a>
                             <p></p>
-                            Shop chuyên hàng hiệu...!
+                            <app-slogan id = "slogan"></app-slogan>
                         </div>
                         <div class="col-md-4" style="margin-top: 30px">
                             <span style="font-size: 24px; color:white; text-align: center "><i class="fa fa-arrows"></i>   THÔNG TIN...</span>
@@ -469,6 +483,64 @@
             </div>
         </footer>
     </div>
+        <modal>
+        <div id="confirmModal" class="modal fade">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header clearfix">
+                        <div class="col-md-3">
+                            <img class = "img-responsive logo" id = "imgModalIcon">    
+                        </div>
+                        <div class="col-md-9">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Phiếu xác nhận</h4>    
+                        </div>
+                    </div>
+                    <div class="modal-body clearfix">
+                        <div class="col-md-3">
+                            <img id = "modalConfirmImage" class="img-responsive">
+                            <div style="margin: 20px"></div>
+                            <label>Product</label><br>
+                            <app-modalProduct></app-modalProduct><br>
+                            <label>Price</label><br>
+                            <div><app-ModalPrice></app-ModalPrice></div>
+                        </div>
+                        <div class="col-md-9">
+                            <label>Cám ơn bạn đã đặt hàng</label>
+                            <div><small>Xin vui lòng cung cấp thêm thông tin về đơn hàng này...</small></div>
+                            <div style="margin: 20px"></div>
+                            <table class="table">
+                                <tbody>
+                                    <tr style="border:none">
+                                        <td>Họ và tên người nhận hàng</td>
+                                        <td>
+                                            <input type="text" class="form-control data-input">
+                                        </td>
+                                    </tr>
+                                    <tr style="border:none">
+                                        <td>Số điện thoại liên hệ</td>
+                                        <td>
+                                            <input type="text" class="form-control data-input">
+                                        </td>
+                                    </tr>
+                                    <tr style="border:none">
+                                        <td>Địa chỉ giao hàng</td>
+                                        <td>
+                                            <input type="text" class="form-control data-input">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id = "modalCancel">Cancel</button>
+                        <button type="button" class="btn btn-danger btn-ok" data-dismiss="modal" id = "modalConfirm">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </modal>
     <template id = 'keyword'>
         <span class="label label-default"><app-cat app-role="cat" ></app-cat></span>
     </template>
@@ -494,7 +566,7 @@
                 </div>
                 <div product-price app-role = 'price'></div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0 ">
-                    <div add-toCart class="items">
+                    <div add-toCart = "true" class="items">
                         <i class="fa fa-cart-plus" style='font-side:24px'></i>
                         <br>Add to Cart
                     </div>
@@ -531,7 +603,7 @@
                 </div>
                 <div product-price app-role = 'price'>Price:123$</div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0 ">
-                    <div add-toCart class="items">
+                    <div add-toCart = "true" class="items">
                         <i class="fa fa-cart-plus" style='font-side:24px'></i>
                         <br>Add to Cart
                     </div>
@@ -549,9 +621,9 @@
         </div>
     </div>
 </template>
-    <script type="text/javascript" src='../public/js/utils.js'></script>
+    <script type="text/javascript" src='/public/js/utils.js'></script>
     <script src="http://maps.googleapis.com/maps/api/js"></script>
-    <script type="text/javascript" src="../public/js/Crypto/cryptoUtils.js"></script>
+    <script type="text/javascript" src="/public/js/Crypto/cryptoUtils.js"></script>
     <script type="text/javascript">
     /* Custom JS */
     //--// Bootstrap component
@@ -611,7 +683,6 @@
 
         if(pos.lat && pos.lon){
             myCenter = new google.maps.LatLng(pos.lat, pos.lon);
-            console.log(pos.lat, pos.lon);
         }
         var marker = new google.maps.Marker({
             position: myCenter,
@@ -647,8 +718,7 @@ updateShop(shop);
 function updateShop(shop){
     if(!shop){
         return;
-    }    
-    console.log(shop);
+    }
     var masthead = document.querySelector("#masthead");    
     masthead.style.backgroundImage  = "url('" + shop.walls.substring(1) +"')";
     masthead.classList.remove("hiddenElem");
@@ -686,8 +756,10 @@ function updateShop(shop){
 
     for (var i = 0; i<hotItems.length;i++){
         var product_image = hotItemElem.querySelector("[app-role ='imgName']")
+        // var imgPath = '/public/products/'+ hotItems[i].imgName[0] +'.png';
         var imgPath = '/public/products/'+ hotItems[i].imgName[0] +'.png';
         product_image.setAttribute('src', imgPath);
+        product_image.setAttribute("id", hotItems[i]._productId);
         var handler = hotItemElem.querySelector('[app-role = "handler"]');        
         handler.setAttribute('app-itemNumber', hotItems[i]._productId);
         var productDescription = hotItemElem.querySelector("[app-role = 'productDescription']");
@@ -698,6 +770,9 @@ function updateShop(shop){
         price.innerHTML = null;
         txt = document.createTextNode(hotItems[i].newPrice + ' VND / ' + hotItems[i].unit);
         price.appendChild(txt);
+        var addToCart = hotItemElem.querySelector('[add-toCart = "true"]');
+        addToCart.setAttribute('app-itemNumber', hotItems[i]._productId);
+        
         // console.log(hotItems[i].imgName[0]);
         if(i<6){
             hotItemElemRoot.appendChild(document.importNode(hotItemElem,true));
@@ -716,7 +791,7 @@ function updateShop(shop){
         var product_img = newItem.querySelector("[app-role ='imgName']");
         imgPath = '/public/products/'+ newItems[i].imgName[0] +'.png';        
         product_img.setAttribute('src', imgPath);
-        product_image.setAttribute('src', imgPath);
+        product_img.setAttribute("id", newItems[i]._productId);
         var _handler = newItem.querySelector('[app-role = "handler"]');
         _handler.setAttribute ('app-itemNumber', newItems[i]._productId);
         var productDescription = newItem.querySelector("[app-role = 'productDescription']");
@@ -727,11 +802,13 @@ function updateShop(shop){
         price.innerHTML = null;
         txt = document.createTextNode(newItems[i].newPrice + ' VND / ' + newItems[i].unit);
         price.appendChild(txt);
+        var addToCart = newItem.querySelector('[add-toCart = "true"]');
+        addToCart.setAttribute('app-itemNumber', newItems[i]._productId);
         // console.log(productDescription.innerHTML);
         if(i<8){
             newProductRootActive.appendChild(document.importNode(newItem,true));
         }
-        if(i>0){
+        if(i>2){
             newProductRoot.appendChild(document.importNode(newItem,true));
         }
     }
@@ -742,11 +819,51 @@ function updateShop(shop){
             // console.log('okie',this.getAttribute('app-itemNumber'));
             // var sURL =  "/createNewShop" + '/' + 'addItem' +'/'+this.getAttribute('app-itemNumber');
             var sURL =  '/' + shop.pathName +'/'+this.getAttribute('app-itemNumber');            
-            console.log ('sURL', sURL);
+            // console.log ('sURL', sURL);
             window.location.href = sURL;
         },false);
     }
+    var addToCarts = document.querySelectorAll('[add-toCart = "true"]');
+    for(var i = 0;i< addToCarts.length; i++){
+        addToCarts[i].addEventListener("click",function(e){
+            var img = document.getElementById(this.getAttribute('app-itemNumber'));
+            movingImage(img, movingImgCallback);
+        },false)
+    }
+    document.getElementById("footerAvatar").setAttribute("src",shop.avatars.substring(1));
+    document.getElementById("slogan").innerHTML = shop.slogan;
+    var backToHomes = document.querySelectorAll('[app-backToHome=true]');
+    for(var i = 0; i< backToHomes.length;i++){
+            // console.log(i, backToHomes(i));
+            backToHomes[i].setAttribute("href", "/"+shop.pathName);
+        }
+
+    document.getElementById('modalConfirm').addEventListener("click",function(e){
+        updateConfirmation();
+    },false)
     startFacebook(document, 'script', 'facebook-jssdk');
+}
+
+var ordering_Item ;
+function movingImgCallback(elem){
+    var shopItems = shop.hot_items.concat(shop.new_items);
+    // item_OrderNum = elem.id;
+    for(var i = 0; i< shopItems.length; i++){
+        if(shopItems[i]._productId == elem.id){
+            ordering_Item = shopItems[i];
+            break;
+        }
+    }
+    console.log(ordering_Item);
+    document.getElementById('imgModalIcon').setAttribute('src', shop['avatars'].substring(1));
+    document.getElementById('modalConfirmImage').setAttribute("src", '/public/products/'+ ordering_Item.imgName[0]+ ".png");
+    document.querySelector('app-ModalPrice').innerHTML = ordering_Item.newPrice + ' VND / ' + ordering_Item.unit;
+    document.querySelector('app-modalProduct').innerHTML = ordering_Item.productName;
+
+    $("#confirmModal").modal('show');
+}
+function updateConfirmation(){
+    console.log("modalConfirm");
 }
 
 function checkLoginStatus() {
@@ -959,7 +1076,6 @@ function statusChangeCallback(response) {
         login.addEventListener('click',fb_enter,false);
     }    
 }
-
 
 
 function fb_enter() {

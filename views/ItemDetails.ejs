@@ -428,6 +428,9 @@ item-detail {
                             complete: function(data, status, jqXHR) {
                                 var obj = JSON.parse(data.responseText);
                                 updateSimilar(obj);
+                                $('html,body').animate({
+                                    scrollTop: $("#start-offset").offset().top - 50},
+                                    'slow');
                             }
                         });
                     }

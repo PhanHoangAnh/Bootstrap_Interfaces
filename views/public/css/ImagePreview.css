@@ -43,10 +43,15 @@
 }
 
 #thumbItem{
-    width: 290px;
-    height: 360px;
-    margin-top: -180px;
-    margin-left: -125px;    
+    /*600 970*/
+    width: 480px;
+    height: 600px;
+    margin-top: -300px;
+    margin-left: -230px; 
+}
+
+.product{
+  height: 600px;
 }
 
 

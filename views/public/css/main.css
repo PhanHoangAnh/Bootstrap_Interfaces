@@ -88,6 +88,7 @@ header {
     -ms-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
     max-width:100%;    
+    cursor:pointer;
 }
 .site-name {
     font-family: 'Lobster', cursive !important;

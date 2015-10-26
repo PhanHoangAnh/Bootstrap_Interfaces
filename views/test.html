@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="../public/js/html2canvas.js"></script>
+</head>
+<style type="text/css">
+.table {
+    border-bottom: 0px !important;
+}
+
+.table th,
+.table td {
+    border: 0px !important;
+}
+
+.fixed-table-container {
+    border: 0px !important;
+}
+</style>
+
+<body>
+    <div class="container-fluid" id="start-offset">
+        <div class="row" style="padding-left: 30px; margin-bottom: 30px">
+            <h3>
+                 <span>Xin chào</span><span id = "helloVisior"></span>
+            </h3>
+            <div>Bắt đầu tạo shop bạn nhé!.</div>
+        </div>
+        <div class="col-md-2">
+            <img src="../public/img/Products/product3.jpg" class="img-responsive" id="createItem">
+        </div>
+        <div class="col-md-10">
+            <div style="margin-top: 15px">
+                <div class="col-md-8 ">
+                    <span>Tên đường dẫn </span>
+                    <br>
+                    <i> Tên tiếng Việt không dấu. Nếu bạn đặt là abcd, đường dẫn tên shop của bạn sẽ là localhost:3000/abcd</i>
+                </div>
+                <div class="col-md-4 " style="padding: 10px">
+                    <input type="text" class="form-control data-input" id="pathName">
+                </div>
+            </div>
+            <div style="margin-top: 15px">
+                <div class="col-md-8 ">
+                    <span>Tên hiển thị của shops </span>
+                    <br>
+                    <i>Có thể đặt bằng tiếng Việt hoặc tiếng Anh</i>
+                </div>
+                <div class="col-md-4 " style="padding: 10px">
+                    <input type="text" class="form-control data-input" id="showName">
+                </div>
+            </div>
+            <div style="margin-top: 15px">
+                <div class="col-md-8 ">
+                    <span>Slogan của shop</span>
+                    <br>
+                    <i>Truyền đạt giá trị bạn muốn đem đến cho khách hàng</i>
+                </div>
+                <div class="col-md-4 " style="padding: 10px">
+                    <input type="text" class="form-control data-input" id="slogan">
+                </div>
+            </div>
+            <div style="margin-top: 15px">
+                <div class="col-md-8 ">
+                    <span>Tên công ty hay nhóm của bạn</span>
+                    <br>
+                    <i>Để hiển thị trên góc trên bên trái của menu trong shop của bạn</i>
+                </div>
+                <div class="col-md-4 " style="padding: 10px">
+                    <input type="text" class="form-control data-input" id="companyName">
+                </div>
+            </div>
+            <div style="margin-top: 15px">
+                <div class="col-md-8 " style="padding: 10px">
+                    <span style="margin: 10px; display: inline-block; vertical-align: middle;">Chọn icon cho shop của bạn</span>
+                    <button id='icon' type="button" style="margin: 10px" class="btn btn-success pull-left" data-toggle="modal" data-target="#m_icon">Icon</button>
+                </div>
+                <div class="col-md-4" style="padding: 10px">
+                    <div style=" height: 74px; width: 74px">
+                        <img id="iconHolder" style="width: 100%; height:auto">
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 15px">
+                <div class="col-md-8 " style="padding: 10px">
+                    <span style="margin: 10px ; display: inline-block; vertical-align: middle;">Chọn hình nền cho shop của bạn</span>
+                    <button id='wallPaper' type="button" style="margin: 10px" class="btn btn-success pull-left" data-toggle="modal" data-target="#m_wall">Wall</button>
+                </div>
+                <div class="col-md-4" style="padding: 10px">
+                    <div style=" widh: 100%; margin-bottom: 15px">
+                        <img id="wallHolder" style=" max-width: 100%; height:auto ">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <modal>
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Phiếu xác nhận</h4>
+                    </div>
+                    <div class="modal-body clearfix">
+                        <div class="col-md-3">
+                            <img src="../public/img/Products/product3.jpg" class="img-responsive">
+                            <div style="margin: 20px"></div>
+                            <label>Product</label>
+                            <div>abced</div>
+                            <label>Price</label>
+                            <div>12345</div>
+                        </div>
+                        <div class="col-md-9">
+                            <label>Cám ơn bạn đã đặt hàng</label>
+                            <div><small>Xin vui lòng cung cấp thêm thông tin về đơn hàng này...</small></div>
+                            <div style="margin: 20px"></div>
+                            <table class="table">
+                                <tbody>
+                                    <tr style="border:none">
+                                        <td>Họ và tên người nhận hàng</td>
+                                        <td>
+                                            <input type="text" class="form-control data-input">
+                                        </td>
+                                    </tr>
+                                    <tr style="border:none">
+                                        <td>Số điện thoại liên hệ</td>
+                                        <td>
+                                            <input type="text" class="form-control data-input">
+                                        </td>
+                                    </tr>
+                                    <tr style="border:none">
+                                        <td>Địa chỉ giao hàng</td>
+                                        <td>
+                                            <input type="text" class="form-control data-input">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </modal>
+</body>
+<script type="text/javascript">
+var button = document.getElementById("wallPaper");
+button.addEventListener('click', function() {
+    var elem = document.getElementById('createItem');
+    movingImage(elem)
+}, false);
+
+function movingImage(elem, fn) {
+    var image = new Image(elem.width, elem.height);
+    document.body.appendChild(image);
+    image.style.position = "fixed";
+    // var _x = getPosition(elem).x;
+    // var _y = getPosition(elem).y;
+    var _x = elem.offsetLeft;
+    var _y = elem.offsetTop;
+    image.style.left = _x + "px";
+    image.style.top = _y + "px";
+    image.src = elem.src;
+
+    console.log(elem.offsetLeft, image.offsetLeft, elem.offsetTop, image.offsetTop);
+    lastFrame = +new Date;
+    timer = setInterval(function() {
+        var now = +new Date;
+        deltaT = now - lastFrame;
+        image.style.left = (_x = _x + getPosition(image).x * deltaT / 160) + "px";
+        image.style.top = (_y = _y - getPosition(image).y * deltaT / 160) + "px";
+        image.width = image.width * 0.9;
+        image.height = image.height * 0.968;
+        lastFrame = now;
+        if (getPosition(image).x > document.body.clientWidth) {
+            clearInterval(timer);
+            if (fn && fn.constructor === Function) {
+                fn();
+            }
+            // image.parentNode.remove(image);
+            $("#myModal").modal('show');
+        }
+    }, 16);
+    // image.classList.remove("itemMoving");
+
+    function getPosition(element) {
+        var xPosition = 0;
+        var yPosition = 0;
+
+        while (element) {
+            xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+            yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+            element = element.offsetParent;
+        }
+        return {
+            x: xPosition,
+            y: yPosition
+        };
+    }
+}
+</script>
+
+</html>

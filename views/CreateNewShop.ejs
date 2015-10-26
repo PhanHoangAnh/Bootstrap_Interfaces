@@ -6,11 +6,11 @@
 <meta name="generator" content="Bootply" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../public/css/navbar.css">
-<link rel="stylesheet" type="text/css" href="../public/css/shop.css">
-<link rel="stylesheet" type="text/css" href="../public/css/main.css">
-<link rel="stylesheet" type="text/css" href="../public/css/blog.css">
-<link rel="stylesheet" type="text/css" href="../public/css/imagePreview.css">
+<link rel="stylesheet" type="text/css" href="/public/css/navbar.css">
+<link rel="stylesheet" type="text/css" href="/public/css/shop.css">
+<link rel="stylesheet" type="text/css" href="/public/css/main.css">
+<link rel="stylesheet" type="text/css" href="/public/css/blog.css">
+<link rel="stylesheet" type="text/css" href="/public/css/imagePreview.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -22,6 +22,15 @@
     #masthead {
         background-size: 115% auto;
     }
+    .anibox {
+    box-sizing: border-box;
+    border: 1px dotted #f00;
+    background-color: #f2f2f2;
+    /*animation: EDITABLE 2s infinite;*/
+    }
+    .emphasized{
+        background-color: #ddd;
+    }   
 
     #masthead.start {
         transition: all 3s ease-in-out;
@@ -222,8 +231,8 @@
                     </div>
                     <nav class="collapse navbar-collapse " role="navigation">                                            
                         <ul class="nav navbar-nav ">
-                            <li class='navbar-right'>
-                                <a href="#sec">    Creating a new Shop...</a>
+                            <li class='navbar-right' id ="create_editItem">
+                                <a href="#sec">    Creating new Item</a>
                             </li>
                             <!-- <li class='navbar-right'>
                                 <a href="#sec">Khuyến mãi</a>
@@ -266,7 +275,7 @@
                             <div>Bắt đầu tạo shop nào...</div>
                         </div>
                     </div>                    
-                    <div style="margin-top: 15px" class="row">      
+                    <div style="margin-top: 15px" class="row" id = "pathHolder">      
                             <span style="margin-bottom: 5px"><b>Tên đường dẫn</b></span>
                             <br>                
                             <i> Tiếng Việt không dấu. Nếu bạn đặt là abcd, đường dẫn tên shop của bạn sẽ là localhost:3000/abcd</i>
@@ -277,19 +286,19 @@
                             <span style="margin-bottom: 5px"><b>Tên hiển thị của shops</b></span>                            
                             <br>
                             <i>Có thể đặt bằng tiếng Việt hoặc tiếng Anh</i>                
-                            <input type="text" class="form-control data-input" id="showName">                    
+                            <input type="text" class="form-control data-input" id="_showName">            
                     </div>
                     <div style="margin-top: 15px" class="row">                
                             <span style="margin-bottom: 5px"><b>Slogan của shop</b></span>                            
                             <br>
                             <i>Truyền đạt giá trị bạn muốn đem đến cho khách hàng</i>                
-                            <input type="text" class="form-control data-input" id="slogan">                    
+                            <input type="text" class="form-control data-input" id="_slogan">                    
                     </div>
                     <div style="margin-top: 15px" class="row">
                             <span style="margin-bottom: 5px"><b>Tên công ty hay nhóm của bạn</b></span>
                             <br>
                             <i>Sẽ hiển thị trên góc trên bên trái của menu trong shop của bạn</i>
-                            <input type="text" class="form-control data-input" id="companyName">
+                            <input type="text" class="form-control data-input" id="_companyName">
                     </div>
                     <div style="margin-top: 15px" class="row">
                         <div class="col-md-4 " style="padding: 10px">
@@ -478,6 +487,7 @@
 <script type="text/javascript" src='../public/js/utils.js'></script>
 <script type="text/javascript" src="../public/js/Crypto/cryptoUtils.js"></script>
 <script type="text/javascript" src="../public/js/ImageSelector/chiplcrop.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
     $(function() {
     // $('#nav-wrapper').height($("#nav").height());
@@ -622,7 +632,7 @@ function initWall(el){
     $('#m_wall').on('hidden.bs.modal', function() {
         
         var masthead = document.getElementById('masthead');
-        var prop = "#f2f2f2 url('" +img_Wall+ "') no-repeat right top"
+        var prop = "#f3f3f3 url('" +img_Wall+ "') no-repeat right top"
         masthead.style.background = prop;
         
         masthead.classList.remove("hiddenElem");
@@ -667,17 +677,17 @@ function getInputData(elem){
         post_data.pathName = elem.value;
     }
     //showName
-    else if(_id == 'showName'){        
+    else if(_id == '_showName'){        
         post_data.showName = elem.value;
         document.querySelector('#showName').innerHTML = innerHTML=elem.value;
     }
     //slogan
-    else if(_id =='slogan'){        
+    else if(_id =='_slogan'){        
         post_data.slogan = elem.value;
         document.querySelector('#slogan').innerHTML=elem.value;
     }
     //companyName
-    else if(_id == 'companyName'){        
+    else if(_id == '_companyName'){        
         post_data.companyName = elem.value;
         document.querySelector("#companyName").innerHTML = elem.value;
     }
@@ -715,8 +725,10 @@ function addControlPanel(el) {
                 break;
         }
     }
+    google.maps.event.trigger(map, "resize");
 }
-function removeControlPanel(e, el) {    
+function removeControlPanel(e, el) {  
+	// console.log("from removeControlPanel: ", el, buttonState) ;
     if (buttonState == 1){
         return;
     };
@@ -741,7 +753,6 @@ function removeControlPanel(e, el) {
             }
         }, false);
     }
-
 }
 
 function isChildElementExisted(parent, child) {
@@ -771,7 +782,6 @@ function mouseTracking(e, el) {
     }
 }
 // Business functions comes here
-
 //  bnt_EditClick, just change state of bnt_Edit and return id of parent div
 // and also change state of it's contendeditable.
 var buttonState;
@@ -803,6 +813,19 @@ function bnt_EditClick(_event, target, _parent) {
         changeContentEditable(false, _parent);
         buttonState = 0;
     }
+    preventGenDiv();
+    function preventGenDiv(){
+        $('div[contenteditable]').keydown(function(e) {
+    // trap the return key being pressed
+    if (e.keyCode === 13) {
+      // insert 2 br tags (if only one br tag is inserted the cursor won't go to the next line)
+      document.execCommand('insertHTML', false, '<br><br>');
+      // document.execCommand('insertHTML', false, '\n');
+      // prevent the default behaviour of return key pressed
+      return false;
+            }
+        });
+    }
 }
 
 function bnt_DoneClick(_event, target, _parent){
@@ -812,8 +835,9 @@ function bnt_DoneClick(_event, target, _parent){
     //id = 'contact-email'
     //id = "address"
     var elemIDs = ['shop_description', 'contact_phone', 'contact_email', 'address'];
-    for (var i = 0; i < elemIDs.length; i++){        
-        post_data[elemIDs[i]] = document.getElementById(elemIDs[i]).innerHTML;
+    for (var i = 0; i < elemIDs.length; i++){
+        // var str_temp = 
+        post_data[elemIDs[i]] = document.getElementById(elemIDs[i]).innerText;
     }
     if (buttonState == 0 || typeof(buttonState) == 'undefined'){
         return;
@@ -826,7 +850,14 @@ function changeContentEditable(state, el) {
     var excerpts = el.querySelectorAll('.excerpt');
     title.setAttribute('contentEditable', state);
     for(var i = 0; i< excerpts.length; i ++){
-        excerpts[i].setAttribute('contentEditable', state);    
+        excerpts[i].setAttribute('contentEditable', state);
+        if (state== true){
+            excerpts[i].classList.add("emphasized");
+            title.classList.add("emphasized");
+        }else{
+            excerpts[i].classList.remove("emphasized")
+            title.classList.remove("emphasized");
+        }
     }    
     if (state == true) {
         el.querySelector('.editarea').classList.add('anibox');
@@ -903,7 +934,7 @@ function uploadImage(str_objType){
 
 function createShop (){
 
-    var elemIDs = ['post-title', 'contact-phone', 'contact-email', 'address','pathName', 'showName','slogan','companyName'];
+    var elemIDs = ['shop_description', 'contact_phone', 'contact_email', 'address','pathName', 'showName','slogan','companyName'];
     var isMissing = false;
     var missingObj = {};
     for( var i = 0; i< elemIDs.length; i ++){        
@@ -920,7 +951,7 @@ function createShop (){
     var isMissing = isMissing*(isUploadImage == false) * (isUploadIcon == false);
     console.log('isMissing', isMissing, 'missingObj', missingObj);
     if (isMissing == true) {
-        displayMissingInfo();
+        displayMissingInfo(missingObj);
         return;
     }
     var _data = {
@@ -935,36 +966,32 @@ function createShop (){
         if (info != "fb_uid" ){
             json_data[info]=post_data[info];
         }
-    }
-    
+    }    
     $.ajax({
         // url: './userToken',
-        url: './api/createShop',
+        url: '/api/createShop',
         method: 'POST',
-        data: json_data,
+        data: json_data,        
         complete: function(data, status, jqXHR) {
             var obj = JSON.parse(data.responseText);
-            // 
-            if (obj.err != 0 || obj.err == null) {              
+            //
+            console.log(obj) ;
+            if (obj.err) {              
                 return;
             }
-            else if (obj.err == 0){
-                var sURL =  post_data.pathName + '/' + 'addItem';
+            else if (obj.err == null){
+                // var sURL =  post_data.pathName + '/' + 'addItem';
+                var sURL =  "/createNewShop" + '/' + 'addItem';
                 console.log ('sURL', sURL);
                 window.location.href = sURL;
             }
         }
     });
-    function displayMissingInfo(){
+    function displayMissingInfo(missingObj){
+        console.log(missingObj);
     }
 }
-
-
-</script>
-<script type="text/javascript">
-// This function is called when someone finishes with the Login
-// Button.  See the onlogin handler attached to it in the sample
-// code below.
+// Facebook
 var RSAPublicKey = <%-JSON.stringify(data)%>;
 
 function checkLoginStatus() {
@@ -1011,16 +1038,14 @@ function getNewToken(uid, token) {
     };
     aes_key = cryptoUtil.generateAESKey();
     var json_data = {
-        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey, aes_key)
+        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey, aes_key),
+        fromCreateNewShop : 1
     };
-    // console.log("stringify: ", JSON.stringify(_data));
-    console.log("cryptoUtil: ", cryptoUtil);
-
-    // _data = cryptoUtil.EncryptJSON(_data, RSAPublicKey, aes_key);
+    
     console.log('_data: ', _data);
     $.ajax({
         // url: './userToken',
-        url: './api/gettoken',
+        url: '/api/gettoken',
 
         method: 'POST',
         data: json_data,
@@ -1030,21 +1055,15 @@ function getNewToken(uid, token) {
             // console.log(typeof(data));
             var obj = JSON.parse(data.responseText);
             if (obj.err == 0) {
-                var encrypted_app_token = obj.encrypted_app_token;
-                // console.log('encrypted_app_token: ', encrypted_app_token);
-                var _app_token = cryptoUtil.aesDecryptor(encrypted_app_token, aes_key);
-                // console.log("typeof app_token: ", typeof(_app_token));
-                // console.log('app_token: ', JSON.parse(_app_token).app_token);
+                var encrypted_app_token = obj.encrypted_app_token;                
+                var _app_token = cryptoUtil.aesDecryptor(encrypted_app_token, aes_key);                
                 app_token = JSON.parse(_app_token).app_token;
-                localStorage.setItem("app_token", app_token);
-                addLinks();
+                localStorage.setItem("app_token", app_token);                
                 post_data.fb_uid = uid;
+                if(obj.isShop == 1){
+                    updateShop(obj.shop);
+                }
             }else{
-                    // for createNewShop id = "createNewShopMenu" class="createNewShop"
-                    var createNewLinks = document.querySelectorAll(".createNewShop");
-                    for (var i=0; i<createNewLinks.length; i++){            
-                        createNewLinks[i].addEventListener('click', preventCreateNewShop ,false);
-                    };
                     post_data.fb_uid = null;
                 }
 
@@ -1068,11 +1087,12 @@ function checkToken(uid, accessToken) {
     };
     // _aes_key = cryptoUtil.generateAESKey();
     var json_data = {
-        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey)
+        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey),
+        fromCreateNewShop : 1
     };
     $.ajax({
         // url: './userToken',
-        url: './api/checktoken',
+        url: '/api/checktoken',
         method: 'POST',
         data: json_data,
         complete: function(data, status, jqXHR) {
@@ -1081,18 +1101,64 @@ function checkToken(uid, accessToken) {
                 getNewToken(uid, accessToken);
                 return;
             }
-            addLinks();
+            if(obj.isShop == 1){                
+                updateShop(obj.shop);
+            }
             post_data.fb_uid = uid;
         }
     });
 }
 
-function addLinks(){
-    var createNewLinks = document.querySelectorAll(".createNewShop");
-    for (var i=0; i<createNewLinks.length; i++){            
-        createNewLinks[i].removeEventListener('click', preventCreateNewShop , false)
-        createNewLinks[i].setAttribute("href", "/createnewshop");
+var isUpdated = false;
+function updateShop(shop){
+    console.log(shop);
+    var pathName = document.querySelector("#pathName");
+    pathName.value = shop.pathName;
+    pathName.disabled = true;    
+    post_data.pathName = shop.pathName;
+    var masthead = document.querySelector("#masthead");    
+    masthead.style.backgroundImage  = "url('" +'/'+ shop.walls +"')";        
+    document.getElementById('logo').setAttribute('src','/'+shop.avatars);
+
+    var elems = ['showName','companyName','slogan'];
+    for(var i = 0; i < elems.length; i ++){
+        var elem = document.querySelector("#_"+elems[i]);
+        elem.value = shop[elems[i]];        
     }
+    document.querySelector("#iconHolder").setAttribute('src','/'+ shop.avatars);    
+    document.querySelector("#wallHolder").setAttribute('src','/'+ shop.walls);
+    
+    var cols = ['showName','companyName','slogan','shop_description','contact_phone','contact_email','address'];
+    for(var i = 0; i< cols.length; i++){
+        // console.log(shop[cols[i]]);
+        post_data[cols[i]] = shop[cols[i]];
+        var str_arr = shop[cols[i]].split("\n");
+        document.getElementById(cols[i]).innerText = null;
+        for(var j = 0; j<str_arr.length;j++){
+                // console.log(str_arr[j], j);                    
+                var t = document.createTextNode(str_arr[j]);
+                document.getElementById(cols[i]).appendChild(t);
+                var br = document.createElement("br");
+                if (j != str_arr.length -1){
+                    document.getElementById(cols[i]).appendChild(br);
+                }                
+            }
+    }
+
+    masthead.classList.remove("hiddenElem");
+    masthead.classList.add('start');
+    post_data = shop;    
+    isUploadIcon=post_data.isUploadIcon = true;
+    isUploadImage=post_data.isUploadImage = true;
+    var pos = {};
+    pos.coords = {};
+    pos.coords.latitude = "";
+    pos.coords.longitude = "";
+    pos.coords.latitude = shop.latitude;
+    pos.coords.longitude = shop.longitude;
+    updatePos(pos);
+    google.maps.event.trigger(map, "resize");        
+    isUpdated = true;
 }
 
 function fetchingInfo(callback) {
@@ -1106,6 +1172,8 @@ function fetchingInfo(callback) {
 
 }
 
+
+
 function handleFBData(response) {
     // document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
     var visitorHolder = document.querySelector('#visitorHolder');        
@@ -1114,7 +1182,7 @@ function handleFBData(response) {
     parent.removeChild(visitorHolder);
     FB.api('/me/picture?type=large', function(response) {
         // document.getElementById("profileImage").setAttribute("src", response.data.url);
-        console.log(response.data.url);
+        // console.log(response.data.url);
         var _img = document.querySelector("#avatar");        
         _img.setAttribute("src", response.data.url);
         _img.style.border = "0";
@@ -1197,10 +1265,10 @@ function fb_enter() {
         }
     }, {})
 }
-</script>
+
 <!-- GoogleMap Section -->
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript">
+
+
     var geocoder = new google.maps.Geocoder();
     var map;
     function geocodePosition(pos) {
@@ -1220,8 +1288,8 @@ function fb_enter() {
     }
 
     function updateMarkerPosition(latLng) {
-        post_data.longitude = latLng.lng();
-        post_data.latitude = latLng.lat();
+            post_data.longitude = latLng.lng();
+            post_data.latitude = latLng.lat();
     }
 
     function updateMarkerAddress(str) {
@@ -1235,17 +1303,17 @@ function fb_enter() {
     function initialize() {
 
         var latLng
-        if (navigator.geolocation) {
+        if (navigator.geolocation|| !isUpdated) {
             navigator.geolocation.getCurrentPosition(updatePos, err_Handler) ;
         } 
         updatePos();
 
-        function updatePos(pos) {
+    }
+    function updatePos(pos) {
 
             if(pos== null|| pos == undefined){
                 latLng = new google.maps.LatLng(-34.397, 150.644);    
-            }else{
-                console.log(pos);
+            }else{                
                 latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
             }
 
@@ -1279,9 +1347,13 @@ function fb_enter() {
                 updateMarkerStatus('Drag ended');
                 geocodePosition(marker.getPosition());
             });
-        }
     }
     // Onload handler to fire off the app.
     google.maps.event.addDomListener(window, 'load', initialize);
+    google.maps.event.addDomListener(window, "resize", function() {
+        var center = map.getCenter();
+        google.maps.event.trigger(map, "resize");
+        map.setCenter(center); 
+    });
     </script>
 </html>

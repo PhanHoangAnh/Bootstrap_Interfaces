@@ -6,16 +6,16 @@
 <meta name="generator" content="Bootply" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../public/css/navbar.css">
-<link rel="stylesheet" type="text/css" href="../public/css/shop.css">
-<link rel="stylesheet" type="text/css" href="../public/css/main.css">
-<link rel="stylesheet" type="text/css" href="../public/css/blog.css">
-<link rel="stylesheet" type="text/css" href="../public/css/imagePreview.css">
-<link rel="stylesheet" media="screen, print, handheld" type="text/css" href="../public/css/calendar.css" />
+<link rel="stylesheet" type="text/css" href="/public/css/navbar.css">
+<link rel="stylesheet" type="text/css" href="/public/css/shop.css">
+<link rel="stylesheet" type="text/css" href="/public/css/main.css">
+<link rel="stylesheet" type="text/css" href="/public/css/blog.css">
+<link rel="stylesheet" type="text/css" href="/public/css/imagePreview.css">
+<link rel="stylesheet" media="screen, print, handheld" type="text/css" href="/public/css/calendar.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../public/js/calendar.02.js"></script>
+<script type="text/javascript" src="/public/js/calendar.02.js"></script>
 <!--script type="text/javascript" src='js/navbar.js'></script-->
 <style type="text/css">
     html,body {
@@ -205,7 +205,9 @@
             <div class="container">
                 <div class="row">
                     <div>
-                        <img id = "logo" class="logo">
+                        <a id = "backToHome" app-backToHome=true>
+                            <img id = "_avatar" class="logo">
+                        </a>
                     </div>
                     <div class='site-name hidden-xs' id = "companyName">
                         <!-- AbcJSC -->
@@ -227,15 +229,6 @@
                             <li class='navbar-right' id ="create_editItem">
                                 <a href="#sec">    Creating new Item</a>
                             </li>
-                            <!-- <li class='navbar-right'>
-                                <a href="#sec">Khuyến mãi</a>
-                            </li>
-                            <li class='navbar-right'>
-                                <a href="#sec">Sản phẩm</a>
-                            </li>
-                            <li class='navbar-right '>
-                                <a href="#sec">Home</a>
-                            </li> -->
                         </ul>
                         <ul class="nav navbar-nav navbar-right" id = "visitor">
                             <li class='navbar-right' id='visitorHolder'>
@@ -256,69 +249,120 @@
 <div class="container-fluid" id="start-offset" style="min-height: 1000px">
     <hr>
     <div class = 'col-md-9'>
-        <div style="background-color: #f5f5f5; min-height:1000px">
+        <div style="background-color: #f5f5f5; min-height:1000px" class = 'clearfix'>
             <div class = 'col-md-6'>
                 <div style="margin-top: 15px" class="row" > 
                     <span style="margin-bottom: 5px"><b>Tên sản phẩm</b></span>                            
                     <br>
                     <i>Product's Name</i>                
-                    <input type="text" class="form-control data-input" id="_showName">            
+                    <input type="text" class="form-control data-input" id="_productName">            
                 </div>
                 <div style="margin-top: 15px" class="row">        
                     <span style="margin-bottom: 5px"><b>Xuất xứ sản phẩm</b></span>                            
                     <br>
                     <i>Country of origin</i>          
-                    <input type="text" class="form-control data-input" id="_showName">            
+                    <input type="text" class="form-control data-input" id="_country_ofOrigin">            
                 </div>
                 <div style="margin-top: 15px" class="row">        
                     <span style="margin-bottom: 5px"><b>Nhản hiệu sản phẩm</b></span>                            
                     <br>
                     <i>Brand Name</i>         
-                    <input type="text" class="form-control data-input" id="_showName">            
+                    <input type="text" class="form-control data-input" id="_brandName">            
                 </div>
                 <div style="margin-top: 15px" class="row">        
                     <span style="margin-bottom: 5px"><b>Mã sản phẩm</b></span>                            
                     <br>
                     <i>Product ID</i>
-                    <input type="text" class="form-control data-input" id="_showName">            
+                    <input type="text" class="form-control data-input" id="_productId" disabled>            
                 </div>
                 <div style="margin-top: 15px" class="row">        
                     <span style="margin-bottom: 5px"><b>Mô tả sản phẩm</b></span>                            
                     <br>
                     <i>Product Description</i>
-                    <textarea class="form-control" rows="7" id="comment"></textarea>         
+                    <textarea class="form-control" rows="7" id="_productDescription"></textarea>         
                 </div>
                 <div style="margin-top: 15px" class="row">        
                     <span style="margin-bottom: 5px"><b>Chủng loại sản phẩm</b></span>                            
                     <br>
                     <i>Keywords</i><br><span style = "font-size:75%; color: red"><i> (Sản phẩm có thể có nhiều keyword, đặt cách nhau bằng dấu phẩy ",")</i></span>
-                    <input type="text" class="form-control data-input" id="_showName">            
+                    <input type="text" class="form-control data-input" id="_categories">            
                 </div>
-                <div style="padding: 20px"></div>
-                <div style="margin-top: 15px" class="row">        
-                    <label><input type="checkbox" value="">   Đặt là sản phẩm mới</label>
-                    <br>
-                    <br><span style = "font-size:75%; color: red"><i> (Bạn chỉ được đặt tối đa 9 sản phẩm mới)</i></span>
+                <div class = "col-md-6">
+                    <div style="margin-top: 15px" class="row">        
+                    <span style="margin-bottom: 5px"><b>Gía sản phẩm trước đây </b></span>
+                        <br><span style = "font-size:75%; color: red"><i> (Nhập chữ số thể hiện giá sản phẩm)</i></span>
+                        <input type="text" class="form-control data-input" id="_oldPrice">            
+                    </div>
                 </div>
-                <div style="padding: 20px"></div>
-                <div style="margin-top: 15px" class="row">        
-                    <label><input type="checkbox" value="">   Đặt là sản phẩm bán chạy nhất</label>
-                    <br>
-                    <br><span style = "font-size:75%; color: red"><i> (Bạn chỉ được đặt tối đa 16 sản phẩm bán chạy nhất)</i></span>                         
+                <div class = "col-md-6">
+                    <div style="margin-top: 15px; margin-bottom: 15px" class="row">        
+                        <span style="margin-bottom: 5px"><b>Gía sản phẩm hiện tại</b></span>
+                            <br><span style = "font-size:75%; color: red"><i> (Nhập chữ số thể hiện giá sản phẩm)</i></span>
+                            <input type="text" class="form-control data-input" id="_newPrice">            
+                    </div>
+                </div>
+                <div class = "col-md-6">
+                    <div style="margin-top: 15px; margin-bottom: 15px" class="row">        
+                        <span style="margin-bottom: 5px"><b>Đơn vị tính</b></span>                            
+                            <br><span style = "font-size:75%; color: red"><i> (đơn vị tính.."kg","chiếc","chục"..vvv)</i></span>
+                            <input type="text" class="form-control data-input" id="_unit">            
+                    </div>
+                </div >
+                <div class = "col-md-12">
+                    <div style="margin-top: 15px" class="row">        
+                        <label><input type="checkbox" id = "_isNewProduct">   Đặt là sản phẩm mới</label>
+                        <br><span style = "font-size:75%; color: red"><i> (Bạn chỉ được đặt tối đa 9 sản phẩm mới)</i></span>
+                    </div>
+                    <div style="padding: 20px"></div>
+                    <div style="margin-top: 15px; margin-bottom: 15px" class="row">        
+                        <label><input type="checkbox" id = "_isHotProduct">   Đặt là sản phẩm bán chạy nhất</label>
+                        <br><span style = "font-size:75%; color: red"><i> (Bạn chỉ được đặt tối đa 16 sản phẩm bán chạy nhất)</i></span>                         
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div id = "msg_info" class="alert alert-success fade in hiddenElem" style="margin-top: 30px">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close" >&times;</a>
+                        <strong>Chúc mừng!</strong>..Sản phẩm của bạn đã được cập nhật. 
+                        </div>                    
                 </div>
             </div>
-            <div class = 'col-md-6' style="border-left: 3px solid #e8e8e8; ; min-height:1000px">
+            <div class = 'col-md-6' style="border-left: 3px solid #e8e8e8; min-height:1300px">
                 <div style="margin-top: 15px" class="row">
-                    <div class="col-md-4 " style="padding: 10px">
+                    <div class="col-md-12 " style="padding: 10px">
                         <span style="margin: 10px; display: inline-block; vertical-align: middle;"><b>Chọn ảnh đại diện cho sản phẩm</b></span>
-                        <button id='icon' type="button" style="margin: 10px" class="btn btn-success pull-left" data-toggle="modal" data-target="#m_icon">Ảnh chính</button>
+                        <button id='main_img' type="button" style="margin: 10px; width: 105px" class="btn btn-success pull-left upImgs" data-toggle="modal" data-target="#m_item">Ảnh chính</button>
                         </div>
-                    <div class="col-md-8" style="padding: 10px">
-                        <div style=" height: 74px; width: 74px">
-                            <img id="iconHolder" style="width: 100%; height:auto">
+                    <div class="col-md-12" style="padding: 10px">
+                        <div style=" width: 60%">
+                            <img id="_main_img" style="width: 100%; height:auto">
                         </div>
                     </div>
                 </div>
+                <div style="margin-top: 15px" class="row">
+                    <div class="col-md-12 " style="padding: 10px">
+                        <span style="margin: 10px; display: inline-block; vertical-align: middle;"><b>Chọn ảnh bổ sung</b></span>
+                        <button id='compl_img_1' type="button" style="margin: 10px" class="btn btn-success pull-left upImgs" data-toggle="modal" data-target="#m_item">Ảnh bổ sung</button>
+                        </div>
+                    <div class="col-md-12" style="padding: 10px">
+                        <div style=" width: 60%">
+                            <img id="_compl_img_1" style="width: 100%; height:auto">
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 15px" class="row">
+                    <div class="col-md-12 " style="padding: 10px">
+                        <span style="margin: 10px; display: inline-block; vertical-align: middle;"><b>Chọn ảnh bổ sung</b></span>
+                        <button id='compl_img_2' type="button" style="margin: 10px" class="btn btn-success pull-left upImgs" data-toggle="modal" data-target="#m_item">Ảnh bổ sung</button>
+                        </div>
+                    <div class="col-md-12" style="padding: 10px">
+                        <div style=" width: 60%">
+                            <img id="_compl_img_2" style="width: 100%; height:auto">
+                        </div>
+                    </div>
+                </div>
+                <div class = 'col-md-12'>
+                    <button id = "bnt_update" type="button" style="margin: 10px" class="btn btn-success pull-right col-centered"><i class="fa fa-upload"></i> Cập nhật</button>
+                </div>         
             </div>
         </div>
     </div>
@@ -338,7 +382,10 @@
 </div>    
 <div class="row" id = "continueButton">
     <div class="container-fluid">
-            <button id = "bnt_continues" type="button" style="margin: 10px" class="btn btn-success pull-right">Tiếp tục</button>
+        <div class = 'col-md-12' style="text-align: center">            
+            <button id = "bnt_deleteItem"  style="margin: 10px; width: 146px" class="btn btn-success" >Xóa sản phẩm </button>
+            <button id = "bnt_continues" onclick="location.href='/createNewShop/addItem'" type="button" style="margin: 10px" class="btn btn-success " >Tạo sản phẩm mới</button>
+        </div>
     </div>
 </div>
 <div id="end-offset">
@@ -352,70 +399,58 @@
     </footer>
 </div>
 
-<style type="text/css">
-    .fullWidth{
-        width: 100%!important;
-        margin:0!important;
-    }
-</style>
-<div class="modal fade" id="m_wall" role="dialog">
-    <div class="modal-dialog fullWidth">
+
+<div class="modal fade" id="m_item" role="dialog">
+    <div class="modal-dialog">
         <!-- Modal content-->
-        <div class="modal-content" style="height: 120%">
+        <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Chọn hình nền cho shop của bạn.</h4>
+                <h4 class="modal-title">Chọn hình ảnh cho sản phẩm .</h4>
             </div>
-            <div class="modal-body" style="padding:0; width: 100%; margin:0">
-                <p style="margin-left: 15px">Drag the image to take an wall</p>
-                <!-- <div class="row"> -->
-                <div class="col-md-12" style="padding:0">
-                    <div class="imageBox" id='wallImg' style="background-color: #F5F5F5">
-                        <div class="fullWidth" id = "thumbWall" style="height: 100%; "></div>
-                        <div class="spinner" style="display: none" id = "spinnerWall" >Loading...</div>
-                        <div id = 'openInput' class="spinner" style="background-color: rgba(0,0,0,0) color: #333"><h3>Click here ....</h3></div>
+            <div class="modal-body">                
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="imageBox product" id='itemImg' >
+                            <div class="thumbBox" id = "thumbItem"></div>
+                            <div class="spinner" style="display: none" id = "spinnerIcon" >Loading...</div>
+                            <div id = 'openInput' class="spinner" style="background-color: rgba(0,0,0,0) color: #333"><h3>Click here ....</h3></div>
+                        </div>                        
                     </div>
-                    <div class="action" style="padding: 15px">
-                        <span class="file-input btn btn-primary btn-file">
-                            Browse&hellip;
-                            <input type="file" multiple id='wallFile'>
-                        </span>
-                        <!--input type="button" id="btnCrop" class="btn btn-primary btncrop" value="Crop"-->
-                        <input type="button" id="wall_btnZoomIn" class="btn btn-primary" value="+" style="float: right">
-                        <input type="button" id="wall_btnZoomOut" class="btn btn-primary" value="-" style="float: right">
+                    <div class="col-md-3">
+                        <p>Drag a image to take best picture</p>
+                        <div class="preview">
+                            <img id='icon_preview' src="" style="border: 1px solid #555">
+                        </div>
+                        <div class="action">
+                            <span class="file-input btn btn-primary btn-file">
+                                Browse&hellip;
+                                <input type="file" multiple id='iconFile'>
+                            </span>
+                            <!--input type="button" id="btnCrop" class="btn btn-primary btncrop" value="Crop"-->
+                            <input type="button" id="icon_btnZoomIn" class="btn btn-primary" value="+" style="float: right">
+                            <input type="button" id="icon_btnZoomOut" class="btn btn-primary" value="-" style="float: right">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Done</button>
+                            </div>
+                        </div>                        
                     </div>
                 </div>
-                <div class="col-md-3" style=" padding: 15px">
-                    <div class="preview">
-                        <img id='wall_preview'>
-                    </div>
-                    <div class="preview-md">
-                        <img id='wall_preview-md'>
-                    </div>
-                    <div class="preview-sm">
-                        <img id='wall_preview-sm'>
-                    </div>
-                </div>
-                <!-- </div> -->
-            </div>
-            <div class="modal-footer" >
-                <button type="button" style="margin-top: 15px" class="btn btn-default" data-dismiss="modal">Done</button>
-            </div>
+            </div>            
         </div>
     </div>
 </div>
-
 </div>
 <div id="phasebeam">
     <canvas width="700" height="650"></canvas>
     <canvas width="700" height="650"></canvas>
     <canvas width="700" height="650"></canvas>
 </div>
-<script type="text/javascript" src="../public/js/phasebeam.js"></script>
+<script type="text/javascript" src="/public/js/phasebeam.js"></script>
 </body>
-<script type="text/javascript" src='../public/js/utils.js'></script>
-<script type="text/javascript" src="../public/js/Crypto/cryptoUtils.js"></script>
-<script type="text/javascript" src="../public/js/ImageSelector/chiplcrop.js"></script>
+<script type="text/javascript" src='/public/js/utils.js'></script>
+<script type="text/javascript" src="/public/js/Crypto/cryptoUtils.js"></script>
+<script type="text/javascript" src="/public/js/ImageSelector/chiplcrop.js"></script>
 <script type="text/javascript">
 $(function() {
     // $('#nav-wrapper').height($("#nav").height());
@@ -432,7 +467,7 @@ $(function() {
     $('#sidebar').affix({
         offset: {
             top: $('#start-offset').offset().top + 30,
-            bottom: $('#end-offset').outerHeight() - 20
+            bottom: $('#end-offset').outerHeight() + 30
         }
     }).on('affix.bs.affix', function() { // before affix
         $(this).css({
@@ -441,6 +476,7 @@ $(function() {
         });
     }).on('affix-bottom.bs.affix', function() { // before affix-bottom
         // $(this).css('bottom', 'auto'); // THIS is what makes the jumping
+        console.log($('#end-offset').outerHeight() - 20);
     });;
 
 });
@@ -449,112 +485,272 @@ $(document).ready(function() {
     var node = document.createElement("calendar");
     var parent = document.getElementById("myCalendar");
     calendar(node, parent);
+
+    var uploadImgs = document.querySelectorAll(".upImgs");
+    for(var i = 0 ; i< uploadImgs.length; i ++){        
+        uploadImgs[i].addEventListener("click", function(el){
+            uploadImageItem(this);
+        }, false)
+    }
+    var inputItems = ['_productName', '_country_ofOrigin', '_brandName', '_productId', '_productDescription', '_categories', '_isNewProduct' ,'_isHotProduct', '_oldPrice', '_newPrice','_unit'];
+    for (var i = 0 ; i < inputItems.length; i ++){
+        document.getElementById(inputItems[i]).addEventListener("change",function(e){
+            getInputData(this);
+        }, false);
+    }
+    var uploadBnt = document.querySelector("#bnt_update");
+    uploadBnt.classList.add("hiddenElem");
+    uploadBnt.addEventListener('click',function(e){
+        uploadAllItem();
+    },false);
+    document.getElementById('_oldPrice').addEventListener('input', function(e){
+        checkValidNumber(this);
+    },false);
+    document.getElementById('_newPrice').addEventListener('input', function(e){
+        checkValidNumber(this);
+    },false);
+    document.getElementById('bnt_deleteItem').addEventListener('click',function(e){
+        removeItem();
+    },false);    
+
 });
 
-// data to keep to update to server
+function checkValidNumber(elem){
+    var _ch = elem.value.substring(elem.value.length-1, elem.value.length);
+        var validChars = "1234567890.,";        
+        if (validChars.indexOf(_ch.toLowerCase())== -1){
+            var _display = elem.value.substring(0,elem.value.length -1);
+            elem.value = _display;
+            return;
+        }
+}
 
+var imgs = [];
+var role_element;
+options = {
+        imageBox: '#itemImg',
+        thumbBox: '#thumbItem',
+        spinner: '#spinnerIcon',
+        imgSrc: ''
+    }
+cropper = new cropbox(options, itemPreview);
+document.querySelector('#icon_btnZoomIn').addEventListener('click', function() {
+            cropper.zoomIn();
+        })
+document.querySelector('#icon_btnZoomOut').addEventListener('click', function() {
+            cropper.zoomOut();
+    })
+var base64_img;
+
+$('#m_item').on('hidden.bs.modal', function hidden(e) {
+    if(role_element == "main_img"){
+        imgs[0] = new Object();
+        imgs[0].image = base64_img;
+        if(!imgs[0].name){
+            imgs[0].name = productId + ".0";    
+        }        
+        post_data.imgName[0] = imgs[0].name;
+        imgs[0].isDownloaded = false;
+        document.querySelector("#_main_img").setAttribute('src', imgs[0].image);
+    }
+    if(role_element == "compl_img_1"){
+        imgs[1] = new Object();
+        imgs[1].image = base64_img;
+        if(!imgs[1].name){
+            imgs[1].name = productId + ".1";    
+        }
+        post_data.imgName[1] = imgs[1].name;
+        imgs[1].isDownloaded = false;
+        document.querySelector("#_compl_img_1").setAttribute('src', imgs[1].image);
+    }
+    if(role_element == "compl_img_2"){
+        imgs[2] = new Object();
+        imgs[2].image = base64_img;
+        if(!imgs[2].name){
+            imgs[2].name = productId + ".2";    
+        };
+        imgs[2].isDownloaded = false;
+        post_data.imgName[2] = imgs[2].name;
+        document.querySelector("#_compl_img_2").setAttribute('src', imgs[2].image);
+    }
+    document.querySelector("#m_item").removeEventListener('hidden.bs.modal',hidden,false);
+    document.getElementById("openInput").style.display= null;
+    document.getElementById('icon_preview').setAttribute('src',"");
+    options.imgSrc = '';
+    cropper.resetOption(options);
+    if(checkMissingInfo() == false && checkImageArrays(imgs) == true){
+        var uploadBnt = document.querySelector("#bnt_update");
+        uploadBnt.classList.remove("hiddenElem");
+    }    
+});
+$('#m_item').on('shown.bs.modal', function showUp() {
+    document.querySelector("#m_item").removeEventListener('shown.bs.modal',showUp,false);
+    cropper.resetOption(options);
+});
+function uploadImageItem(el){
+    function iconFile_click(){
+        document.getElementById("iconFile").click();
+        document.getElementById("openInput").removeEventListener('click',iconFile_click,false);
+    }    
+    document.getElementById("openInput").addEventListener('click',iconFile_click,false);
+    document.querySelector('#iconFile').addEventListener('change', function clicked(el){
+        if(this.value == null){
+            return;
+        }        
+        getImage(this);        
+    }, false);
+    role_element = el.id;
+    function getImage(elem){    
+
+        document.getElementById("openInput").style.display= "none";  
+        var reader = new FileReader();
+        
+        reader.onload = function(e) {        
+            options.imgSrc = e.target.result;                    
+            cropper.resetOption(options);
+        }
+        reader.readAsDataURL(elem.files[0]);        
+        elem.files = [];
+        elem.value = null;
+    }
+}
+function itemPreview(data) {
+    base64_img = data;
+    document.getElementById('icon_preview').setAttribute('src',data);
+}
 var post_data = {};
-
-function initIcon(el){    
-
-
-};
-
-function initWall(el){
-
-};
-
+post_data.isNewproduct = false;
+post_data.isHotProduct = false;
+post_data.imgName = [];
 // Update by realtime with input (oninput) events
 function getInputData(elem){    
     var _id = elem.id;
-
+    console.log(_id, elem);
+    switch (_id){
+        case '_productName':
+            post_data.productName = elem.value
+            break;
+        case '_country_ofOrigin':
+            post_data.country_ofOrigin = elem.value
+            break;
+        case '_brandName' :
+            post_data.brandName = elem.value
+            break;
+        case '_productId' :
+            post_data.productId = elem.value
+            break;
+        case '_productDescription' :
+            post_data.productDescription = elem.value
+            break;
+        case '_categories' :
+            post_data.categories = elem.value.split(",")
+            break;
+        case '_isNewProduct' :
+            post_data.isNewproduct = elem.checked;
+            break;
+        case '_isHotProduct' :
+            post_data.isHotProduct = elem.checked;
+            break;
+        case '_oldPrice':
+            post_data.oldPrice = elem.value
+            break;
+        case '_newPrice':
+            post_data.newPrice = elem.value
+            break;
+        case '_unit':
+            post_data.unit = elem.value
+            break;
+    }
+    console.log(checkMissingInfo(),post_data);
+    if(checkMissingInfo() == false && checkImageArrays(imgs) == true){
+        // upload image
+        // upload item
+        var uploadBnt = document.querySelector("#bnt_update");
+        uploadBnt.classList.remove("hiddenElem");
+    }
 };
-
-
-
-
-
-function bnt_EditClick(_event, target, _parent) {
-
-    
-    preventGenDiv();
-    function preventGenDiv(){
-        $('div[contenteditable]').keydown(function(e) {
-    // trap the return key being pressed
-    if (e.keyCode === 13) {
-      // insert 2 br tags (if only one br tag is inserted the cursor won't go to the next line)
-      document.execCommand('insertHTML', false, '<br><br>');
-      // document.execCommand('insertHTML', false, '\n');
-      // prevent the default behaviour of return key pressed
-      return false;
-            }
-        });
-    }
-}
-
-function bnt_DoneClick(_event, target, _parent){
-    
-}
-
-function changeContentEditable(state, el) {
-    var title = el.querySelector('.post-title');
-    var excerpts = el.querySelectorAll('.excerpt');
-    title.setAttribute('contentEditable', state);
-    for(var i = 0; i< excerpts.length; i ++){
-        excerpts[i].setAttribute('contentEditable', state);    
-    }    
-    if (state == true) {
-        el.querySelector('.editarea').classList.add('anibox');
-        el.querySelector('.editarea').focus();
-        placeCaretAtEnd(title);
-    } else {
-        el.querySelector('.editarea').classList.remove('anibox');
-    }
-
-    function placeCaretAtEnd(el) {
-        el.focus();
-        if (typeof window.getSelection != "undefined" && typeof document.createRange != "undefined") {
-            var range = document.createRange();
-            range.selectNodeContents(el);
-            range.collapse(false);
-            var sel = window.getSelection();
-            sel.removeAllRanges();
-            sel.addRange(range);
-        } else if (typeof document.body.createTextRange != "undefined") {
-            var textRange = document.body.createTextRange();
-            textRange.moveToElementText(el);
-            textRange.collapse(false);
-            textRange.select();
+function checkMissingInfo(){
+    var inputItems = ['_productName', '_country_ofOrigin', '_brandName', '_productId', '_productDescription', '_categories','_oldPrice','_newPrice', '_unit'];
+    for (var i = 0; i < inputItems.length; i ++){
+        var value = document.getElementById(inputItems[i]).value
+        if (!value ){                
+            return true;
+            break;
         }
     }
+    return false;
+}
 
+function checkImageArrays(arr){
+    for (var i = 0;i<3; i ++){
+        if(! arr[i]){
+            return false;
+            break;
+        }
+    }
+    return true;
+}
+
+function uploadAllItem(){
+    for(var i = 0; i < 3; i ++){
+        uploadImage('Products',imgs[i]);
+    }
+    uploadItem();
 }
 
 
-function uploadImage(str_objType){
+function uploadImage(str_objType, img){
     // create encrypted temporary JWT from app_token    
-    
+    if(img.isDownloaded == true){
+        return;
+    }
     // check Item validation
     var _data = {
         userName: post_data.fb_uid,
         password: app_token
-    };
+    };    
     // _aes_key = cryptoUtil.generateAESKey();    
     var json_data = {
         data: cryptoUtil.EncryptJSON(_data, RSAPublicKey)
     };
-    if (str_objType == "avatars"){
-        json_data.img = img_Icon.toString();        
-    }else if (str_objType = "walls"){
-        json_data.img = img_Wall;
+    if (str_objType == "Products"){
+        json_data.img = img.image;    
+        json_data.imgName = img.name;
+    }else{
+        console.log("err");
+        return;
     }
-    else{
 
-    };    
     json_data.u_type = str_objType;
     $.ajax({
         // url: './userToken',
-        url: './api/uploadImage',
+        url: '/api/uploadImage',
+        method: 'POST',
+        data: json_data,
+        complete: function(data, status, jqXHR) {
+            var obj = JSON.parse(data.responseText);
+            // 
+            if (obj.err != 0 || obj.err == null) {                 
+                return;
+            }            
+        }
+    });
+
+}
+function uploadItem(){
+    var _data = {
+        userName: post_data.fb_uid,
+        password: app_token
+    };    
+    // _aes_key = cryptoUtil.generateAESKey();    
+    var json_data = {
+        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey)
+    };
+    json_data.item = post_data;
+    // console.log("from add Item:",post_data);
+    $.ajax({
+        // url: './userToken',
+        url: '/api/updateItem',
         method: 'POST',
         data: json_data,
         complete: function(data, status, jqXHR) {
@@ -563,19 +759,92 @@ function uploadImage(str_objType){
             if (obj.err != 0 || obj.err == null) {                 
                 return;
             }
-            if(obj.uploadType=="avatars"){
-                    isUploadIcon = true;
-            }else if(obj.uploadType = "walls"){
-                    isUploadImage = true;
-            }else{
-
-            }
+            console.log(obj);
+            var msg_info = document.getElementById('msg_info');
+            msg_info.classList.remove('hiddenElem')
         }
-    });
-
+    });    
 }
-// Facebook
+
+
 var RSAPublicKey = <%-JSON.stringify(data)%>;
+var itemNumber = <%-JSON.stringify(itemNumber)%>;
+document.querySelector('#_productId').value = itemNumber;
+post_data._productId = itemNumber;
+var isItem = <%-JSON.stringify(isItem)%>;
+var origin_item = <%-JSON.stringify(item)%>;
+// console.log(origin_item);
+var productId = itemNumber;
+console.log(origin_item, isItem);
+
+function updateItem(){
+    if(isItem == true){
+        var inputItems = ['_productName', '_country_ofOrigin', '_brandName', '_productDescription','_oldPrice','_newPrice','_unit' ];
+        for (var i = 0;i< inputItems.length; i ++){
+            var elem = inputItems[i].substring(1);        
+            document.getElementById(inputItems[i]).value = origin_item[elem];
+            post_data[elem] = origin_item[elem];
+        }
+        document.getElementById('_productId').value = origin_item._productId;
+        var cats = origin_item['categories'];
+        post_data.categories = cats;
+        // for(var i = 0;i<cats.length;i++){
+            document.getElementById('_categories').value += cats.toString();
+        // }
+        document.getElementById('_isNewProduct').checked = (origin_item['isNewproduct']=='true');
+        document.getElementById('_isHotProduct').checked = (origin_item['isHotProduct']=='true');
+        post_data.isNewproduct = origin_item['isNewproduct'];
+        post_data.isHotProduct = origin_item['isHotProduct'];
+        var imgName = origin_item.imgName;
+        post_data.imgName = imgName;
+        document.getElementById('_main_img').setAttribute('src',"/public/products/" + imgName[0] + ".png");
+        document.getElementById('_compl_img_1').setAttribute('src',"/public/products/" + imgName[1] + ".png");
+        document.getElementById('_compl_img_2').setAttribute('src',"/public/products/" + imgName[2] + ".png");
+        for(var i = 0; i< 3; i ++){
+            imgs[i] = new Object();
+            imgs[i].isDownloaded = true;
+        }
+        console.log("checkMissingInfo:",checkMissingInfo());
+        if(checkMissingInfo() == false){        
+            setTimeout(function(){
+                document.querySelector("#bnt_update").classList.remove("hiddenElem");
+            }, 100)        
+        }
+    }    
+}
+
+function removeItem(){
+    console.log('here');
+   var _data = {
+    userName: post_data.fb_uid,
+    password: app_token
+    };    
+    // _aes_key = cryptoUtil.generateAESKey();    
+    var json_data = {
+        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey)
+    };
+    json_data.item = post_data;
+    $.ajax({
+        // url: './userToken',
+        url: '/api/removeItem',
+        method: 'POST',
+        data: json_data,
+        complete: function(data, status, jqXHR) {
+            var obj = JSON.parse(data.responseText);
+            // 
+            if (obj.err != 0 || obj.err == null) {                 
+                return;
+            }
+            console.log(obj);
+            var sURL =  "/createNewShop" + '/' + 'addItem';
+            console.log ('sURL', sURL);
+            window.location.href = sURL;
+        }
+    });       
+}
+
+
+// Facebook
 
 function checkLoginStatus() {
     FB.getLoginStatus(function(response) {
@@ -628,7 +897,7 @@ function getNewToken(uid, token) {
     console.log('_data: ', _data);
     $.ajax({
         // url: './userToken',
-        url: './api/gettoken',
+        url: '/api/gettoken',
 
         method: 'POST',
         data: json_data,
@@ -675,7 +944,7 @@ function checkToken(uid, accessToken) {
     };
     $.ajax({
         // url: './userToken',
-        url: '../api/checktoken',
+        url: '/api/checktoken',
         method: 'POST',
         data: json_data,
         complete: function(data, status, jqXHR) {
@@ -696,9 +965,9 @@ function updateShop(shop){
     console.log(shop);    
     
     var masthead = document.querySelector("#masthead");    
-    masthead.style.backgroundImage  = "url('../" + shop.walls +"')";
-    var src = '.' + shop.avatars
-    document.getElementById('logo').setAttribute('src',src);
+    masthead.style.backgroundImage  = "url('/" + shop.walls +"')";
+    var src = '/' + shop.avatars
+    document.getElementById('_avatar').setAttribute('src',src);
 
     var cols = ['showName','companyName','slogan'];
     for(var i = 0; i< cols.length; i++){
@@ -715,25 +984,25 @@ function updateShop(shop){
                 }                
             }
     }
-
     masthead.classList.remove("hiddenElem");
     masthead.classList.add('start');
-    post_data = shop;    
-    
+    post_data.shop = shop.pathName;
+    updateItem();
+    var backToHomes = document.querySelectorAll('[app-backToHome=true]');
+    for(var i = 0; i< backToHomes.length;i++){
+            // console.log(i, backToHomes(i));
+        backToHomes[i].setAttribute("href", "/"+shop.pathName);
+    }
 }
 
 function fetchingInfo(callback) {
-
     // console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', 'GET', {
         "fields": "id,name,email"
     }, function(response) {        
         callback(response);
     });
-
 }
-
-
 
 function handleFBData(response) {
     // document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
@@ -822,7 +1091,4 @@ function fb_enter() {
     }, {})
 }
 </script>
-<!-- GoogleMap Section -->
-
-
 </html>
