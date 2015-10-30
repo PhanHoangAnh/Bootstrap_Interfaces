@@ -259,9 +259,12 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right" id = "visitor">
+                            <li class='navbar-right'>
+                                <a id = "itemsList"><b id = 'quantityOfItems'></b><i class="fa fa-cart-plus" style="font-size: 18px;color: #fff"></i></a>
+                            </li>
                             <li class='navbar-right' id='visitorHolder'>
                                 <a href="#sec" id = "login"> <i class="fa fa-facebook fa-2x "></i><span> Login with Facebook</span></a>
-                            </li>                            
+                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -487,16 +490,16 @@
         <div id="confirmModal" class="modal fade">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <div class="modal-header clearfix">
+                    <div class="modal-header clearfix" style="background-color: #A30042; color:#fff; padding:0">
                         <div class="col-md-3">
                             <img class = "img-responsive logo" id = "imgModalIcon">    
                         </div>
                         <div class="col-md-9">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Phiếu xác nhận</h4>    
+                            <h3 class="modal-title" style="padding: 10px">Phiếu xác nhận</h3>    
                         </div>
                     </div>
-                    <div class="modal-body clearfix">
+                    <div class="modal-body clearfix" style="background-color: #f2f2f2">
                         <div class="col-md-3">
                             <img id = "modalConfirmImage" class="img-responsive">
                             <div style="margin: 20px"></div>
@@ -514,28 +517,28 @@
                                     <tr style="border:none">
                                         <td>Họ và tên người nhận hàng</td>
                                         <td>
-                                            <input type="text" class="form-control data-input">
+                                            <input type="text" class="form-control data-input" id = 'orderPerson'>
                                         </td>
                                     </tr>
                                     <tr style="border:none">
                                         <td>Số điện thoại liên hệ</td>
                                         <td>
-                                            <input type="text" class="form-control data-input">
+                                            <input type="text" class="form-control data-input" id = 'orderPhone'>
                                         </td>
                                     </tr>
                                     <tr style="border:none">
                                         <td>Địa chỉ giao hàng</td>
                                         <td>
-                                            <input type="text" class="form-control data-input">
+                                            <input type="text" class="form-control data-input" id = "orderAddress">
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer" style="background-color: #eee">
                         <button type="button" class="btn btn-default" data-dismiss="modal" id = "modalCancel">Cancel</button>
-                        <button type="button" class="btn btn-danger btn-ok" data-dismiss="modal" id = "modalConfirm">Confirm</button>
+                        <button type="button" class="btn btn-success btn-ok" data-dismiss="modal" id = "modalConfirm">Done</button>
                     </div>
                 </div>
             </div>
@@ -621,9 +624,15 @@
         </div>
     </div>
 </template>
+    <div id="phasebeam">
+        <canvas width="700" height="650"></canvas>
+        <canvas width="700" height="650"></canvas>
+        <canvas width="700" height="650"></canvas>
+    </div>
     <script type="text/javascript" src='/public/js/utils.js'></script>
     <script src="http://maps.googleapis.com/maps/api/js"></script>
     <script type="text/javascript" src="/public/js/Crypto/cryptoUtils.js"></script>
+    <script type="text/javascript" src="../public/js/phasebeam.js"></script>
     <script type="text/javascript">
     /* Custom JS */
     //--// Bootstrap component
@@ -699,12 +708,7 @@
         content: "Hello World!"
     });
     </script>
-    <div id="phasebeam">
-        <canvas width="700" height="650"></canvas>
-        <canvas width="700" height="650"></canvas>
-        <canvas width="700" height="650"></canvas>
-    </div>
-    <script type="text/javascript" src="../public/js/phasebeam.js"></script>
+
 </body>
 <script type="text/javascript">
 // This function is called when someone finishes with the Login
@@ -712,13 +716,20 @@
 // code below.
 var RSAPublicKey = <%-JSON.stringify(data)%>
 var shop = <%-JSON.stringify(shop)%>
-
+var orderId;
 updateShop(shop);
 
 function updateShop(shop){
     if(!shop){
         return;
     }
+    if (localStorage.getItem("orderId") === null) {
+        orderId =<%-JSON.stringify(orderId)%>
+        localStorage.setItem("orderId", orderId);
+    }else{
+        orderId = localStorage.getItem("orderId");
+    }    
+    
     var masthead = document.querySelector("#masthead");    
     masthead.style.backgroundImage  = "url('" + shop.walls.substring(1) +"')";
     masthead.classList.remove("hiddenElem");
@@ -818,7 +829,7 @@ function updateShop(shop){
         imgs[i].addEventListener('click',function(e){
             // console.log('okie',this.getAttribute('app-itemNumber'));
             // var sURL =  "/createNewShop" + '/' + 'addItem' +'/'+this.getAttribute('app-itemNumber');
-            var sURL =  '/' + shop.pathName +'/'+this.getAttribute('app-itemNumber');            
+            var sURL =  '/' + shop.pathName +'/item/'+this.getAttribute('app-itemNumber');            
             // console.log ('sURL', sURL);
             window.location.href = sURL;
         },false);
@@ -840,11 +851,21 @@ function updateShop(shop){
 
     document.getElementById('modalConfirm').addEventListener("click",function(e){
         updateConfirmation();
-    },false)
+    },false);
+
+    var orderElems = ['orderPerson', 'orderPhone', 'orderAddress'];
+    for (var i = 0;i< orderElems.length; i ++){
+        document.getElementById(orderElems[i]).addEventListener('change',function(e){
+            getOrderInfo(this);
+        },false);
+    }
+    document.getElementById('itemsList').setAttribute('href','/'+shop.pathName+'/orderList');
+    // localStorage.setItem("orderItemLists",JSON.stringify([]));
     startFacebook(document, 'script', 'facebook-jssdk');
 }
 
 var ordering_Item ;
+var orderInfo = {};
 function movingImgCallback(elem){
     var shopItems = shop.hot_items.concat(shop.new_items);
     // item_OrderNum = elem.id;
@@ -861,9 +882,44 @@ function movingImgCallback(elem){
     document.querySelector('app-modalProduct').innerHTML = ordering_Item.productName;
 
     $("#confirmModal").modal('show');
-}
+};
+$('#confirmModal').on('shown.bs.modal', function() {
+    var orderElems = ['orderPerson', 'orderPhone', 'orderAddress'];
+    for (var i = 0;i< orderElems.length; i ++){
+        if(orderInfo[orderElems[i]]){
+            document.getElementById(orderElems[i]).value = orderInfo[orderElems[i]]    
+        }
+    }
+    ordering_Item.orderInfo = orderInfo;
+    ordering_Item.qty = 1;
+})
+function getOrderInfo(elem){
+    orderInfo[elem.id]= elem.value;
+};
+var itemsQuantity = 0;
+
+var orderItemLists = [];
 function updateConfirmation(){
-    console.log("modalConfirm");
+    console.log("modalConfirm", orderInfo);
+    itemsQuantity++;
+    document.getElementById('quantityOfItems').innerHTML = itemsQuantity;
+    if(localStorage.getItem("orderItemLists")){
+        orderItemLists = JSON.parse(localStorage.getItem("orderItemLists"));
+    }    
+    if(orderItemLists.length == 0){
+        orderItemLists.push(ordering_Item);            
+    }else{
+        for (var i =0; i<orderItemLists.length; i++){
+        if(orderItemLists[i]._productId == ordering_Item._productId ){
+            orderItemLists[i].qty ++;
+        }else{
+            orderItemLists.push(ordering_Item);    
+            }
+        }    
+    }
+    
+    console.log(ordering_Item, orderItemLists);
+    localStorage.setItem("orderItemLists",JSON.stringify(orderItemLists));
 }
 
 function checkLoginStatus() {
@@ -911,11 +967,7 @@ function getNewToken(uid, token) {
     var json_data = {
         data: cryptoUtil.EncryptJSON(_data, RSAPublicKey, aes_key)
     };
-    // console.log("stringify: ", JSON.stringify(_data));
-    console.log("cryptoUtil: ", cryptoUtil);
-
-    // _data = cryptoUtil.EncryptJSON(_data, RSAPublicKey, aes_key);
-    console.log('_data: ', _data);
+    
     $.ajax({
         // url: './userToken',
         url: '/api/gettoken',
@@ -982,11 +1034,12 @@ function checkToken(uid, accessToken) {
 }
 
 function addLinks(){
-        var createNewLinks = document.querySelectorAll(".createNewShop");
-        for (var i=0; i<createNewLinks.length; i++){            
-                createNewLinks[i].removeEventListener('click', preventCreateNewShop , false)
-                createNewLinks[i].setAttribute("href", "/createnewshop");
-        }
+    isLoggedIn = true;
+    var createNewLinks = document.querySelectorAll(".createNewShop");
+    for (var i=0; i<createNewLinks.length; i++){            
+        createNewLinks[i].removeEventListener('click', preventCreateNewShop , false)
+        createNewLinks[i].setAttribute("href", "/createnewshop");
+    }
 }
 
 function fetchingInfo(callback) {
@@ -1046,7 +1099,9 @@ function handleFBData(response) {
 
 }
 
+var isLoggedIn = false;
 // This is called with the results from from FB.getLoginStatus().
+var uid
 function statusChangeCallback(response) {
 
     // The response object is returned with a status field that lets the
@@ -1055,7 +1110,7 @@ function statusChangeCallback(response) {
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
         fetchingInfo(handleFBData);
-        var uid = response.authResponse.userID;
+        uid = response.authResponse.userID;
         var accessToken = response.authResponse.accessToken;        
         checkToken(uid, accessToken);
 
