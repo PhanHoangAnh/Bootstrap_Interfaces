@@ -287,7 +287,7 @@ html,body {
         <!--center-->
         <div class="col-sm-9 col-md-pull-3" style="min-height: 100%;">
             <!-- <h3 style="color: #fff">Đơn đặt hàng</h3> -->
-            <table class="table table-bordered" style="color:#fff" >
+            <table class="table table-bordered" style="color:#fff;background-color: rgba(0,0,0,.6)" >
                 <thead style="background-color:rgba(0,0,0,0.6)">
                     <tr>
                         <th class = "col-md-2">Product</th>
@@ -299,6 +299,15 @@ html,body {
                 </thead>
                 <tbody id = "rootTable">
                     
+                </tbody>
+                <tbody style="background-color: rgba(255,255,255,.2">
+                    <tr>
+                        <td>Tổng cộng : </td>
+                        <td></td>
+                        <td id = "summary"></td>
+                        <td></td>
+                        <td style="vertical-align: middle"><button app-role = "submit" type="button" class="btn btn-success center-block">Đặt hàng</button></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -410,23 +419,47 @@ $(document).ready(function() {
 });
 function updateItemLists(){
     var rootTable = document.getElementById('rootTable');
+    rootTable.innerHTML = null;
     var singleItem = document.getElementById('singleItem').content;
-        
+    var totalPaid = 0
     for(var i = 0; i<orderItemLists.length; i++){
         var icon = singleItem.querySelector('[app-role = "icon"]');
         icon.setAttribute('src','/public/products/'+orderItemLists[i].imgName[0]+ ".png")
         singleItem.querySelector('[app-role= "product"]').innerHTML = orderItemLists[i].productName;
         singleItem.querySelector('[app-role = "quantity"]').innerHTML = orderItemLists[i].qty;
-        singleItem.querySelector('[app-role = "price"]').innerHTML= orderItemLists[i].newPrice + " /VND " + orderItemLists[i].unit;        
+        singleItem.querySelector('[app-role = "price"]').innerHTML= orderItemLists[i].newPrice + " VND/ " + orderItemLists[i].unit;
         var str  = '';
         str += "<label> " + "Người nhận: "+ "</label>" +orderItemLists[i].orderInfo.orderPerson +"<br>"
         str += "<label> " + "Phone: "+ "</label>" + orderItemLists[i].orderInfo.orderPhone +"<br>"
         str += "<label> " + "Địa chỉ: "+ "</label>" +orderItemLists[i].orderInfo.orderAddress
-        
         singleItem.querySelector('[app-role = "info"]').innerHTML= str;
         singleItem.querySelector('[app-role = "removeBnt"]').setAttribute('id', orderItemLists[i]._id);
         rootTable.appendChild(document.importNode(singleItem,true));
+        totalPaid += parseFloat(orderItemLists[i].newPrice);
+        document.getElementById('summary').innerHTML = totalPaid + " VND " ;
     }
+    var removeBnts = document.querySelectorAll('[app-role = "removeBnt"]');
+    for (var i= 0; i <removeBnts.length; i++){
+        removeBnts[i].addEventListener('click',function(e){
+            removeItem(this);
+        },false)
+    }
+}
+function removeItem(elem){
+    var id = elem.id;
+    for(var i = 0; i<orderItemLists.length; i++){
+        if(orderItemLists[i]._id == id ){
+            if( orderItemLists[i].qty > 1 ){
+                orderItemLists[i].qty--;
+                break;
+            }else{
+                orderItemLists.splice(i,1);                
+                break;
+            }
+        }
+    }
+    localStorage.setItem("orderItemLists",JSON.stringify(orderItemLists));
+    updateItemLists();
 }
 function checkLoginStatus() {
     FB.getLoginStatus(function(response) {
@@ -649,9 +682,8 @@ function fb_enter() {
     }, {})
 
 }
-function preventCreateNewShop(){
-        console.log ("you have to login before create new Shop");
-}
+function preventCreateNewShop(){}
+
 
 </script>
 

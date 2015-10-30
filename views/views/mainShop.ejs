@@ -900,7 +900,6 @@ var itemsQuantity = 0;
 
 var orderItemLists = [];
 function updateConfirmation(){
-    console.log("modalConfirm", orderInfo);
     itemsQuantity++;
     document.getElementById('quantityOfItems').innerHTML = itemsQuantity;
     if(localStorage.getItem("orderItemLists")){
@@ -909,13 +908,17 @@ function updateConfirmation(){
     if(orderItemLists.length == 0){
         orderItemLists.push(ordering_Item);            
     }else{
+        var isExisted = false;
         for (var i =0; i<orderItemLists.length; i++){
-        if(orderItemLists[i]._productId == ordering_Item._productId ){
-            orderItemLists[i].qty ++;
-        }else{
-            orderItemLists.push(ordering_Item);    
+            if(orderItemLists[i]._productId == ordering_Item._productId ){
+                orderItemLists[i].qty ++;
+                isExisted = true;
+                break;   
             }
-        }    
+        }
+        if (!isExisted){
+            orderItemLists.push(ordering_Item);
+        }
     }
     
     console.log(ordering_Item, orderItemLists);
