@@ -260,7 +260,7 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right" id = "visitor">
                             <li class='navbar-right'>
-                                <a id = "itemsList"><b id = 'quantityOfItems'></b><i class="fa fa-cart-plus" style="font-size: 18px;color: #fff"></i></a>
+                                <a id = "cartReview"><b id = 'quantityOfItems'></b><i class="fa fa-cart-plus" style="font-size: 18px;color: #fff"></i></a>
                             </li>
                             <li class='navbar-right' id='visitorHolder'>
                                 <a href="#sec" id = "login"> <i class="fa fa-facebook fa-2x "></i><span> Login with Facebook</span></a>
@@ -717,6 +717,8 @@
 var RSAPublicKey = <%-JSON.stringify(data)%>
 var shop = <%-JSON.stringify(shop)%>
 var orderId;
+var itemsQuantity = 0;
+var orderInfo = {};
 updateShop(shop);
 
 function updateShop(shop){
@@ -729,7 +731,18 @@ function updateShop(shop){
     }else{
         orderId = localStorage.getItem("orderId");
     }    
-    
+    //
+    if(localStorage.getItem("cartItemLists")){
+        cartItemLists = JSON.parse(localStorage.getItem("cartItemLists"));
+        for (var i =0; i < cartItemLists.length; i ++){
+            itemsQuantity += cartItemLists[i].qty;
+        }
+        document.getElementById('quantityOfItems').innerHTML = itemsQuantity;    
+    }
+    if(localStorage.getItem("orderInfo")){
+        orderInfo = JSON.parse(localStorage.getItem('orderInfo'));
+    }
+    //
     var masthead = document.querySelector("#masthead");    
     masthead.style.backgroundImage  = "url('" + shop.walls.substring(1) +"')";
     masthead.classList.remove("hiddenElem");
@@ -784,7 +797,6 @@ function updateShop(shop){
         var addToCart = hotItemElem.querySelector('[add-toCart = "true"]');
         addToCart.setAttribute('app-itemNumber', hotItems[i]._productId);
         
-        // console.log(hotItems[i].imgName[0]);
         if(i<6){
             hotItemElemRoot.appendChild(document.importNode(hotItemElem,true));
         }
@@ -859,13 +871,13 @@ function updateShop(shop){
             getOrderInfo(this);
         },false);
     }
-    document.getElementById('itemsList').setAttribute('href','/'+shop.pathName+'/orderList');
-    // localStorage.setItem("orderItemLists",JSON.stringify([]));
+    document.getElementById('cartReview').setAttribute('href','/'+shop.pathName+'/cartReview');
+    // localStorage.setItem("cartItemLists",JSON.stringify([]));
     startFacebook(document, 'script', 'facebook-jssdk');
 }
 
 var ordering_Item ;
-var orderInfo = {};
+
 function movingImgCallback(elem){
     var shopItems = shop.hot_items.concat(shop.new_items);
     // item_OrderNum = elem.id;
@@ -875,7 +887,6 @@ function movingImgCallback(elem){
             break;
         }
     }
-    console.log(ordering_Item);
     document.getElementById('imgModalIcon').setAttribute('src', shop['avatars'].substring(1));
     document.getElementById('modalConfirmImage').setAttribute("src", '/public/products/'+ ordering_Item.imgName[0]+ ".png");
     document.querySelector('app-ModalPrice').innerHTML = ordering_Item.newPrice + ' VND / ' + ordering_Item.unit;
@@ -895,34 +906,33 @@ $('#confirmModal').on('shown.bs.modal', function() {
 })
 function getOrderInfo(elem){
     orderInfo[elem.id]= elem.value;
+    localStorage.setItem('orderInfo', JSON.stringify(orderInfo));
 };
-var itemsQuantity = 0;
 
-var orderItemLists = [];
+
+var cartItemLists = [];
 function updateConfirmation(){
     itemsQuantity++;
     document.getElementById('quantityOfItems').innerHTML = itemsQuantity;
-    if(localStorage.getItem("orderItemLists")){
-        orderItemLists = JSON.parse(localStorage.getItem("orderItemLists"));
+    if(localStorage.getItem("cartItemLists")){
+        cartItemLists = JSON.parse(localStorage.getItem("cartItemLists"));
     }    
-    if(orderItemLists.length == 0){
-        orderItemLists.push(ordering_Item);            
+    if(cartItemLists.length == 0){
+        cartItemLists.push(ordering_Item);            
     }else{
         var isExisted = false;
-        for (var i =0; i<orderItemLists.length; i++){
-            if(orderItemLists[i]._productId == ordering_Item._productId ){
-                orderItemLists[i].qty ++;
+        for (var i =0; i<cartItemLists.length; i++){
+            if(cartItemLists[i]._productId == ordering_Item._productId ){
+                cartItemLists[i].qty ++;
                 isExisted = true;
                 break;   
             }
         }
         if (!isExisted){
-            orderItemLists.push(ordering_Item);
+            cartItemLists.push(ordering_Item);
         }
     }
-    
-    console.log(ordering_Item, orderItemLists);
-    localStorage.setItem("orderItemLists",JSON.stringify(orderItemLists));
+    localStorage.setItem("cartItemLists",JSON.stringify(cartItemLists));
 }
 
 function checkLoginStatus() {

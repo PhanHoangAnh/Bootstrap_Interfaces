@@ -402,7 +402,7 @@ $(function() {
 });
 var RSAPublicKey = <%-JSON.stringify(data)%>
 var shop =  <%-JSON.stringify(shop)%>
-var orderItemLists = JSON.parse(localStorage.getItem("orderItemLists"));
+var cartItemLists = JSON.parse(localStorage.getItem("cartItemLists"));
 
 $(document).ready(function() {
     /** code inside **/
@@ -422,22 +422,22 @@ function updateItemLists(){
     rootTable.innerHTML = null;
     var singleItem = document.getElementById('singleItem').content;
     var totalPaid = 0
-    for(var i = 0; i<orderItemLists.length; i++){
+    for(var i = 0; i<cartItemLists.length; i++){
         var icon = singleItem.querySelector('[app-role = "icon"]');
-        icon.setAttribute('src','/public/products/'+orderItemLists[i].imgName[0]+ ".png")
-        singleItem.querySelector('[app-role= "product"]').innerHTML = orderItemLists[i].productName;
-        singleItem.querySelector('[app-role = "quantity"]').innerHTML = orderItemLists[i].qty;
-        singleItem.querySelector('[app-role = "price"]').innerHTML= orderItemLists[i].newPrice + " VND/ " + orderItemLists[i].unit;
+        icon.setAttribute('src','/public/products/'+cartItemLists[i].imgName[0]+ ".png")
+        singleItem.querySelector('[app-role= "product"]').innerHTML = cartItemLists[i].productName;
+        singleItem.querySelector('[app-role = "quantity"]').innerHTML = cartItemLists[i].qty;
+        singleItem.querySelector('[app-role = "price"]').innerHTML= cartItemLists[i].newPrice + " VND/ " + cartItemLists[i].unit;
         var str  = '';
-        str += "<label> " + "Người nhận: "+ "</label>" +orderItemLists[i].orderInfo.orderPerson +"<br>"
-        str += "<label> " + "Phone: "+ "</label>" + orderItemLists[i].orderInfo.orderPhone +"<br>"
-        str += "<label> " + "Địa chỉ: "+ "</label>" +orderItemLists[i].orderInfo.orderAddress
+        str += "<label > " + "Người nhận: "+ "</label>" +cartItemLists[i].orderInfo.orderPerson +"<br>"
+        str += "<label> " + "Phone: "+ "</label>" + cartItemLists[i].orderInfo.orderPhone +"<br>"
+        str += "<label> " + "Địa chỉ: "+ "</label>" +cartItemLists[i].orderInfo.orderAddress
         singleItem.querySelector('[app-role = "info"]').innerHTML= str;
-        singleItem.querySelector('[app-role = "removeBnt"]').setAttribute('id', orderItemLists[i]._id);
+        singleItem.querySelector('[app-role = "removeBnt"]').setAttribute('id', cartItemLists[i]._id);
         rootTable.appendChild(document.importNode(singleItem,true));
-        totalPaid += parseFloat(orderItemLists[i].newPrice);
-        document.getElementById('summary').innerHTML = totalPaid + " VND " ;
+        totalPaid += parseFloat(cartItemLists[i].newPrice)*cartItemLists[i].qty;
     }
+    document.getElementById('summary').innerHTML = totalPaid + " VND " ;
     var removeBnts = document.querySelectorAll('[app-role = "removeBnt"]');
     for (var i= 0; i <removeBnts.length; i++){
         removeBnts[i].addEventListener('click',function(e){
@@ -447,18 +447,18 @@ function updateItemLists(){
 }
 function removeItem(elem){
     var id = elem.id;
-    for(var i = 0; i<orderItemLists.length; i++){
-        if(orderItemLists[i]._id == id ){
-            if( orderItemLists[i].qty > 1 ){
-                orderItemLists[i].qty--;
+    for(var i = 0; i<cartItemLists.length; i++){
+        if(cartItemLists[i]._id == id ){
+            if( cartItemLists[i].qty > 1 ){
+                cartItemLists[i].qty--;
                 break;
             }else{
-                orderItemLists.splice(i,1);                
+                cartItemLists.splice(i,1);                
                 break;
             }
         }
     }
-    localStorage.setItem("orderItemLists",JSON.stringify(orderItemLists));
+    localStorage.setItem("cartItemLists",JSON.stringify(cartItemLists));
     updateItemLists();
 }
 function checkLoginStatus() {
