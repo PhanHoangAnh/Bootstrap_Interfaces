@@ -51,6 +51,7 @@ html,body {
 @media (min-width: 979px) {
     #sidebar.affix-bottom {
         position: absolute;
+        /*position: :relative;*/
     }
     #sidebar.affix-top {
         position: static;
@@ -169,7 +170,7 @@ html,body {
                 <div class="col-md-6 col-md-offset-1 ">
                     <h1><app-showname id="showName"></app-showname>
                         <!-- <hr style = "border-top: 1px solid rgba(255,255,255,.3)"> -->
-                        <p class="lead"><app-slogan id = 'slogan'>Shop chuyên hàng hiệu...!</app-slogan></p>
+                        <p class="lead"><app-slogan id = 'slogan' app-slogan = true>Shop chuyên hàng hiệu...!</app-slogan></p>
                     </h1>
                 </div>
                 <!-- <div class="col-md-5" style="padding-right:30px; bottom: 10px; right: 0px; position: absolute;"> -->
@@ -193,11 +194,11 @@ html,body {
         <div id="nav" class="navbar navbar-inverse navbar-static-top navbar" role="navigation">
             <div class="container">
                 <div class="row">
-                    <div >
+                    <a id = 'logoCover' app-backToHome=true>
                         <img id = "avatars" src="/public/img/CatLogo.png" class="logo">
-                    </div>
+                    </a>
                     <div id = 'companyName' class='site-name hidden-xs'>
-                        AbcJSC
+                        <app-showName></app-showName>
                     </div>
                     <div class='navbar-left site-name phone'>
                         <i class="fa fa-phone "></i>
@@ -226,7 +227,7 @@ html,body {
                                 <a href="#sec">Sản phẩm</a>
                             </li>
                             <li class='navbar-right '>
-                                <a href="#sec">Home</a>
+                                <a app-backToHome=true >Home</a>
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right" id = "visitor">
@@ -286,30 +287,52 @@ html,body {
         <!-- /Left Sidebar -->
         <!--center-->
         <div class="col-sm-9 col-md-pull-3" style="min-height: 100%;">
-            <!-- <h3 style="color: #fff">Đơn đặt hàng</h3> -->
-            <table class="table table-bordered" style="color:#fff;background-color: rgba(0,0,0,.6)" >
-                <thead style="background-color:rgba(0,0,0,0.6)">
-                    <tr>
-                        <th class = "col-md-2">Product</th>
-                        <th>Qty</th>
-                        <th>Price</th>
-                        <th>Order's Info</th>
-                        <th>Remove</th>
-                    </tr>
-                </thead>
-                <tbody id = "rootTable">
-                    
-                </tbody>
-                <tbody style="background-color: rgba(255,255,255,.2">
-                    <tr>
-                        <td>Tổng cộng : </td>
-                        <td></td>
-                        <td id = "summary"></td>
-                        <td></td>
-                        <td style="vertical-align: middle"><button app-role = "submit" type="button" class="btn btn-success center-block">Đặt hàng</button></td>
-                    </tr>
-                </tbody>
-            </table>
+            <ul class="nav nav-tabs">
+              <li class="active"><a id = "cartReviewTab" data-toggle="tab" href="#cartReview">Duyệt đơn hàng</a></li>
+              <li><a id = "orderReviewTab" data-toggle="tab" href="#orderReview">Hàng đã đặt</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="cartReview" class="tab-pane fade in active">
+                    <table class="table table-bordered" style="color:#fff;background-color: rgba(0,0,0,.6)">
+                        <thead style="background-color:rgba(0,0,0,0.6)">
+                            <tr>
+                                <th class = "col-md-2">Product</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Order's Info</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody id = "rootTable">
+                        </tbody>
+                        <tbody style="background-color: rgba(255,255,255,.2">
+                            <tr>
+                                <td>Tổng cộng : </td>
+                                <td></td>
+                                <td id = "summary"></td>
+                                <td></td>
+                                <td style="vertical-align: middle"><button app-role = "submit" type="button" class="btn btn-success center-block" id = "orderItems">Đặt hàng</button></td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </div>
+                <div id="orderReview" class="tab-pane fade">
+                    <table class="table table-bordered" style="color:#fff;background-color: rgba(0,0,0,.6)">
+                        <thead style="background-color:rgba(0,0,0,0.6)">
+                            <tr>
+                                <th class = "col-md-2">Product</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Order's Info</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id = "orderTable">
+                        </tbody>
+                    </table> 
+                </div>
+            </div>
         </div>
         <!--/center-->
     </div>
@@ -321,9 +344,11 @@ html,body {
                         <div class="col-md-4" style='text-align: center; margin-top: 30px'>
                             <span style="font-size: 24px; color:white;  ">CON MÈO</span>
                             <p></p>
-                            <img src="../public/img/CatLogo.png" style="width: 40%; margin-top: 30px">
+                            <a app-backToHome=true>
+                                <img id = 'avatarFooter' style="width: 40%; margin-top: 30px">
+                            </a>
                             <p></p>
-                            Shop chuyên hàng hiệu...!
+                            <div app-slogan=true></div>
                         </div>
                         <div class="col-md-4" style="margin-top: 30px">
                             <span style="font-size: 24px; color:white; text-align: center "><i class="fa fa-arrows"></i>   THÔNG TIN...</span>
@@ -364,6 +389,7 @@ html,body {
             <td style="vertical-align: middle"><button app-role = "removeBnt" type="button" class="btn btn-danger center-block" >Remove</button></td>
         </tr>
     </template>
+
     <div id="phasebeam">
         <canvas width="700" height="650"></canvas>
         <canvas width="700" height="650"></canvas>
@@ -403,17 +429,56 @@ $(function() {
 var RSAPublicKey = <%-JSON.stringify(data)%>
 var shop =  <%-JSON.stringify(shop)%>
 var cartItemLists = JSON.parse(localStorage.getItem("cartItemLists"));
+var orderId;
 
 $(document).ready(function() {
     /** code inside **/
 
     // var masthead = $("#masthead");
     // masthead.addClass('start');
+    if (localStorage.getItem("orderId") === null) {
+        orderId =<%-JSON.stringify(orderId)%>
+        localStorage.setItem("orderId", orderId);
+    }else{
+        orderId = localStorage.getItem("orderId");
+    }
     var masthead = document.querySelector("#masthead");    
     masthead.style.backgroundImage  = "url('" + shop.walls.substring(1) +"')";
     masthead.classList.remove("hiddenElem");
     masthead.classList.add('start');
-    document.getElementById('avatars').setAttribute('src',shop['avatars'].substring(1));    
+    document.getElementById('avatars').setAttribute('src',shop['avatars'].substring(1));  
+    document.getElementById('avatarFooter').setAttribute('src',shop['avatars'].substring(1));
+    document.getElementById('orderReviewTab').addEventListener('click',function(e){
+        $.ajax({
+        // url: './userToken',
+        url: '/'+shop.pathName+'/order/'+orderId,
+        method: 'get',
+        complete: function(data, status, jqXHR) {
+            var obj = JSON.parse(data.responseText);
+            if (obj.err == 0) {
+                updateOrderLists(obj.orderLists);
+                console.log(obj.orderLists);
+                }
+            }
+        });    
+    },false);
+    var document.getElementById('orderReviewTab').addEventListener('click',function(e){
+        updateItemLists();     
+    },false)
+    var showNames = document.querySelectorAll("app-showName");
+    for(var i = 0 ; i< showNames.length; i++){
+        showNames[i].innerHTML = shop.showName;
+    }
+
+    var backToHomes = document.querySelectorAll('[app-backToHome=true]');
+        for(var i = 0; i< backToHomes.length;i++){
+            // console.log(i, backToHomes(i));
+            backToHomes[i].setAttribute("href", "/"+shop.pathName);
+        }
+    var slogans = document.querySelectorAll("[app-slogan=true]");
+        for(var i = 0; i< slogans.length;i++){
+            slogans[i].innerHTML = shop.slogan;
+        }
     updateItemLists();
     startFacebook(document, 'script', 'facebook-jssdk');
 });
@@ -444,6 +509,9 @@ function updateItemLists(){
             removeItem(this);
         },false)
     }
+    document.getElementById('orderItems').addEventListener('click',function(e){
+        orderItems_inCart()
+    },false)
 }
 function removeItem(elem){
     var id = elem.id;
@@ -461,6 +529,63 @@ function removeItem(elem){
     localStorage.setItem("cartItemLists",JSON.stringify(cartItemLists));
     updateItemLists();
 }
+function orderItems_inCart(){
+    if(!cartItemLists){
+        return;
+    }
+    if (localStorage.getItem("app_token") === null) {
+        getNewToken(uid, accessToken);
+    }
+    //2. get Token from localStorage
+    token = localStorage.getItem("app_token");
+    var _data = {
+        userName: uid,
+        password: token
+    };
+    aes_key = cryptoUtil.generateAESKey();
+    var json_data = {
+        data: cryptoUtil.EncryptJSON(_data, RSAPublicKey, aes_key)
+    };
+    json_data.orderId = orderId;    
+    json_data.cartItems = JSON.stringify(cartItemLists);
+    $.ajax({
+        // url: './userToken',
+        url: '/'+shop.pathName+'/order',
+        method: 'POST',
+        data: json_data,
+        complete: function(data, status, jqXHR) {
+            var obj = JSON.parse(data.responseText);
+            if (obj.err == 0) {
+                localStorage.setItem("cartItemLists", JSON.stringify([]));
+                cartItemLists =[];
+            }
+        }
+    });
+};
+function updateOrderLists(orderLists){
+    var orderTable = document.getElementById('orderTable');
+    orderTable.innerHTML = null;
+    rootTable.innerHTML = null;
+    
+    var singleItem = document.getElementById('singleItem').content;
+    
+    for(var i = 0; i<orderLists.length; i++){
+        var icon = singleItem.querySelector('[app-role = "icon"]');
+        icon.setAttribute('src','/public/products/'+orderLists[i].imgName[0]+ ".png")
+        singleItem.querySelector('[app-role= "product"]').innerHTML = orderLists[i].productName;
+        singleItem.querySelector('[app-role = "quantity"]').innerHTML = orderLists[i].qty;
+        singleItem.querySelector('[app-role = "price"]').innerHTML= orderLists[i].newPrice + " VND/ " + orderLists[i].unit;
+        var str  = '';
+        str += "<label > " + "Người nhận: "+ "</label>" +orderLists[i].orderInfo.orderPerson +"<br>"
+        str += "<label> " + "Phone: "+ "</label>" + orderLists[i].orderInfo.orderPhone +"<br>"
+        str += "<label> " + "Địa chỉ: "+ "</label>" +orderLists[i].orderInfo.orderAddress +"<br>"
+        str += "<label> " + "Time: "+ "</label>" + orderLists[i].date;
+        singleItem.querySelector('[app-role = "info"]').innerHTML= str;
+        orderTable.appendChild(document.importNode(singleItem,true));
+    }
+}
+
+
 function checkLoginStatus() {
     FB.getLoginStatus(function(response) {
         statusChangeCallback(response);
@@ -510,13 +635,10 @@ function getNewToken(uid, token) {
     $.ajax({
         // url: './userToken',
         url: '/api/gettoken',
-
         method: 'POST',
         data: json_data,
         // contentType:'application/json',
         complete: function(data, status, jqXHR) {
-            console.log('result', data);
-            // console.log(typeof(data));
             var obj = JSON.parse(data.responseText);
             if (obj.err == 0) {
                 var encrypted_app_token = obj.encrypted_app_token;

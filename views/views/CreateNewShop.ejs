@@ -211,9 +211,9 @@
         <div id="nav" class="navbar navbar-inverse navbar-static-top navbar" role="navigation">
             <div class="container">
                 <div class="row">
-                    <div>
+                    <a id = "logoCover">
                         <img id = "logo" class="logo">
-                    </div>
+                    </a>
                     <div class='site-name hidden-xs' id = "companyName">
                         <!-- AbcJSC -->
                     </div>
@@ -325,7 +325,7 @@
                         <div class="row block ">
                             <h3><i class="fa fa-microphone"></i> Giới thiệu</h3>
                             <div class="editarea">
-                                <div style="column-count:2" class="post-title data-input" id="shop_description" contenteditable="false">
+                                <div style="min-height: 30em" class="post-title data-input" id="shop_description" contenteditable="false">
                                 <b><h4> Hãy giới thiệu về shop của bạn tại đây....</h4></b>Di chuột hoặc click vào khu vực này để thấy nút <kbd>Edit</kbd> dưới màn hinh<br>Sử dụng bản đồ bên tay phải (kéo quả bóng đỏ trong bản đồ!.) để cung cấp địa chỉ của bạn cho khách hàng....<br>Click chuột vào những khu vực chuyển màu xám để thay đổi thông tin mà bạn muốn cập nhật đến khách hàng.<br>Nhấn nút <kbd>Done</kbd> để cập nhập thông tin khi bạn hoàn tất<br>Chúc các bạn thành công..
                                 </div>
                                 <h3><i class="fa fa-anchor"></i> Liên hệ:</h3>
@@ -1111,7 +1111,9 @@ function checkToken(uid, accessToken) {
 
 var isUpdated = false;
 function updateShop(shop){
-    console.log(shop);
+    if(!shop){
+        return
+    }
     var pathName = document.querySelector("#pathName");
     pathName.value = shop.pathName;
     pathName.disabled = true;    
@@ -1159,6 +1161,9 @@ function updateShop(shop){
     updatePos(pos);
     google.maps.event.trigger(map, "resize");        
     isUpdated = true;
+    if(shop){
+        document.getElementById('logoCover').setAttribute('href',shop.pathName);
+    }
 }
 
 function fetchingInfo(callback) {
