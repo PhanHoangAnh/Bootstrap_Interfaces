@@ -8,13 +8,13 @@
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/shop.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/main.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/startrating.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/Carousel.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/component.css">
-    <link rel="stylesheet" href="../public/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/shop.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/startrating.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/Carousel.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/component.css">
+    <link rel="stylesheet" href="/public/css/animate.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -487,63 +487,63 @@
         </footer>
     </div>
         <modal>
-        <div id="confirmModal" class="modal fade">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header clearfix" style="background-color: #A30042; color:#fff; padding:0">
-                        <div class="col-md-3">
-                            <img class = "img-responsive logo" id = "imgModalIcon">    
+            <div id="confirmModal" class="modal fade">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header clearfix" style="background-color: #A30042; color:#fff; padding:0">
+                            <div class="col-md-3">
+                                <img class = "img-responsive logo" id = "imgModalIcon">    
+                            </div>
+                            <div class="col-md-9">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title" style="padding: 10px">Phiếu xác nhận</h3>    
+                            </div>
                         </div>
-                        <div class="col-md-9">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h3 class="modal-title" style="padding: 10px">Phiếu xác nhận</h3>    
+                        <div class="modal-body clearfix" style="background-color: #f2f2f2">
+                            <div class="col-md-3">
+                                <img id = "modalConfirmImage" class="img-responsive">
+                                <div style="margin: 20px"></div>
+                                <label>Product</label><br>
+                                <app-modalProduct></app-modalProduct><br>
+                                <label>Price</label><br>
+                                <div><app-ModalPrice></app-ModalPrice></div>
+                            </div>
+                            <div class="col-md-9">
+                                <label>Cám ơn bạn đã đặt hàng</label>
+                                <div><small>Xin vui lòng cung cấp thêm thông tin về đơn hàng này...</small></div>
+                                <div style="margin: 20px"></div>
+                                <table class="table">
+                                    <tbody>
+                                        <tr style="border:none">
+                                            <td>Họ và tên người nhận hàng</td>
+                                            <td>
+                                                <input type="text" class="form-control data-input" id = 'orderPerson'>
+                                            </td>
+                                        </tr>
+                                        <tr style="border:none">
+                                            <td>Số điện thoại liên hệ</td>
+                                            <td>
+                                                <input type="text" class="form-control data-input" id = 'orderPhone'>
+                                            </td>
+                                        </tr>
+                                        <tr style="border:none">
+                                            <td>Địa chỉ giao hàng</td>
+                                            <td>
+                                                <input type="text" class="form-control data-input" id = "orderAddress">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-body clearfix" style="background-color: #f2f2f2">
-                        <div class="col-md-3">
-                            <img id = "modalConfirmImage" class="img-responsive">
-                            <div style="margin: 20px"></div>
-                            <label>Product</label><br>
-                            <app-modalProduct></app-modalProduct><br>
-                            <label>Price</label><br>
-                            <div><app-ModalPrice></app-ModalPrice></div>
+                        <div class="modal-footer" style="background-color: #eee">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id = "modalCancel">Cancel</button>
+                            <button type="button" class="btn btn-success btn-ok" data-dismiss="modal" id = "modalConfirm">Done</button>
                         </div>
-                        <div class="col-md-9">
-                            <label>Cám ơn bạn đã đặt hàng</label>
-                            <div><small>Xin vui lòng cung cấp thêm thông tin về đơn hàng này...</small></div>
-                            <div style="margin: 20px"></div>
-                            <table class="table">
-                                <tbody>
-                                    <tr style="border:none">
-                                        <td>Họ và tên người nhận hàng</td>
-                                        <td>
-                                            <input type="text" class="form-control data-input" id = 'orderPerson'>
-                                        </td>
-                                    </tr>
-                                    <tr style="border:none">
-                                        <td>Số điện thoại liên hệ</td>
-                                        <td>
-                                            <input type="text" class="form-control data-input" id = 'orderPhone'>
-                                        </td>
-                                    </tr>
-                                    <tr style="border:none">
-                                        <td>Địa chỉ giao hàng</td>
-                                        <td>
-                                            <input type="text" class="form-control data-input" id = "orderAddress">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="modal-footer" style="background-color: #eee">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" id = "modalCancel">Cancel</button>
-                        <button type="button" class="btn btn-success btn-ok" data-dismiss="modal" id = "modalConfirm">Done</button>
                     </div>
                 </div>
             </div>
-        </div>
-    </modal>
+        </modal>
     <template id = 'keyword'>
         <span class="label label-default"><app-cat app-role="cat" ></app-cat></span>
     </template>
@@ -575,10 +575,12 @@
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0">
-                    <div more-detail style="padding-left:0 " class="items">
-                        <div style="border-left: dotted 1px; padding-left: 5px">
-                            <i class="fa fa-list"></i>
-                            <br>More details
+                    <div more-detail style="padding-left:0 " class="items">                        
+                        <div style="border-left: dotted 1px; padding-left: 5px" >
+                            <a app-itemPreview = true style="color:#fff">
+                                <i class="fa fa-list" ></i>
+                                <br>More details
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -613,9 +615,11 @@
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0">
                     <div more-detail style="padding-left:0 " class="items">
-                        <div style="border-left: dotted 1px; padding-left: 5px">
-                            <i class="fa fa-list"></i>
-                            <br>More details
+                        <div style="border-left: dotted 1px; padding-left: 5px" >
+                            <a app-itemPreview = true style="color:#fff">
+                                <i class="fa fa-list"></i>
+                                <br>More details
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -634,8 +638,6 @@
     <script type="text/javascript" src="/public/js/Crypto/cryptoUtils.js"></script>
     <script type="text/javascript" src="../public/js/phasebeam.js"></script>
     <script type="text/javascript">
-    /* Custom JS */
-    //--// Bootstrap component
     $(function() {
         // $('#nav-wrapper').height($("#nav").height());
         // $('#nav-wrapper').height(200);
@@ -678,32 +680,37 @@
     //-// Google map    
     var pos = {};
     var myCenter = new google.maps.LatLng(21.030668, 105.852284);
-    if(pos.lat && pos.lon){
-        myCenter = new google.maps.LatLng(pos.lat, pos.lon);
-    }    
+    
     function initialize() {
-        var mapProp = {
-            center: myCenter,
-            zoom: 14,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-        };
-
-        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-
         if(pos.lat && pos.lon){
             myCenter = new google.maps.LatLng(pos.lat, pos.lon);
         }
-        var marker = new google.maps.Marker({
-            position: myCenter,
-            animation: google.maps.Animation.DROP
-        });
+        try{
+            var mapProp = {
+                center: myCenter,
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+            };
 
-        marker.setMap(map);
-        google.maps.event.addListener(marker, 'click', function() {
-            infowindow.open(map, marker);
-        });
-    }
-    google.maps.event.addDomListener(window, 'load', initialize);
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+            if(pos.lat && pos.lon){
+                myCenter = new google.maps.LatLng(pos.lat, pos.lon);
+            }
+            var marker = new google.maps.Marker({
+                position: myCenter,
+                animation: google.maps.Animation.DROP
+            });
+
+            marker.setMap(map);
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.open(map, marker);
+            });
+        }            
+        catch(err){
+            console.log(err);
+        }
+    }    
     var infowindow = new google.maps.InfoWindow({
         content: "Hello World!"
     });
@@ -742,6 +749,7 @@ function updateShop(shop){
     if(localStorage.getItem("orderInfo")){
         orderInfo = JSON.parse(localStorage.getItem('orderInfo'));
     }
+    
     //
     var masthead = document.querySelector("#masthead");    
     masthead.style.backgroundImage  = "url('" + shop.walls.substring(1) +"')";
@@ -784,7 +792,9 @@ function updateShop(shop){
         var imgPath = '/public/products/'+ hotItems[i].imgName[0] +'.png';
         product_image.setAttribute('src', imgPath);
         product_image.setAttribute("id", hotItems[i]._productId);
-        var handler = hotItemElem.querySelector('[app-role = "handler"]');        
+        var handler = hotItemElem.querySelector('[app-role = "handler"]');
+        var itemPreview = hotItemElem.querySelector('[app-itemPreview="true"]')
+        itemPreview.setAttribute("href",'/' + shop.pathName +'/item/'+hotItems[i]._productId);
         handler.setAttribute('app-itemNumber', hotItems[i]._productId);
         var productDescription = hotItemElem.querySelector("[app-role = 'productDescription']");
         productDescription.innerHTML = null;
@@ -817,6 +827,8 @@ function updateShop(shop){
         product_img.setAttribute("id", newItems[i]._productId);
         var _handler = newItem.querySelector('[app-role = "handler"]');
         _handler.setAttribute ('app-itemNumber', newItems[i]._productId);
+        var itemPreview = newItem.querySelector('[app-itemPreview="true"]')
+        itemPreview.setAttribute("href",'/' + shop.pathName +'/item/'+hotItems[i]._productId);
         var productDescription = newItem.querySelector("[app-role = 'productDescription']");
         productDescription.innerHTML = null;
         txt = document.createTextNode(newItems[i].productDescription);        
@@ -871,9 +883,11 @@ function updateShop(shop){
             getOrderInfo(this);
         },false);
     }
-    document.getElementById('cartReview').setAttribute('href','/'+shop.pathName+'/cartReview');
+    document.getElementById('cartReview').setAttribute('href','/'+shop.pathName+'/cartReview#start-offset');
     // localStorage.setItem("cartItemLists",JSON.stringify([]));
     startFacebook(document, 'script', 'facebook-jssdk');
+    // GoogleMap
+    google.maps.event.addDomListener(window, 'load', initialize);
 }
 
 var ordering_Item ;

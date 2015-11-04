@@ -125,6 +125,9 @@ item-detail {
                             </li>                            
                         </ul>
                         <ul class="nav navbar-nav navbar-right" id = "visitor">
+                            <li class='navbar-right'>
+                                <a id = "cartReview"><b id = 'quantityOfItems'></b><i class="fa fa-cart-plus" style="font-size: 18px;color: #fff"></i></a>
+                            </li>
                             <li class='navbar-right' id='visitorHolder'>
                                 <a href="#sec" id = "login"> <i class="fa fa-facebook fa-2x "></i><span> Login with Facebook</span></a>
                             </li>                            
@@ -153,10 +156,10 @@ item-detail {
     </section>
     <div class="container-fluid"  style="padding:10px"></div>
     <div class="container-fluid"  style="padding:0" id="start-offset">
-        <div class="col-md-9 ">            
-            <div style="background-color:rgba(0,0,0,0.6); padding:15px" class="clearfix animated bounceInLeft" id="cover">
+        <div class="col-md-9 " >
+            <div style="background-color:rgba(0,0,0,0.6); padding:15px;" class="clearfix animated bounceInLeft" id="cover" >
                 <!-- Product Description -->
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="color:white">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="color:white" id = 'itemInfo'>
                     <li class="heading">
                             <app-productName></app-productName><button id = "bnt_edit" type="button" class=" hiddenElem btn btn-success pull-right">Edit Item</button>
                         </li>
@@ -194,11 +197,15 @@ item-detail {
                             <span style="text-decoration: line-through; color:red"><app-oldPrice></app-oldPrice></span>
                             <span><app-newPrice></app-newPrice></span>
                         </li>
+                        <div add-toCart = "true" class="items center-block clearfix" style="width:90%;"     id = "addButton">
+                            <i class="fa fa-cart-plus" style='font-side:24px'></i>
+                            <br>Add to Cart
+                        </div>
                 </div>
                 <!-- Product Images -->
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="padding:0">
                     <div>
-                        <img class="img-responsive" style="margin-left:auto; height: auto; width: 100% " id = "DisplayImg">
+                        <img class="img-responsive" style="margin-left:auto; height: auto; width: 100% " id = "DisplayImg" >
                     </div>
                     <div style="position:absolute;top:0;width:20%" class="clearfix">
                         <div>
@@ -211,10 +218,10 @@ item-detail {
                             <img class="img-responsive center-block" style="padding-bottom:1px; cursor: pointer;" id = "img_2" app-role = "complementImage">
                         </div>
                     </div>
-                </div>
-
+                </div>                
+            </div>            
+            <div style="padding:10px">
             </div>
-            <div style="padding:10px"></div>
             <div class="container-fluid" style="padding:0">
                 <div class="panel panel-default ">
                     <div class="panel-heading">
@@ -319,6 +326,64 @@ item-detail {
     <template id = 'keyword'>
         <span class="label label-default"><app-cat app-role="cat" ></app-cat></span>
     </template>
+    <modal>
+        <div id="confirmModal" class="modal fade">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header clearfix" style="background-color: #A30042; color:#fff; padding:0">
+                            <div class="col-md-3">
+                                <img class = "img-responsive logo" id = "imgModalIcon">    
+                            </div>
+                            <div class="col-md-9">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3 class="modal-title" style="padding: 10px">Phiếu xác nhận</h3>    
+                            </div>
+                        </div>
+                        <div class="modal-body clearfix" style="background-color: #f2f2f2">
+                            <div class="col-md-3">
+                                <img id = "modalConfirmImage" class="img-responsive">
+                                <div style="margin: 20px"></div>
+                                <label>Product</label><br>
+                                <app-modalProduct></app-modalProduct><br>
+                                <label>Price</label><br>
+                                <div><app-ModalPrice></app-ModalPrice></div>
+                            </div>
+                            <div class="col-md-9">
+                                <label>Cám ơn bạn đã đặt hàng</label>
+                                <div><small>Xin vui lòng cung cấp thêm thông tin về đơn hàng này...</small></div>
+                                <div style="margin: 20px"></div>
+                                <table class="table">
+                                    <tbody>
+                                        <tr style="border:none">
+                                            <td>Họ và tên người nhận hàng</td>
+                                            <td>
+                                                <input type="text" class="form-control data-input" id = 'orderPerson'>
+                                            </td>
+                                        </tr>
+                                        <tr style="border:none">
+                                            <td>Số điện thoại liên hệ</td>
+                                            <td>
+                                                <input type="text" class="form-control data-input" id = 'orderPhone'>
+                                            </td>
+                                        </tr>
+                                        <tr style="border:none">
+                                            <td>Địa chỉ giao hàng</td>
+                                            <td>
+                                                <input type="text" class="form-control data-input" id = "orderAddress">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer" style="background-color: #eee">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id = "modalCancel">Cancel</button>
+                            <button type="button" class="btn btn-success btn-ok" data-dismiss="modal" id = "modalConfirm">Done</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </modal>
     <div id="phasebeam">
         <canvas width="700" height="650"></canvas>
         <canvas width="700" height="650"></canvas>
@@ -332,6 +397,9 @@ item-detail {
     var item =  <%-JSON.stringify(item)%>
     var shop =  <%-JSON.stringify(shop)%>
     var similarItems = <%-JSON.stringify(similarItems)%>
+    var ordering_Item={};
+    var orderInfo = {};
+    var itemsQuantity = 0;
     $(function() {
         $('#nav').affix({
             offset: {
@@ -359,11 +427,41 @@ item-detail {
         var parent = document.getElementById("myCalendar");
         calendar(node, parent);
     })
-        $(document).ready(function() {        
+    $(document).ready(function() {
         updateItem(item);
+        if(!shop){
+            return;
+        }
+        if (localStorage.getItem("orderId") === null) {
+            orderId =<%-JSON.stringify(orderId)%>
+            localStorage.setItem("orderId", orderId);
+        }else{
+            orderId = localStorage.getItem("orderId");
+        }    
+        //
+        
+        if(localStorage.getItem("cartItemLists")){
+            cartItemLists = JSON.parse(localStorage.getItem("cartItemLists"));
+            for (var i =0; i < cartItemLists.length; i ++){
+                itemsQuantity += cartItemLists[i].qty;
+            }
+            document.getElementById('quantityOfItems').innerHTML = itemsQuantity;    
+        }
+        if(localStorage.getItem("orderInfo")){
+            orderInfo = JSON.parse(localStorage.getItem('orderInfo'));
+        }
+
         function updateItem(item){
+            ordering_Item = item
+            document.getElementById('addButton').addEventListener('click',function(e){
+                var img = document.getElementById('DisplayImg');
+                movingImage(img, movingImgCallback);
+            },false);
             var imgs = item.imgName;
             document.getElementById('DisplayImg').setAttribute('src','/public/products/'+imgs[0]+'.png');
+            document.getElementById('DisplayImg').onload = function(){
+                makeSameHeight(this);
+            }
             document.getElementById('img_0').setAttribute('src','/public/products/'+imgs[0]+'.png');
             document.getElementById('img_1').setAttribute('src','/public/products/'+imgs[1]+'.png');
             document.getElementById('img_2').setAttribute('src','/public/products/'+imgs[2]+'.png');
@@ -442,19 +540,85 @@ item-detail {
                 },false);
             }    
         }
-    var keyword = document.getElementById('keyword').content;    
-    var introduction = document.getElementById('introduction');
-    for(var i in shop.categories){
-        var appCat  = keyword.querySelector('[app-role="cat"]');        
-        var txt = document.createTextNode(shop.categories[i]);
-        appCat.innerHTML = null;
-        appCat.appendChild(txt);
-        introduction.appendChild(document.importNode(keyword, true));
-    };
-    startFacebook(document, 'script', 'facebook-jssdk');
+        var keyword = document.getElementById('keyword').content;
+        var introduction = document.getElementById('introduction');
+        for(var i in shop.categories){
+            var appCat  = keyword.querySelector('[app-role="cat"]');        
+            var txt = document.createTextNode(shop.categories[i]);
+            appCat.innerHTML = null;
+            appCat.appendChild(txt);
+            introduction.appendChild(document.importNode(keyword, true));
+        };
+        document.getElementById('modalConfirm').addEventListener("click",function(e){
+            updateConfirmation();
+        },false);
+        var orderElems = ['orderPerson', 'orderPhone', 'orderAddress'];
+        for (var i = 0;i< orderElems.length; i ++){
+            document.getElementById(orderElems[i]).addEventListener('change',function(e){
+                getOrderInfo(this);
+            },false);
+        }
+        document.getElementById('cartReview').setAttribute('href','/'+shop.pathName+'/cartReview#start-offset');
+        startFacebook(document, 'script', 'facebook-jssdk');
     });
 
+function makeSameHeight(elem){
+    var height = elem.height;
+    // console.log(height);
+    document.getElementById('itemInfo').style.height = height + 'px';
+    var addButton = document.getElementById('addButton');
+    addButton.style.bottom = '0px';
+    addButton.style.position = "absolute";
 
+}
+
+function movingImgCallback(){
+    document.getElementById('imgModalIcon').setAttribute('src', shop['avatars'].substring(1));
+    document.getElementById('modalConfirmImage').setAttribute("src", '/public/products/'+ ordering_Item.imgName[0]+ ".png");
+    document.querySelector('app-ModalPrice').innerHTML = ordering_Item.newPrice + ' VND / ' + ordering_Item.unit;
+    document.querySelector('app-modalProduct').innerHTML = ordering_Item.productName;
+
+    $("#confirmModal").modal('show');
+};
+$('#confirmModal').on('shown.bs.modal', function() {
+    var orderElems = ['orderPerson', 'orderPhone', 'orderAddress'];
+    for (var i = 0;i< orderElems.length; i ++){
+        if(orderInfo[orderElems[i]]){
+            document.getElementById(orderElems[i]).value = orderInfo[orderElems[i]]    
+        }
+    }
+    ordering_Item.orderInfo = orderInfo;
+    ordering_Item.qty = 1;
+});
+var cartItemLists = [];
+
+function updateConfirmation(){
+    itemsQuantity++;
+    document.getElementById('quantityOfItems').innerHTML = itemsQuantity;
+    if(localStorage.getItem("cartItemLists")){
+        cartItemLists = JSON.parse(localStorage.getItem("cartItemLists"));
+    }    
+    if(cartItemLists.length == 0){
+        cartItemLists.push(ordering_Item);            
+    }else{
+        var isExisted = false;
+        for (var i =0; i<cartItemLists.length; i++){
+            if(cartItemLists[i]._productId == ordering_Item._productId ){
+                cartItemLists[i].qty ++;
+                isExisted = true;
+                break;   
+            }
+        }
+        if (!isExisted){
+            cartItemLists.push(ordering_Item);
+        }
+    }
+    localStorage.setItem("cartItemLists",JSON.stringify(cartItemLists));
+}
+function getOrderInfo(elem){
+    orderInfo[elem.id]= elem.value;
+    localStorage.setItem('orderInfo', JSON.stringify(orderInfo));
+};
 function checkLoginStatus() {
     FB.getLoginStatus(function(response) {
         statusChangeCallback(response);

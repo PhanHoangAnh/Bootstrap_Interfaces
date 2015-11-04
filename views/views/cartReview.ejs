@@ -47,21 +47,19 @@ html,body {
     margin-top: 15px;
     /*vertical-align: middle;*/
 }
-
+/*.affix-bottom {
+    position: relative
+}*/
 @media (min-width: 979px) {
     #sidebar.affix-bottom {
-        position: absolute;
-        /*position: :relative;*/
+        position: relative
     }
     #sidebar.affix-top {
         position: static;
-        /*margin-top: 30px;*/
-        /*width: 300px;*/
     }
     #sidebar.affix {
         position: fixed;
         top: 70px;
-        /*width: 300px;*/
     }
 }
 
@@ -249,44 +247,9 @@ html,body {
     <!-- <div style="width:100%; height:20px; background-color: rgba(0,0,0,.5)"></div> -->
     <div class="container-fluid" id="start-offset" style="min-height: 100%;">
     <hr>
-        <!-- Left Sidebar -->
-        <div class="col-sm-3 col-md-push-9 hidden-xs">
-            <!-- <div class="col-sm-3 col-md-pull-9"> -->
-            <div id='sidebar' class='sidebar'>
-                <!-- <h2>Side</h2> -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <marketing-message>Tin tức khuyến mại</marketing-message>
-                    </div>
-                    <div class="panel-body">Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
-                </div>
-                <hr>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <marketing-message>Tin tức khuyến mại</marketing-message>
-                    </div>
-                    <div class="panel-body">Content here..</div>
-                </div>
-                <hr>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <marketing-message>Tin tức khuyến mại</marketing-message>
-                    </div>
-                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
-                </div>
-                <hr>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <marketing-message>Tin tức khuyến mại</marketing-message>
-                    </div>
-                    <div class="panel-body">Content here..</div>
-                </div>
-                <hr>
-            </div>
-        </div>
-        <!-- /Left Sidebar -->
+
         <!--center-->
-        <div class="col-sm-9 col-md-pull-3" style="min-height: 100%;">
+        <div class="col-sm-9 " style="min-height: 100%;">
             <ul class="nav nav-tabs">
               <li class="active"><a id = "cartReviewTab" data-toggle="tab" href="#cartReview">Duyệt đơn hàng</a></li>
               <li><a id = "orderReviewTab" data-toggle="tab" href="#orderReview">Hàng đã đặt</a></li>
@@ -335,6 +298,42 @@ html,body {
             </div>
         </div>
         <!--/center-->
+                <!-- Left Sidebar -->
+        <div class="col-sm-3 hidden-xs">
+            <!-- <div class="col-sm-3 col-md-pull-9"> -->
+            <div id='sidebar' class='sidebar'>
+                <!-- <h2>Side</h2> -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <marketing-message>Tin tức khuyến mại</marketing-message>
+                    </div>
+                    <div class="panel-body">Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
+                </div>
+                <hr>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <marketing-message>Tin tức khuyến mại</marketing-message>
+                    </div>
+                    <div class="panel-body">Content here..</div>
+                </div>
+                <hr>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <marketing-message>Tin tức khuyến mại</marketing-message>
+                    </div>
+                    <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
+                </div>
+                <hr>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <marketing-message>Tin tức khuyến mại</marketing-message>
+                    </div>
+                    <div class="panel-body">Content here..</div>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <!-- /Left Sidebar -->
     </div>
     <div id="end-offset">
         <footer>
@@ -380,13 +379,27 @@ html,body {
     <template id = 'singleItem'>
         <tr>
             <td>
-            <img app-role = "icon" src="../public/img/Products/product3.jpg" style="height:50px;width:auto">                        
+            <img app-role = "icon" style="height:50px;width:auto">                        
                 <label app-role= "product">Something</label>
             </td>
             <td app-role = "quantity"></td>
             <td app-role = "price"></td>
             <td app-role = "info"></td>
             <td style="vertical-align: middle"><button app-role = "removeBnt" type="button" class="btn btn-danger center-block" >Remove</button></td>
+        </tr>
+    </template>
+    <template id = 'orderItem'>
+        <tr>
+            <td>
+            <img app-role = "icon"  style="height:50px;width:auto">                        
+                <label app-role= "product"></label><br>
+                <label>Shop: </label>
+                <div app-role= "shop"></div>
+            </td>
+            <td app-role = "quantity"></td>
+            <td app-role = "price"></td>
+            <td app-role = "info"></td>
+            <td style="vertical-align: middle"><span app-role = "status" class="center-block" ></span></td>
         </tr>
     </template>
 
@@ -414,7 +427,7 @@ $(function() {
     $('#sidebar').affix({
         offset: {
             top: $('#start-offset').offset().top + 0,
-            bottom: $('#end-offset').outerHeight() - 20
+            bottom: $('#end-offset').outerHeight()+ 35
         }
     }).on('affix.bs.affix', function() { // before affix
         $(this).css({
@@ -462,9 +475,7 @@ $(document).ready(function() {
             }
         });    
     },false);
-    var document.getElementById('orderReviewTab').addEventListener('click',function(e){
-        updateItemLists();     
-    },false)
+    
     var showNames = document.querySelectorAll("app-showName");
     for(var i = 0 ; i< showNames.length; i++){
         showNames[i].innerHTML = shop.showName;
@@ -487,6 +498,7 @@ function updateItemLists(){
     rootTable.innerHTML = null;
     var singleItem = document.getElementById('singleItem').content;
     var totalPaid = 0
+    // console.log(cartItemLists);
     for(var i = 0; i<cartItemLists.length; i++){
         var icon = singleItem.querySelector('[app-role = "icon"]');
         icon.setAttribute('src','/public/products/'+cartItemLists[i].imgName[0]+ ".png")
@@ -558,30 +570,35 @@ function orderItems_inCart(){
             if (obj.err == 0) {
                 localStorage.setItem("cartItemLists", JSON.stringify([]));
                 cartItemLists =[];
+                rootTable.innerHTML = null;
             }
         }
     });
 };
 function updateOrderLists(orderLists){
     var orderTable = document.getElementById('orderTable');
-    orderTable.innerHTML = null;
-    rootTable.innerHTML = null;
+    orderTable.innerHTML = null;    
+    if(!orderLists){
+        return;
+    }
     
-    var singleItem = document.getElementById('singleItem').content;
+    var orderItem = document.getElementById('orderItem').content;
     
-    for(var i = 0; i<orderLists.length; i++){
-        var icon = singleItem.querySelector('[app-role = "icon"]');
+    for(var i = 0; i<orderLists.reverse().length; i++){
+        var icon = orderItem.querySelector('[app-role = "icon"]');
         icon.setAttribute('src','/public/products/'+orderLists[i].imgName[0]+ ".png")
-        singleItem.querySelector('[app-role= "product"]').innerHTML = orderLists[i].productName;
-        singleItem.querySelector('[app-role = "quantity"]').innerHTML = orderLists[i].qty;
-        singleItem.querySelector('[app-role = "price"]').innerHTML= orderLists[i].newPrice + " VND/ " + orderLists[i].unit;
+        orderItem.querySelector('[app-role= "product"]').innerHTML = orderLists[i].productName;
+        orderItem.querySelector('[app-role = "quantity"]').innerHTML = orderLists[i].qty;
+        orderItem.querySelector('[app-role = "price"]').innerHTML= orderLists[i].newPrice + " VND/ " + orderLists[i].unit;
         var str  = '';
         str += "<label > " + "Người nhận: "+ "</label>" +orderLists[i].orderInfo.orderPerson +"<br>"
         str += "<label> " + "Phone: "+ "</label>" + orderLists[i].orderInfo.orderPhone +"<br>"
         str += "<label> " + "Địa chỉ: "+ "</label>" +orderLists[i].orderInfo.orderAddress +"<br>"
         str += "<label> " + "Time: "+ "</label>" + orderLists[i].date;
-        singleItem.querySelector('[app-role = "info"]').innerHTML= str;
-        orderTable.appendChild(document.importNode(singleItem,true));
+        orderItem.querySelector('[app-role = "info"]').innerHTML= str;
+        orderItem.querySelector('[app-role = "status"]').innerHTML = orderLists[i].status;
+        orderItem.querySelector('[app-role = "shop"]').innerHTML = orderLists[i].shop;
+        orderTable.appendChild(document.importNode(orderItem,true));
     }
 }
 
