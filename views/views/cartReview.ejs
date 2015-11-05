@@ -2,7 +2,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<title>Marketing Blog</title>
+<title>Cart Review</title>
 <meta name="generator" content="Bootply" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -230,9 +230,9 @@ html,body {
                         </ul>
                         <ul class="nav navbar-nav navbar-right" id = "visitor">
                             <li class='navbar-right'>
-                                <a><b id = 'quantityOfItems'></b><i class="fa fa-cart-plus" style="font-size: 18px;color: #fff"></i></a>
+                                <a style="cursor: pointer"><b id = 'quantityOfItems'></b><i class="fa fa-cart-plus" style="font-size: 18px;color: #fff"></i></a>
                             </li>
-                            <li class='navbar-right' id='visitorHolder'>
+                            <li class='navbar-right' id='visitorHolder' style="cursor: pointer">
                                 <a href="#sec" id = "login"> <i class="fa fa-facebook fa-2x "></i><span> Login with Facebook</span></a>
                             </li>
                         </ul>
@@ -443,17 +443,25 @@ var RSAPublicKey = <%-JSON.stringify(data)%>
 var shop =  <%-JSON.stringify(shop)%>
 var cartItemLists = JSON.parse(localStorage.getItem("cartItemLists"));
 var orderId;
-
+var itemsQuantity =0;
 $(document).ready(function() {
     /** code inside **/
 
     // var masthead = $("#masthead");
     // masthead.addClass('start');
+
     if (localStorage.getItem("orderId") === null) {
         orderId =<%-JSON.stringify(orderId)%>
         localStorage.setItem("orderId", orderId);
     }else{
         orderId = localStorage.getItem("orderId");
+    }
+    if(localStorage.getItem("cartItemLists")){
+        cartItemLists = JSON.parse(localStorage.getItem("cartItemLists"));
+        for (var i =0; i < cartItemLists.length; i ++){
+            itemsQuantity += cartItemLists[i].qty;
+        }
+        document.getElementById('quantityOfItems').innerHTML = itemsQuantity;    
     }
     var masthead = document.querySelector("#masthead");    
     masthead.style.backgroundImage  = "url('" + shop.walls.substring(1) +"')";
@@ -462,15 +470,17 @@ $(document).ready(function() {
     document.getElementById('avatars').setAttribute('src',shop['avatars'].substring(1));  
     document.getElementById('avatarFooter').setAttribute('src',shop['avatars'].substring(1));
     document.getElementById('orderReviewTab').addEventListener('click',function(e){
+        console.log('/'+shop.pathName+'/order/'+orderId);
         $.ajax({
         // url: './userToken',
-        url: '/'+shop.pathName+'/order/'+orderId,
+        url: '/'+shop.pathName+'/order/'+orderId,        
         method: 'get',
-        complete: function(data, status, jqXHR) {
-            var obj = JSON.parse(data.responseText);
-            if (obj.err == 0) {
-                updateOrderLists(obj.orderLists);
-                console.log(obj.orderLists);
+        cache: false,
+        success: function(data, status, jqXHR) {
+            // console.log(data);  
+            console.log(JSON.parse(data).err, JSON.parse(data).orderLists.constructor);
+            if (JSON.parse(data).err == 0) {
+                updateOrderLists(JSON.parse(data).orderLists);
                 }
             }
         });    
@@ -498,6 +508,9 @@ function updateItemLists(){
     rootTable.innerHTML = null;
     var singleItem = document.getElementById('singleItem').content;
     var totalPaid = 0
+    if(!cartItemLists){
+        return;
+    }
     // console.log(cartItemLists);
     for(var i = 0; i<cartItemLists.length; i++){
         var icon = singleItem.querySelector('[app-role = "icon"]');
@@ -565,12 +578,18 @@ function orderItems_inCart(){
         url: '/'+shop.pathName+'/order',
         method: 'POST',
         data: json_data,
+        beforeSend: function(){
+            document.getElementById('orderItems').disabled =true;
+        },
         complete: function(data, status, jqXHR) {
             var obj = JSON.parse(data.responseText);
             if (obj.err == 0) {
                 localStorage.setItem("cartItemLists", JSON.stringify([]));
                 cartItemLists =[];
                 rootTable.innerHTML = null;
+                document.getElementById('summary').innerHTML = 0 +" VND " ;
+                document.getElementById('quantityOfItems').innerHTML = '';
+                // document.getElementById('orderItems').disabled =false;      
             }
         }
     });
@@ -578,13 +597,11 @@ function orderItems_inCart(){
 function updateOrderLists(orderLists){
     var orderTable = document.getElementById('orderTable');
     orderTable.innerHTML = null;    
-    if(!orderLists){
+    if(!orderLists|| orderLists.constructor !== Array){
         return;
     }
-    
-    var orderItem = document.getElementById('orderItem').content;
-    
-    for(var i = 0; i<orderLists.reverse().length; i++){
+    var orderItem = document.getElementById('orderItem').content;    
+    for(var i = 0; i<orderLists.length; i++){
         var icon = orderItem.querySelector('[app-role = "icon"]');
         icon.setAttribute('src','/public/products/'+orderLists[i].imgName[0]+ ".png")
         orderItem.querySelector('[app-role= "product"]').innerHTML = orderLists[i].productName;
@@ -771,7 +788,8 @@ function handleFBData(response) {
     _a.style.color = "#fff";
     var t = document.createTextNode( String.fromCharCode(160)+ response.name +  String.fromCharCode(160));
     _a.appendChild(t);
-    _li.appendChild(_a)
+    _a.style.cursor = "pointer";
+    _li.appendChild(_a)    
     parent.appendChild(_li);
     // console.log("parent", parent);
 

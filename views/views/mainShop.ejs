@@ -62,7 +62,7 @@
     }
     #sidebar.affix {
         position: fixed;
-        top: 70px;
+        top: 70px;        
         /*width: 300px;*/
     }
 }
@@ -81,11 +81,25 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100%;    
 }
 
 .introduction .label {
     background-color: #5CB85C;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    min-width: 130px;
+    /*background-color: #5CB85C;
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    color: #fff;
+    margin: 0 5px 5px 0;*/
+    /*font-style: italic;*/
+    cursor: pointer;
 }
 
 .animatedIcon {
@@ -1120,6 +1134,7 @@ function handleFBData(response) {
     _a.style.color = "#fff";
     var t = document.createTextNode( String.fromCharCode(160)+ response.name +  String.fromCharCode(160));
     _a.appendChild(t);
+    _a.style.cursor = "pointer";
     _li.appendChild(_a)
     parent.appendChild(_li);
     // console.log("parent", parent);
