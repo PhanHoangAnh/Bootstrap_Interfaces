@@ -2,21 +2,27 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<title>Cart Review</title>
+<title>Marketing Blog</title>
 <meta name="generator" content="Bootply" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="/public/css/navbar.css">
-<link rel="stylesheet" type="text/css" href="/public/css/shop.css">
-<link rel="stylesheet" type="text/css" href="/public/css/main.css">
+<link rel="stylesheet" type="text/css" href="../public/css/navbar.css">
+<link rel="stylesheet" type="text/css" href="../public/css/shop.css">
+<link rel="stylesheet" type="text/css" href="../public/css/main.css">
+<link rel="stylesheet" media="screen, print, handheld" type="text/css" href="../public/css/calendar.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="../public/css/breadcrumb.css">
+<link rel="stylesheet" type="text/css" href="../public/css/blog.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../public/js/calendar.02.js"></script>
 <!--script type="text/javascript" src='js/navbar.js'></script-->
 <style type="text/css">
-html,body {
+body,
+html {
     min-height: 100%;
 }
+
 #masthead {
     background-size: 115% auto;
 }
@@ -27,6 +33,10 @@ html,body {
     top: 0;
     left: 0;
     padding-top: 15%;
+}
+
+.br-response {
+    height: 0;
 }
 
 @media only screen and (max-width: 768px) {
@@ -41,15 +51,16 @@ html,body {
         padding-top: 15%;
         /*bottom: 0px;*/
     }
+    .br-response {
+        height: 120px;
+    }
 }
 
 .controls {
     margin-top: 15px;
     /*vertical-align: middle;*/
 }
-/*.affix-bottom {
-    position: relative
-}*/
+
 @media (min-width: 979px) {
     #sidebar.affix-bottom {
         position: relative
@@ -156,42 +167,30 @@ html,body {
         margin-top: 10px;
     }
 }
-.hideElement {
-    display: none;
+
+.photo >img {
+    width: 100%;
 }
 </style>
 
-<body style="background-color: rgb(0,0,0)">
-    <!-- Dont touch this section -->
-    <!-- masthead -->
+<body style="background-color: rgb(0,0,0);">
     <div id="masthead">
         <!-- <div style="height:100%; width: 100%; background-color: rgba(0,0,0,.6)"></div> -->
         <div class="container-fluid">
             <div class="row cover">
                 <div class="col-md-6 col-md-offset-1 ">
-                    <h1><app-showname id="showName"></app-showname>
+                    <h1>Con mèo
                         <!-- <hr style = "border-top: 1px solid rgba(255,255,255,.3)"> -->
-                        <p class="lead"><app-slogan id = 'slogan' app-slogan = true>Shop chuyên hàng hiệu...!</app-slogan></p>
+                        <p class="lead"><app-slogan>Shop chuyên hàng hiệu...!</app-slogan></p>
                     </h1>
-                </div>
-                <!-- <div class="col-md-5" style="padding-right:30px; bottom: 10px; right: 0px; position: absolute;"> -->
-                <div class="col-md-5" style="padding:30px">
-                    <!-- Primary Advertising Here -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <marketing-message>Tin tức khuyến mại</marketing-message>
-                        </div>
-                        <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi. Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. Aliquam in felis sit amet augue.</div>
-                    </div>
-                    <!-- /Primary Advertising Here -->
-                </div>
+                </div>                
             </div>
         </div>
         <!-- /cont -->
     </div>
-    <!-- /masthead -->
+    <!-- Dont touch this section -->
     <!-- NavBar -->
-    <div id="nav-wrapper">
+        <div id="nav-wrapper">
         <div id="nav" class="navbar navbar-inverse navbar-static-top navbar" role="navigation">
             <div class="container">
                 <div class="row">
@@ -254,67 +253,25 @@ html,body {
             </div>
         </div>
     </div>
-
-    <!-- /NavBar -->
-    <!-- /Dont touch this section -->
-    <!-- <div style="width:100%; height:20px; background-color: rgba(0,0,0,.5)"></div> -->
-    <div class="container-fluid" id="start-offset" style="min-height: 100%;">
     <hr>
-
+    <div class="container-fluid" id="start-offset" style="min-height: 100%;">
         <!--center-->
-        <div class="col-sm-9 " style="min-height: 100%;">
-            <ul class="nav nav-tabs">
-              <li class="active"><a id = "cartReviewTab" data-toggle="tab" href="#cartReview">Duyệt đơn hàng</a></li>
-              <li><a id = "orderReviewTab" data-toggle="tab" href="#orderReview">Hàng đã đặt</a></li>
-            </ul>
-
-            <div class="tab-content">
-                <div id="cartReview" class="tab-pane fade in active">
-                    <table class="table table-bordered" style="color:#fff;background-color: rgba(0,0,0,.6)">
-                        <thead style="background-color:rgba(0,0,0,0.6)">
-                            <tr>
-                                <th class = "col-md-2">Product</th>
-                                <th>Qty</th>
-                                <th>Price</th>
-                                <th>Order's Info</th>
-                                <th>Remove</th>
-                            </tr>
-                        </thead>
-                        <tbody id = "rootTable">
-                        </tbody>
-                        <tbody style="background-color: rgba(255,255,255,.2">
-                            <tr>
-                                <td>Tổng cộng : </td>
-                                <td></td>
-                                <td id = "summary"></td>
-                                <td></td>
-                                <td style="vertical-align: middle"><button app-role = "submit" type="button" class="btn btn-success center-block" id = "orderItems">Đặt hàng</button></td>
-                            </tr>
-                        </tbody>
-                    </table> 
-                </div>
-                <div id="orderReview" class="tab-pane fade">
-                    <table class="table table-bordered" style="color:#fff;background-color: rgba(0,0,0,.6)">
-                        <thead style="background-color:rgba(0,0,0,0.6)">
-                            <tr>
-                                <th class = "col-md-2">Product</th>
-                                <th>Qty</th>
-                                <th>Price</th>
-                                <th>Order's Info</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id = "orderTable">
-                        </tbody>
-                    </table> 
-                </div>
-            </div>
+        <div class="col-md-9" style="min-height: 100%;" >
+        	<h3 style="color: #fff">
+        		Quản lý đơn đặt hàng
+        	</h3>
+        	<div id = 'orderManager'>
+        			
+        	</div>
+            
         </div>
         <!--/center-->
-                <!-- Left Sidebar -->
-        <div class="col-sm-3 hidden-xs">
+        <!-- Right Sidebar -->
+        <div class="col-md-3">
             <!-- <div class="col-sm-3 col-md-pull-9"> -->
             <div id='sidebar' class='sidebar'>
+                <div id="myCalendar"></div>
+                <hr>
                 <!-- <h2>Side</h2> -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -346,9 +303,10 @@ html,body {
                 <hr>
             </div>
         </div>
-        <!-- /Left Sidebar -->
+        <!-- /Right Sidebar -->
     </div>
     <div id="end-offset">
+        <section class="divider"></section>
         <footer>
             <div class="container-fluid" style="background-color:rgba(0,0,0,.65); ">
                 <div class=" footer row cover " style="padding-top: 20px; padding-bottom: 40px;">
@@ -356,11 +314,9 @@ html,body {
                         <div class="col-md-4" style='text-align: center; margin-top: 30px'>
                             <span style="font-size: 24px; color:white;  ">CON MÈO</span>
                             <p></p>
-                            <a app-backToHome=true>
-                                <img id = 'avatarFooter' style="width: 40%; margin-top: 30px">
-                            </a>
+                            <img style="width: 40%; margin-top: 30px" id = "avatarFooter">
                             <p></p>
-                            <div app-slogan=true></div>
+                            Shop chuyên hàng hiệu...!
                         </div>
                         <div class="col-md-4" style="margin-top: 30px">
                             <span style="font-size: 24px; color:white; text-align: center "><i class="fa fa-arrows"></i>   THÔNG TIN...</span>
@@ -389,33 +345,48 @@ html,body {
             </div>
         </footer>
     </div>
-    <template id = 'singleItem'>
-        <tr>
-            <td>
-            <img app-role = "icon" style="height:50px;width:auto">                        
-                <label app-role= "product">Something</label>
-            </td>
-            <td app-role = "quantity"></td>
-            <td app-role = "price"></td>
-            <td app-role = "info"></td>
-            <td style="vertical-align: middle"><button app-role = "removeBnt" type="button" class="btn btn-danger center-block" >Remove</button></td>
-        </tr>
-    </template>
-    <template id = 'orderItem'>
-        <tr>
-            <td>
-            <img app-role = "icon"  style="height:50px;width:auto">                        
-                <label app-role= "product"></label><br>
-                <label>Shop: </label>
-                <div app-role= "shop"></div>
-            </td>
-            <td app-role = "quantity"></td>
-            <td app-role = "price"></td>
-            <td app-role = "info"></td>
-            <td style="vertical-align: middle"><span app-role = "status" class="center-block" ></span></td>
-        </tr>
-    </template>
+    <div id = "order" style="diplay:none">
+    	<div class = 'row' app-id = 'order'>
+    		<div class="panel panel-default">
+    			<div style="border:1px solid #fff">					    	
+    				<img app-id='buyerAvatar'style="height:40px;width:auto"></img>
+    				<span app-id="OrderPerson" style="padding: 10px">Nemo de Nemo</span>
+    				<span app-role = "time" class="pull-right" style="padding: 10px"></span>
+    				<span class="pull-right" style="padding: 10px">Đặt hàng lúc</span>
+    			</div>
+    			<div>
+    				<table class="table table-bordered" style="color:#fff;background-color: rgba(0,0,0,.6)">
+    					<thead style="background-color:rgba(255,255,255,0.1)">
+    						<tr>
+    							<th class="col-md-2">Product</th>
+    							<th class="col-md-1">Qty</th>
+    							<th>Price</th>
+    							<th class="col-md-4">Order's Info</th>
+    							<th class="col-md-1">Status</th>
+    						</tr>
+    					</thead>
+    					<tbody app-id="orderTable">
 
+    					</tbody>
+    				</table>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <template id = "items">
+    	<tr>
+    		<td>
+    			<img app-role = "icon"  style="height:50px;width:auto">                        
+    			<label app-role= "product"></label><br>
+    			<!-- <label>Shop: </label>
+    			<div app-role= "shop"></div> -->
+    		</td>
+    		<td app-role = "quantity"></td>
+    		<td app-role = "price"></td>
+    		<td app-role = "info"></td>
+    		<td style="vertical-align: middle"><span app-role = "status" class="center-block" ></span></td>
+    	</tr>
+    </template>
     <div id="phasebeam">
         <canvas width="700" height="650"></canvas>
         <canvas width="700" height="650"></canvas>
@@ -440,7 +411,7 @@ $(function() {
     $('#sidebar').affix({
         offset: {
             top: $('#start-offset').offset().top + 0,
-            bottom: $('#end-offset').outerHeight()+ 35
+            bottom: $('#end-offset').outerHeight() - 20
         }
     }).on('affix.bs.affix', function() { // before affix
         $(this).css({
@@ -449,57 +420,24 @@ $(function() {
         });
     }).on('affix-bottom.bs.affix', function() { // before affix-bottom
         // $(this).css('bottom', 'auto'); // THIS is what makes the jumping
-    });;
+    });
+    // Calendar
+	var node = document.createElement("calendar");
+	var parent = document.getElementById("myCalendar");
+	calendar(node, parent);
 
 });
+
 var RSAPublicKey = <%-JSON.stringify(data)%>
 var shop =  <%-JSON.stringify(shop)%>
-var cartItemLists = JSON.parse(localStorage.getItem("cartItemLists"));
-var orderId;
-var itemsQuantity =0;
-var avatarImg;
-var facebookName;
-
 $(document).ready(function() {
-    /** code inside **/
 
-    // var masthead = $("#masthead");
-    // masthead.addClass('start');
-
-    if (localStorage.getItem("orderId") === null) {
-        orderId =<%-JSON.stringify(orderId)%>
-        localStorage.setItem("orderId", orderId);
-    }else{
-        orderId = localStorage.getItem("orderId");
-    }
-    if(localStorage.getItem("cartItemLists")){
-        cartItemLists = JSON.parse(localStorage.getItem("cartItemLists"));
-        for (var i =0; i < cartItemLists.length; i ++){
-            itemsQuantity += cartItemLists[i].qty;
-        }
-        document.getElementById('quantityOfItems').innerHTML = itemsQuantity;    
-    }
     var masthead = document.querySelector("#masthead");    
     masthead.style.backgroundImage  = "url('" + shop.walls.substring(1) +"')";
     masthead.classList.remove("hiddenElem");
     masthead.classList.add('start');
     document.getElementById('avatars').setAttribute('src',shop['avatars'].substring(1));  
     document.getElementById('avatarFooter').setAttribute('src',shop['avatars'].substring(1));
-    document.getElementById('orderReviewTab').addEventListener('click',function(e){
-        // console.log('/'+shop.pathName+'/order/'+orderId);
-        $.ajax({
-        // url: './userToken',
-        url: '/'+shop.pathName+'/order/'+orderId,        
-        method: 'get',
-        cache: false,
-        success: function(data, status, jqXHR) {
-            if (JSON.parse(data).err == 0) {
-                updateOrderLists(JSON.parse(data).orderLists);
-                }
-            }
-        });    
-    },false);
-    
     var showNames = document.querySelectorAll("app-showName");
     for(var i = 0 ; i< showNames.length; i++){
         showNames[i].innerHTML = shop.showName;
@@ -517,65 +455,13 @@ $(document).ready(function() {
         for(var i = 0; i< slogans.length;i++){
             slogans[i].innerHTML = shop.slogan;
         }
-    updateItemLists();
+    
     startFacebook(document, 'script', 'facebook-jssdk');
+    getOrderOfCustomer();
 });
-function updateItemLists(){
-    var rootTable = document.getElementById('rootTable');
-    rootTable.innerHTML = null;
-    var singleItem = document.getElementById('singleItem').content;
-    var totalPaid = 0
-    if(!cartItemLists){
-        return;
-    }
-    // console.log(cartItemLists);
-    for(var i = 0; i<cartItemLists.length; i++){
-        var icon = singleItem.querySelector('[app-role = "icon"]');
-        icon.setAttribute('src','/public/products/'+cartItemLists[i].imgName[0]+ ".png")
-        singleItem.querySelector('[app-role= "product"]').innerHTML = cartItemLists[i].productName;
-        singleItem.querySelector('[app-role = "quantity"]').innerHTML = cartItemLists[i].qty;
-        singleItem.querySelector('[app-role = "price"]').innerHTML= cartItemLists[i].newPrice + " VND/ " + cartItemLists[i].unit;
-        var str  = '';
-        str += "<label > " + "Người nhận: "+ "</label>" +cartItemLists[i].orderInfo.orderPerson +"<br>"
-        str += "<label> " + "Phone: "+ "</label>" + cartItemLists[i].orderInfo.orderPhone +"<br>"
-        str += "<label> " + "Địa chỉ: "+ "</label>" +cartItemLists[i].orderInfo.orderAddress
-        singleItem.querySelector('[app-role = "info"]').innerHTML= str;
-        singleItem.querySelector('[app-role = "removeBnt"]').setAttribute('id', cartItemLists[i]._id);
-        rootTable.appendChild(document.importNode(singleItem,true));
-        totalPaid += parseFloat(cartItemLists[i].newPrice)*cartItemLists[i].qty;
-    }
-    document.getElementById('summary').innerHTML = totalPaid + " VND " ;
-    var removeBnts = document.querySelectorAll('[app-role = "removeBnt"]');
-    for (var i= 0; i <removeBnts.length; i++){
-        removeBnts[i].addEventListener('click',function(e){
-            removeItem(this);
-        },false)
-    }
-    document.getElementById('orderItems').addEventListener('click',function(e){
-        orderItems_inCart()
-    },false)
-}
-function removeItem(elem){
-    var id = elem.id;
-    for(var i = 0; i<cartItemLists.length; i++){
-        if(cartItemLists[i]._id == id ){
-            if( cartItemLists[i].qty > 1 ){
-                cartItemLists[i].qty--;
-                break;
-            }else{
-                cartItemLists.splice(i,1);                
-                break;
-            }
-        }
-    }
-    localStorage.setItem("cartItemLists",JSON.stringify(cartItemLists));
-    updateItemLists();
-}
-function orderItems_inCart(){
-    if(!cartItemLists){
-        return;
-    }
-    if (localStorage.getItem("app_token") === null) {
+
+function getOrderOfCustomer(){
+	if (localStorage.getItem("app_token") === null) {
         getNewToken(uid, accessToken);
     }
     //2. get Token from localStorage
@@ -587,59 +473,55 @@ function orderItems_inCart(){
     aes_key = cryptoUtil.generateAESKey();
     var json_data = {
         data: cryptoUtil.EncryptJSON(_data, RSAPublicKey, aes_key)
-    };
-    json_data.orderId = orderId;    
-    json_data.cartItems = JSON.stringify(cartItemLists);
-    if ( avatarImg||facebookName){
-        json_data.avatarImg = avatarImg;
-        json_data.facebookName = facebookName;
-    }
+    };    
+    
     $.ajax({
         // url: './userToken',
-        url: '/'+shop.pathName+'/order',
-        method: 'POST',
+        url: '/'+shop.pathName+'/orderOfCustomer',
+        method: 'GET',
         data: json_data,
         beforeSend: function(){
-            document.getElementById('orderItems').disabled =true;
+            
         },
         complete: function(data, status, jqXHR) {
-            var obj = JSON.parse(data.responseText);
-            if (obj.err == 0) {
-                localStorage.setItem("cartItemLists", JSON.stringify([]));
-                cartItemLists =[];
-                rootTable.innerHTML = null;
-                document.getElementById('summary').innerHTML = 0 +" VND " ;
-                document.getElementById('quantityOfItems').innerHTML = '';
-                // document.getElementById('orderItems').disabled =false;      
+            var arr = JSON.parse(data.responseText);
+            arr = arr.reverse();
+            var root = document.getElementById('orderManager');
+            console.log(arr);
+            var _orderElem = document.getElementById('order');
+            for(var i = 0;i<arr.length;i++){
+            	var orderElem = _orderElem.cloneNode(true);
+            	orderElem.style.display = 'block';
+            	var ava = orderElem.querySelector("[app-id='buyerAvatar']");
+            	ava.setAttribute('src', arr[i].avatarImg);
+            	var orderPerson = orderElem.querySelector('[app-id="OrderPerson"]');
+            	orderPerson.innerHTML = arr[i].facebookName;
+            	var items = arr[i].items
+            	var orderTableRoot = orderElem.querySelector('[app-id="orderTable"]');
+            	orderElem.querySelector('[app-role = "time"]').innerHTML = arr[i].time;
+            	for (var j = 0 ; j < items.length; j ++){
+
+            		var itemElem = document.getElementById('items').content;
+            		// console.log(orderTableRoot);
+            		var icon = itemElem.querySelector('[app-role = "icon"]');
+        			icon.setAttribute('src','/public/products/'+items[j].imgName[0]+ ".png")
+        			itemElem.querySelector('[app-role= "product"]').innerHTML = items[j].productName;
+        			itemElem.querySelector('[app-role = "quantity"]').innerHTML = items[j].qty;	
+        			itemElem.querySelector('[app-role = "price"]').innerHTML= items[j].newPrice + " VND/ " + items[j].unit;	
+        			var str  = '';
+			        str += "<label > " + "Người nhận: "+ "</label>" +items[j].orderInfo.orderPerson +"<br>"
+			        str += "<label> " + "Phone: "+ "</label>" + items[j].orderInfo.orderPhone +"<br>"
+			        str += "<label> " + "Địa chỉ: "+ "</label>" +items[j].orderInfo.orderAddress
+			        itemElem.querySelector('[app-role = "info"]').innerHTML= str;	
+        			orderTableRoot.appendChild(document.importNode(itemElem,true));
+            	}
+            	orderTableRoot = undefined;
+            	// root.appendChild(document.importNode(orderElem,true));
+            	root.appendChild(orderElem);
             }
         }
     });
-};
-function updateOrderLists(orderLists){
-    var orderTable = document.getElementById('orderTable');
-    orderTable.innerHTML = null;    
-    if(!orderLists|| orderLists.constructor !== Array){
-        return;
-    }
-    var orderItem = document.getElementById('orderItem').content;    
-    for(var i = 0; i<orderLists.length; i++){
-        var icon = orderItem.querySelector('[app-role = "icon"]');
-        icon.setAttribute('src','/public/products/'+orderLists[i].imgName[0]+ ".png")
-        orderItem.querySelector('[app-role= "product"]').innerHTML = orderLists[i].productName;
-        orderItem.querySelector('[app-role = "quantity"]').innerHTML = orderLists[i].qty;
-        orderItem.querySelector('[app-role = "price"]').innerHTML= orderLists[i].newPrice + " VND/ " + orderLists[i].unit;
-        var str  = '';
-        str += "<label > " + "Người nhận: "+ "</label>" +orderLists[i].orderInfo.orderPerson +"<br>"
-        str += "<label> " + "Phone: "+ "</label>" + orderLists[i].orderInfo.orderPhone +"<br>"
-        str += "<label> " + "Địa chỉ: "+ "</label>" +orderLists[i].orderInfo.orderAddress +"<br>"
-        str += "<label> " + "Time: "+ "</label>" + orderLists[i].date;
-        orderItem.querySelector('[app-role = "info"]').innerHTML= str;
-        orderItem.querySelector('[app-role = "status"]').innerHTML = orderLists[i].status;
-        orderItem.querySelector('[app-role = "shop"]').innerHTML = orderLists[i].shop;
-        orderTable.appendChild(document.importNode(orderItem,true));
-    }
 }
-
 
 function checkLoginStatus() {
     FB.getLoginStatus(function(response) {
@@ -752,9 +634,7 @@ function checkToken(uid, accessToken) {
 function addLinks(obj){
     isLoggedIn = true;
     var createNewLinks = document.querySelectorAll(".createNewShop");
-    console.log(obj);
     if(obj.isShop&&obj.isShop==1){
-        console.log(obj.isShop&&obj.isShop==1)
        document.getElementById('configMenu').classList.remove('hideElement');
        document.getElementById('getHome').setAttribute('href', "/"+obj.shop.pathName);
        document.getElementById('editShop').setAttribute('href','/createnewshop');
@@ -875,7 +755,6 @@ function fb_enter() {
 
 }
 function preventCreateNewShop(){}
-
 
 </script>
 

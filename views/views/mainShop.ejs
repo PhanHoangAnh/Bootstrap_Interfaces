@@ -274,10 +274,20 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right" id = "visitor">
                             <li class='navbar-right'>
-                                <a id = "cartReview"><b id = 'quantityOfItems'></b><i class="fa fa-cart-plus" style="font-size: 18px;color: #fff"></i></a>
+                                <a id = "cartReview"><b id = 'quantityOfItems'></b><i class="fa fa-opencart" style="font-size: 18px;color: #fff"></i></a>
                             </li>
                             <li class='navbar-right' id='visitorHolder'>
-                                <a href="#sec" id = "login"> <i class="fa fa-facebook fa-2x "></i><span> Login with Facebook</span></a>
+                                <a href="#sec" id = "login"> <i class="fa fa-facebook "></i><span> Login with Facebook</span></a>
+                            </li>
+                        </ul>
+                        <ul class='nav navbar-nav navbar-right hideElement' id = 'configMenu'>
+                            <li class='navbar-right'>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-heart-o"></i> MyShop <b class="caret"></b></a>
+                                <ul class="dropdown-menu multi-level navbar-right">
+                                    <li><a href="#" id = "getHome"><i class="fa fa-home"></i> Về nhà </a></li>
+                                    <li><a href="#" id = "editShop"><i class="fa fa-cog"></i> Chỉnh sửa giao diện </a></li>
+                                    <li><a href="#" id = "manageShop"><i class="fa fa-th-large"></i> Quản lý bán hàng </a></li>
+                                </ul>
                             </li>
                         </ul>
                     </nav>
@@ -584,7 +594,7 @@
                 <div product-price app-role = 'price'></div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0 ">
                     <div add-toCart = "true" class="items">
-                        <i class="fa fa-cart-plus" style='font-side:24px'></i>
+                        <i class="fa fa-opencart" style='font-side:24px'></i>
                         <br>Add to Cart
                     </div>
                 </div>
@@ -623,7 +633,7 @@
                 <div product-price app-role = 'price'>Price:123$</div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding:0 ">
                     <div add-toCart = "true" class="items">
-                        <i class="fa fa-cart-plus" style='font-side:24px'></i>
+                        <i class="fa fa-opencart" style='font-side:24px'></i>
                         <br>Add to Cart
                     </div>
                 </div>
@@ -1028,7 +1038,7 @@ function getNewToken(uid, token) {
                 // console.log('app_token: ', JSON.parse(_app_token).app_token);
                 app_token = JSON.parse(_app_token).app_token;
                 localStorage.setItem("app_token", app_token);
-                addLinks();
+                addLinks(obj);
             }else{
                     // for createNewShop id = "createNewShopMenu" class="createNewShop"
                 var createNewLinks = document.querySelectorAll(".createNewShop");
@@ -1069,17 +1079,30 @@ function checkToken(uid, accessToken) {
                 getNewToken(uid, accessToken);
                 return;
             }
-            addLinks();
+            addLinks(obj);
         }
     });
 }
 
-function addLinks(){
+function addLinks(obj){
     isLoggedIn = true;
     var createNewLinks = document.querySelectorAll(".createNewShop");
-    for (var i=0; i<createNewLinks.length; i++){            
-        createNewLinks[i].removeEventListener('click', preventCreateNewShop , false)
-        createNewLinks[i].setAttribute("href", "/createnewshop");
+    console.log(obj);
+    if(obj.isShop&&obj.isShop==1){
+       document.getElementById('configMenu').classList.remove('hideElement');
+       document.getElementById('getHome').setAttribute('href', "/"+obj.shop.pathName);
+       document.getElementById('editShop').setAttribute('href','createnewshop');
+       document.getElementById('manageShop').setAttribute('href',obj.shop.pathName+"/"+"management");
+       console.log('from addLinks')
+       for (var i=0; i<createNewLinks.length; i++){
+            createNewLinks[i].style.visibility = "hidden";
+        }
+    }else{
+        
+        for (var i=0; i<createNewLinks.length; i++){            
+            createNewLinks[i].removeEventListener('click', preventCreateNewShop , false)
+            createNewLinks[i].setAttribute("href", "/createnewshop");
+        }
     }
 }
 
